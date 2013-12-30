@@ -37,11 +37,6 @@
       "patterns": ["http://*/*", "https://*/*"],
       "js": ["content_scripts/content.js", "controllers/BasicController.js"],
      	"run_at": "document_idle"
-    },
-    {
-      "matches": ["*://sway.fm/*", "*://dev.swayfm.com/*", "*://swaydev.herokuapp.com/*"],
-      "js": ["content_scripts/swayfm_content.js"],
-      "run_at": "document_idle"
     }
   ],
   "options_page": "options/options.html",

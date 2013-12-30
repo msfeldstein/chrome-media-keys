@@ -13,20 +13,11 @@ module.exports = (grunt) ->
 		copy:
 			dev:
 				files: [
-					{expand: true, cwd: 'dev/', src: '**/*.js', dest: 'ext/', filter: 'isFile'}
+					{expand: true, cwd: 'dev/', src: '**/*.js', dest: 'ext/'}
 				]
 			src:
 				files: [
-					{expand: true, cwd: 'src/', src: '**/*.js', dest: 'ext/', filter: 'isFile'}
-				]
-		jade:
-			dev:
-				files: [
-					{expand: true, cwd: 'dev/', src: '*.jade', dest: 'ext/', ext: '.html', filter: 'isFile'}
-				]
-			src:
-				files: [
-					{expand: true, cwd: 'src/', src: '*.jade', dest: 'ext/', ext: '.html', filter: 'isFile'}
+					{expand: true, cwd: 'src/', src: ['**/*.js', '**/*.png', '**/*.css', '**/*.html'], dest: 'ext/'}
 				]
 		coffee:
 			dev:
@@ -45,11 +36,10 @@ module.exports = (grunt) ->
 		watch:
 			all:
 				files: ['dev/**', 'src/**']
-				tasks: ['build:manifest', 'copy:dev', 'jade:dev', 'coffee:dev', 'copy:src', 'jade:src', 'coffee:src', 'haml']
+				tasks: ['build:manifest', 'copy:dev', 'coffee:dev', 'copy:src', 'coffee:src', 'haml']
 				
 	grunt.loadNpmTasks 'grunt-image-resize'
 	grunt.loadNpmTasks 'grunt-contrib-copy'
-	grunt.loadNpmTasks 'grunt-contrib-jade'
 	grunt.loadNpmTasks 'grunt-contrib-watch'
 	grunt.loadNpmTasks 'grunt-contrib-coffee'
 	grunt.loadNpmTasks 'grunt-contrib-haml'
@@ -65,8 +55,8 @@ module.exports = (grunt) ->
 		grunt.file.write 'ext/manifest.json', JSON.stringify(mnf)
 		
 	grunt.registerTask 'build:icons', ['image_resize:icon16', 'image_resize:icon48', 'image_resize:icon128']
-	grunt.registerTask 'build:sources', ['copy:src', 'jade:src', 'coffee:src']
+	grunt.registerTask 'build:sources', ['copy:src', 'coffee:src']
 	grunt.registerTask 'build', ['build:manifest', 'build:icons', 'build:sources']
-	grunt.registerTask 'run', ['build:manifest', 'copy:dev', 'jade:dev', 'coffee:dev', 'build', 'watch']
+	grunt.registerTask 'run', ['build:manifest', 'copy:dev', 'coffee:dev', 'build', 'watch']
 	grunt.registerTask 'default', ['build']
 	

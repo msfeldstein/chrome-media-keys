@@ -1,0 +1,51 @@
+@font-face {  
+  font-family: museo ;  
+  src: url(http://sway.fm/MuseoSans-300.otf) format("truetype");
+  font-weight: 300;
+} 
+
+
+@font-face {  
+  font-family: museo ;  
+  src: url(http://sway.fm/MuseoSans-100.otf) format("truetype");
+  font-weight: 100;
+} 
+
+
+body {
+  -webkit-transform: translateZ(0);
+  background: #E8E8E8;
+  font-family: museo;
+  font-weight: 100;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+#logo {
+  margin-top: 55px;
+}
+
+#topbar {
+  background: #00a0e0;
+  height: 26px;
+}
+
+.subhead {
+  margin-top: 28px;
+  font-size: 30px;
+}
+
+#app-buttons {
+  margin-top: 20px;
+}
+
+#app-buttons > img {
+  margin: 0;
+  padding: 0;
+  height: 80px;
+}

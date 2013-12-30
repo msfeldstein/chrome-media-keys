@@ -1,0 +1,185 @@
+:focus {
+    outline:rgba(0,0,0,0);
+}
+
+::-webkit-scrollbar {
+    height: 0;
+}
+
+@font-face {
+  font-family: 'Museo Sans';
+  font-style: normal;
+  src: url(MuseoSans-300.otf) format("truetype");
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    color: #111;
+    width:400px;
+    height:280px;
+    background: #e8e8e8;
+    -webkit-user-select: none; 
+    font-family: "Museo Sans";
+    font-size: 22pt;
+    font-weight: 100;
+}
+
+#topbar {
+  height: 10px;
+  background: #00a0e0;
+}
+
+#header {
+  height: 62px;
+  background: -webkit-linear-gradient(top, #DDDDDD, #CCCCCC);
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: center;
+}
+
+#controls {
+    z-index: 100;
+    -webkit-box-flex: 0;
+    display:-webkit-box;
+    -webkit-box-orient:horizontal;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+    margin-right: 10px;
+}
+
+.no-music #controls {
+  opacity: 0.4;
+}
+
+#controls > div {
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 40px;
+    width: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+#controls > div:active {
+  -webkit-filter: drop-shadow(0px 0px 7px rgba(0,0,0,0.5))
+}
+#previous {
+    background-image: url(images/back.png);
+}
+
+#play-pause {
+    background-image: url(images/play.png);
+}
+body.playing #play-pause {
+    background-image: url(images/pause.png);
+}
+
+#next {
+    background-image: url(images/next.png);
+}
+
+#controls > #thumbs-down {
+    background-image: url(images/controls/thumbsdown.png);
+}
+
+#controls > #thumbs-down.toggled {
+  background-image: url(images/controls/thumbsdown_active.png);
+}
+#controls > #thumbs-up {
+    background-image: url(images/controls/thumbsup.png);
+}
+
+#controls > #thumbs-up.toggled {
+  background-image: url(images/controls/thumbsup_active.png);
+}
+
+#favorite {
+  background-image: url(images/controls/heart.png);
+}
+
+#favorite.toggled {
+  background-image: url(images/controls/heart_active.png);
+}
+
+#song-details {
+  -webkit-box-flex: 1;
+  padding-left: 10px;
+}
+
+#artist-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14pt;
+  opacity: 0.7;
+}
+
+#song-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16pt;
+}
+
+#art-holder {
+  display: -webkit-box;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  height: 240px;
+}
+
+#album-art {
+  min-width: 100px;
+  min-height: 100px;
+  max-width: 175px;
+  max-height: 175px;
+  background-size: cover;
+  -webkit-box-shadow: 0 0 25px rgba(0,0,0,0.8);
+  background-image: url(images/art.jpeg);
+  background-position: center;
+}
+
+#not-playing-container {
+  font-size: 18px;
+  text-align: center;
+  margin-top: 20px;
+  max-width: 300px;
+  margin: auto;
+}
+
+#sway-cta {
+  display: none;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  font-size: 15px;
+  text-align: center;
+  width: 100%;
+  background-color: rgb(252, 253, 186);
+  border-top: 2px solid rgb(0, 160, 224);
+  padding: 5px;
+  cursor: pointer;
+}
+
+#art-holder.with-cta {
+  padding-bottom: 20px;
+}
+
+.with-cta #sway-cta {
+  display: block;
+}
+
+#sway-cta a, #sway-cta a:visited {
+  color: rgb(0, 0, 238);
+}
+
+#sway-cta .share-img {
+  height: 21px;
+  vertical-align: bottom;
+}

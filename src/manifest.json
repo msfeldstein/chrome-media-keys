@@ -1,0 +1,54 @@
+{
+  "name": "Sway.fm Unified Music Media Keys",
+  "version": "2.129",
+  "manifest_version": 2,
+  "icons": { "16": "images/icon128.png",
+           "48": "images/icon128.png",
+          "128": "images/icon128.png" },
+  "browser_action": {
+    "default_icon": {
+        "19": "images/browser-action-icon.png",
+        "38": "images/browser-action-icon.png"
+      },
+    "default_popup": "popup/popup.html",
+    "default_title": "Unity Music Media Keys"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "notifications",
+    "unlimitedStorage",
+    "nativeMessaging"
+  ],
+  "description": "Media keys support for online radio and streaming music apps.",
+  "background": {
+    "page":"background/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "patterns": ["http://*/*", "https://*/*"],
+      "js": ["content_scripts/shim.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "patterns": ["http://*/*", "https://*/*"],
+      "js": ["content_scripts/content.js", "controllers/BasicController.js"],
+     	"run_at": "document_idle"
+    },
+    {
+      "matches": ["*://sway.fm/*", "*://dev.swayfm.com/*", "*://swaydev.herokuapp.com/*"],
+      "js": ["content_scripts/swayfm_content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_page": "options/options.html",
+  "content_security_policy": "script-src 'self' https://ws.audioscrobbler.com https://dc8na2hxrj29i.cloudfront.net; object-src 'self';",
+  "web_accessible_resources": [
+    "images/funnel_bar/text.png",
+    "images/funnel_bar/button.png",
+    "images/funnel_bar/close.png"
+  ]
+}

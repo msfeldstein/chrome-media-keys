@@ -43,9 +43,9 @@ requestFocus = (newFocusTab) ->
     activeTabStack.splice index, 1
   activeTabStack.push newid
 
-  # Todo: request focus for plugin here as well
+  useMediaKeys()
 
-sendAction = (action) ->
+window.sendAction = (action) ->
   if activeTab()
     chrome.tabs.sendRequest activeTab(), {action: action}, (()->)
 
@@ -56,8 +56,7 @@ window.addStateListener = (l) ->
 
 newState = (state) ->
   if not wasPlaying and state.playing
-    # Todo: Make sure the plugin has focus here
-    "skip"
+    useMediaKeys()
   wasPlaying = state.playing
   for listener in stateListeners
     listener(state)

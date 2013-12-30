@@ -2,9 +2,6 @@
 # filter out updates from background non-playing tabs.
 tabId = null
 
-launch = (url) ->
-  window.open url, "_blank"
-
 $ = (qs) ->
   document.querySelector(qs)
 

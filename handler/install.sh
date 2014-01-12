@@ -2,6 +2,7 @@
 
 # Install the sway.fm media key handler native messaging client
 
+# Point to the executable in the extension so it can be updated without requiring a reinstall every time.
 binaryDir=`pwd`
 binaryDir=$binaryDir"/mediakeys"
 manifestJson=`cat fm.sway.mediakeys.json-template`

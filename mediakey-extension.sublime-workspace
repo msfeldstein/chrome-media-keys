@@ -11,23 +11,15 @@
 			"file": "Gruntfile.coffee",
 			"settings":
 			{
-				"buffer_size": 1957,
+				"buffer_size": 1699,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "handler/install.sh",
+			"file": "src/options/options.html",
 			"settings":
 			{
-				"buffer_size": 517,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "handler/fm.sway.mediakeys.json-template",
-			"settings":
-			{
-				"buffer_size": 321,
+				"buffer_size": 2444,
 				"line_ending": "Unix"
 			}
 		}
@@ -68,6 +60,10 @@
 	},
 	"file_history":
 	[
+		"/Users/michael/Google Drive/Source/chrome-media-keys/handler/fm.sway.mediakeys.json-template",
+		"/Users/michael/Google Drive/Source/chrome-media-keys/src/options/options.html",
+		"/Users/michael/Google Drive/Source/chrome-media-keys/handler/install.sh",
+		"/Users/michael/Google Drive/Source/chrome-media-keys/mediakey-extension.sublime-project",
 		"/Users/michael/Google Drive/Source/chrome-media-keys/ext/handler/fm.sway.mediakeys.json-e",
 		"/Users/michael/Google Drive/Source/chrome-media-keys/Gruntfile.coffee"
 	],
@@ -87,6 +83,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"dev",
 			"popular_items"
 		],
 		"highlight": true,
@@ -113,15 +110,15 @@
 					"file": "Gruntfile.coffee",
 					"settings":
 					{
-						"buffer_size": 1957,
+						"buffer_size": 1699,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								993,
-								993
+								1677,
+								1679
 							]
 						],
 						"settings":
@@ -129,57 +126,33 @@
 							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 25.0,
-						"translation.y": 0.0,
+						"translation.x": 0.0,
+						"translation.y": 4.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "handler/install.sh",
+					"file": "src/options/options.html",
 					"settings":
 					{
-						"buffer_size": 517,
+						"buffer_size": 2444,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								517,
-								517
+								1110,
+								1110
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "handler/fm.sway.mediakeys.json-template",
-					"settings":
-					{
-						"buffer_size": 321,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1,
-								1
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

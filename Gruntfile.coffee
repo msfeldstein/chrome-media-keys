@@ -18,6 +18,7 @@ module.exports = (grunt) ->
 			src:
 				files: [
 					{expand: true, cwd: 'src/', src: ['**/*.js', '**/*.png', '**/*.css', '**/*.html'], dest: 'ext/'}
+					{expand: true, cwd: 'handler/', src: ['**'], dest: 'ext/handler/'}
 				]
 		coffee:
 			dev:
@@ -35,7 +36,7 @@ module.exports = (grunt) ->
 				]
 		watch:
 			all:
-				files: ['dev/**', 'src/**']
+				files: ['dev/**', 'src/**', 'handler/**']
 				tasks: ['build:manifest', 'copy:dev', 'coffee:dev', 'copy:src', 'coffee:src', 'haml']
 				
 	grunt.loadNpmTasks 'grunt-image-resize'

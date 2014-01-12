@@ -1,0 +1,11 @@
+{
+  "name": "fm.sway.mediakeys",
+  "description": "Media Key Host",
+  "path": "%BINARY_PATH%",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://gdmkjgiknmnpnaajhpnhaabdikomfgkk/",
+    "chrome-extension://nmahkjkemnboojdealojindhpbkbomcg/",
+    "chrome-extension://icckhjgjjompfgoiidainoapgjepncej/"
+  ]
+}

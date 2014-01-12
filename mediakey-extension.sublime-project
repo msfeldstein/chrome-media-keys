@@ -1,0 +1,9 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/michael/Google Drive/Source/chrome-media-keys",
+			"folder_exclude_patterns": ["ext"]
+		}
+	]
+}

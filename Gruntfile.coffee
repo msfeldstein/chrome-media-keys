@@ -11,20 +11,12 @@ module.exports = (grunt) ->
 				options: width: 128
 				files: 'ext/icon128.png': 'src/icon.png'
 		copy:
-			dev:
-				files: [
-					{expand: true, cwd: 'dev/', src: '**/*.js', dest: 'ext/'}
-				]
 			src:
 				files: [
 					{expand: true, cwd: 'src/', src: ['**/*.js', '**/*.png', '**/*.css', '**/*.html'], dest: 'ext/'}
 					{expand: true, cwd: 'handler/', src: ['**'], dest: 'ext/handler/'}
 				]
 		coffee:
-			dev:
-				files: [
-					{expand: true, cwd: 'dev/', src: '**/*.coffee', dest: 'ext/', ext: '.js'}
-				]
 			src:
 				files: [
 					{expand: true, cwd: 'src/', src: '**/*.coffee', dest: 'ext/', ext: '.js'}
@@ -36,8 +28,8 @@ module.exports = (grunt) ->
 				]
 		watch:
 			all:
-				files: ['dev/**', 'src/**', 'handler/**']
-				tasks: ['build:manifest', 'copy:dev', 'coffee:dev', 'copy:src', 'coffee:src', 'haml']
+				files: ['src/**', 'handler/**']
+				tasks: ['build:manifest', 'copy:src', 'coffee:src', 'haml']
 				
 	grunt.loadNpmTasks 'grunt-image-resize'
 	grunt.loadNpmTasks 'grunt-contrib-copy'
@@ -58,6 +50,6 @@ module.exports = (grunt) ->
 	grunt.registerTask 'build:icons', ['image_resize:icon16', 'image_resize:icon48', 'image_resize:icon128']
 	grunt.registerTask 'build:sources', ['copy:src', 'coffee:src']
 	grunt.registerTask 'build', ['build:manifest', 'build:icons', 'build:sources']
-	grunt.registerTask 'run', ['build:manifest', 'copy:dev', 'coffee:dev', 'build', 'watch']
+	grunt.registerTask 'run', ['build:manifest', 'build', 'watch']
 	grunt.registerTask 'default', ['build']
 	

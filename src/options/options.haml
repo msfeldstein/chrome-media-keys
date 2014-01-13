@@ -1,0 +1,51 @@
+!!!
+%html
+  %head 
+    %link{href: "options.css", rel: "stylesheet", type: "text/css"}/
+    %title Sway.fm's Media Keys
+  %body
+    .column.light
+      #topbar
+      %a{href: "http://sway.fm"}
+        %img#logo{alt: "Unity", src: "logo.png"}/
+      .alert#install-package-message
+        #after{style: "display:none;"}
+          %h1
+            You're all set
+          .subtext
+            Go listen to some music.
+        #before
+          %h1
+            Something's changed!
+          .subtext
+            Chrome has removed support for the plugins we were using to do media keys.  To continue using them, you'll need to install our helper script below, for windows or mac currently.
+          .installers
+            %a.mac{download: "", href: "../handler/Media Keys Installer.zip"} Install for mac
+            %a.windows{href: "#"} Install for windows (Not Yet Available)
+          
+      %div
+        .subhead
+          Thanks for installing!
+        %p
+          While music is playing through Chrome, press
+          = succeed "," do
+            %img{src: "../popup/images/back.png", style: "height: 15px;"}/
+          = succeed "/" do
+            %img{src: "../popup/images/play.png", style: "height: 15px;"}/
+          %img{src: "../popup/images/pause.png", style: "height: 15px;"}/
+          and
+          %img{src: "../popup/images/next.png", style: "height: 15px;"}/
+          on your keyboard to control it.
+        %p
+          Click
+          %img{src: "extbutton.png", style: "vertical-align: bottom;"}/
+          from your extension bar for more options.
+        
+      %p{style: "margin-top: 30px;"}
+        %iframe{allowtransparency: "true", frameborder: "0", scrolling: "no", src: "http://platform.twitter.com/widgets/follow_button.html?screen_name=swayfm&show_count=false&show_screen_name=true", style: "width:120px; margin-left: 15px; height:20px; position: absolute;"}
+        %span#lastfm{style: "margin-left: 135px;"}
+          %a#lastfm-enable{href: "#"}
+            Enable Last.fm Scrobbling
+          %a#lastfm-loading{href: "#"}
+            Logging in to last.fm
+    %script{src: "options.js", type: "text/javascript"}

@@ -1,9 +1,9 @@
 {
   "name": "Sway.fm Unified Music Media Keys",
-  "version": "2.129",
+  "version": "3.0",
   "manifest_version": 2,
-  "icons": { "16": "images/icon128.png",
-           "48": "images/icon128.png",
+  "icons": { "16": "images/icon16.png",
+           "48": "images/icon148.png",
           "128": "images/icon128.png" },
   "browser_action": {
     "default_icon": {
@@ -23,7 +23,7 @@
   ],
   "description": "Media keys support for online radio and streaming music apps.",
   "background": {
-    "page":"background/background.html"
+    "scripts":["background/jquery_1.10.2.min.js", "background/mappings.js", "background/background.js", "background/lastfm/lastfm.api.md5.js", "background/lastfm/lastfm.api.js", "background/scrobbler.js", "background/media_key_support.js"]
   },
   "content_scripts": [
     {
@@ -40,10 +40,5 @@
     }
   ],
   "options_page": "options/options.html",
-  "content_security_policy": "script-src 'self' https://ws.audioscrobbler.com https://dc8na2hxrj29i.cloudfront.net; object-src 'self';",
-  "web_accessible_resources": [
-    "images/funnel_bar/text.png",
-    "images/funnel_bar/button.png",
-    "images/funnel_bar/close.png"
-  ]
+  "content_security_policy": "script-src 'self' https://ws.audioscrobbler.com https://dc8na2hxrj29i.cloudfront.net; object-src 'self';"
 }

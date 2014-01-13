@@ -24,10 +24,10 @@ chrome.windows.getAll {populate: true}, (windows) ->
       chrome.tabs.executeScript tab.id, {file: 'content_scripts/content.js'}
 
 # Launch the option page on the first run
-hasLaunchedOptions = localStorage.getItem("hasLaunchedOptions")
+hasLaunchedOptions = localStorage.getItem("hasSeen2") # Has seen version of updates.  Increment every time there's something to alert
 if not hasLaunchedOptions
   chrome.tabs.create {url: chrome.extension.getURL('options/options.html')}
-  localStorage.setItem 'hasLaunchedOptions', true
+  localStorage.setItem 'hasSeen2', true
 
 # Request audio focus, telling the previously playing tab that it's lost
 # focus and should pause itself.

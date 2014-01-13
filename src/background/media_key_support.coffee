@@ -1,6 +1,7 @@
 p = null
 
 useMediaKeys = () ->
+  p?.sendMessage({quit:true})
   p?.disconnect()
   p = chrome.runtime.connectNative('fm.sway.mediakeys')
   p.onMessage.addListener (msg) ->

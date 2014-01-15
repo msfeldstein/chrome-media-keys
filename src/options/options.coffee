@@ -34,7 +34,7 @@ focused = () ->
 chrome.tabs.getCurrent (tab) ->
   currentTabId = tab.id
   chrome.tabs.onActiveChanged.addListener (tabId) ->
-    if tabIdis currentTabId then focused()
+    if tabId is currentTabId then focused()
 allSet = () ->
   before = document.querySelector("#before")
   before.style.display = "none"

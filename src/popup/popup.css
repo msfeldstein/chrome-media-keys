@@ -68,18 +68,18 @@ body {
   -webkit-filter: drop-shadow(0px 0px 7px rgba(0,0,0,0.5))
 }
 #previous {
-    background-image: url(images/back.png);
+    background-image: url(images/controls/back.png);
 }
 
 #play-pause {
-    background-image: url(images/play.png);
+    background-image: url(images/controls/play.png);
 }
 body.playing #play-pause {
-    background-image: url(images/pause.png);
+    background-image: url(images/controls/pause.png);
 }
 
 #next {
-    background-image: url(images/next.png);
+    background-image: url(images/controls/next.png);
 }
 
 #controls > #thumbs-down {

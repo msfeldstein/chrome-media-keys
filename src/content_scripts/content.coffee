@@ -2,31 +2,31 @@ if window.injected then return
 window.injected = true;
 noop = (()->)
 
-fireEvent = (element, event, data) ->
+window.fireEvent = (element, event, data) ->
   evt = document.createEvent("HTMLEvents")
   evt.initEvent(event, true, true)
   if data then evt.data = data
   !element.dispatchEvent(evt)
 
-innerText = (id) ->
+window.innerText = (id) ->
   document.getElementById(id)?.textContent
 
-clickById = (id) ->
+window.clickById = (id) ->
   div = document.getElementById(id)
   fireEvent(div, 'click')
 
-querySelectorText = (query) ->
+window.querySelectorText = (query) ->
   document.querySelector(query)?.textContent or ""
 
-innerTextById = (id) ->
+window.innerTextById = (id) ->
   div = document.getElementById(id);
   div?.textContent || ""
 
-hasClassById = (id, className) ->
+window.hasClassById = (id, className) ->
   div = document.getElementById(id);
   div?.classList.contains(className) or false
 
-isVisible = (el) ->
+window.isVisible = (el) ->
   while el != document.body
     if el.style.display == 'none'
       return false;

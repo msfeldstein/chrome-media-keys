@@ -42,21 +42,23 @@ allSet = () ->
   after.style.display = ""
   document.querySelector(".alert").classList.add("success")
 
-attempts = 0
-mediaKeyTimer = 0
-# There's gotta be a better way to check if it's installed than just catching errors
-checkMediaKeys = () ->
-  if attempts is 0
-    document.querySelector(".alert").style.display = "none"
-  else
-    document.querySelector(".alert").style.display = "block"
-  attempts = attempts + 1
-  p = chrome.runtime.connectNative('fm.sway.mediakeys')
-  p.onMessage.addListener (msg) ->
-    allSet()
-    clearTimeout mediaKeyTimer
-  timeout = if attempts is 0 then 1 else 1000
-  mediaKeyTimer = setTimeout checkMediaKeys, timeout
 
-checkMediaKeys()
+# Don't do this until we are using native messaging
+# attempts = 0
+# mediaKeyTimer = 0
+# # There's gotta be a better way to check if it's installed than just catching errors
+# checkMediaKeys = () ->
+#   if attempts is 0
+#     document.querySelector(".alert").style.display = "none"
+#   else
+#     document.querySelector(".alert").style.display = "block"
+#   attempts = attempts + 1
+#   p = chrome.runtime.connectNative('fm.sway.mediakeys')
+#   p.onMessage.addListener (msg) ->
+#     allSet()
+#     clearTimeout mediaKeyTimer
+#   timeout = if attempts is 0 then 1 else 1000
+#   mediaKeyTimer = setTimeout checkMediaKeys, timeout
+
+# checkMediaKeys()
   

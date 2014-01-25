@@ -18,12 +18,11 @@
     "http://*/*",
     "https://*/*",
     "notifications",
-    "unlimitedStorage",
-    "nativeMessaging"
+    "unlimitedStorage"
   ],
   "description": "Media keys support for online radio and streaming music apps.",
   "background": {
-    "scripts":["background/jquery_1.10.2.min.js", "background/mappings.js", "background/background.js", "background/lastfm/lastfm.api.md5.js", "background/lastfm/lastfm.api.js", "background/scrobbler.js", "background/media_key_support.js"]
+    "scripts":["background/jquery_1.10.2.min.js", "background/mappings.js", "background/background.js", "background/lastfm/lastfm.api.md5.js", "background/lastfm/lastfm.api.js", "background/scrobbler.js", "background/media_key_support_npapi.js"]
   },
   "content_scripts": [
     {
@@ -38,6 +37,10 @@
       "js": ["content_scripts/content.js", "controllers/BasicController.js"],
      	"run_at": "document_idle"
     }
+  ],
+  "plugins" : [
+    {"path": "handler/UnityControlPlugin.plugin"},
+    {"path": "handler/npUnityControlPlugin.dll"}
   ],
   "options_page": "options/options.html",
   "content_security_policy": "script-src 'self' https://ws.audioscrobbler.com https://dc8na2hxrj29i.cloudfront.net; object-src 'self';"

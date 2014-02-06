@@ -15,6 +15,7 @@ mapping =
   'deezer': 'DeezerController.js'
   'grooveshark': 'GroovesharkController.js'
   'bandcamp': 'BandcampController.js'
+  'beatsmusic': 'BeatsMusicController.js'
   'earbits': 'EarbitsController.js'
   'getworkdonemusic': 'GetWorkDoneController.js'
   '8tracks': 'EightTracksController.js'

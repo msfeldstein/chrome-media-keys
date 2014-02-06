@@ -49,7 +49,7 @@ module.exports = (grunt) ->
 		
 	grunt.registerTask 'build:icons', ['image_resize:icon16', 'image_resize:icon48', 'image_resize:icon128']
 	grunt.registerTask 'build:sources', ['copy:src', 'coffee:src']
-	grunt.registerTask 'build', ['build:manifest', 'build:icons', 'build:sources']
+	grunt.registerTask 'build', ['build:manifest', 'build:icons', 'build:sources', 'haml:src']
 	grunt.registerTask 'run', ['build:manifest', 'build', 'watch']
 	grunt.registerTask 'default', ['build']
 	

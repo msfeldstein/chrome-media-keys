@@ -20,9 +20,6 @@ controller = new BasicController({
   isThumbsDownSelector: "#t-hate.active",
 });
 
-// verify controller loaded
-console.log("Got the Beats controller");
-
 // grab url from background-image and upgrade to medium size
 controller.override('getAlbumArt', function() {
   var art = document.getElementById("t-art");

@@ -29,7 +29,7 @@ module.exports = (grunt) ->
 		watch:
 			all:
 				files: ['src/**', 'handler/**']
-				tasks: ['build:manifest', 'copy:src', 'coffee:src', 'haml']
+				tasks: ['build:manifest', 'copy:src', 'coffee:src', 'haml:src']
 				
 	grunt.loadNpmTasks 'grunt-image-resize'
 	grunt.loadNpmTasks 'grunt-contrib-copy'

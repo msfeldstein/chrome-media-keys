@@ -23,6 +23,9 @@ controller = new BasicController({
 // grab url from background-image and upgrade to medium size
 controller.override('getAlbumArt', function() {
   var art = document.getElementById("t-art");
+  if (!art) {
+    return null;
+  }
   var artURL = getComputedStyle(art).getPropertyValue('background-image').slice(4,-1);
   var artMed = artURL.replace('small', 'medium');
   return artMed;

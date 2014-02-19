@@ -44,6 +44,7 @@ requestFocus = (newFocusTab) ->
   activeTabStack.push newid
 
   useMediaKeys()
+  window.plugin?.requestFocus()
 
 window.sendAction = (action) ->
   if activeTab()

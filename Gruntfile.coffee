@@ -5,7 +5,6 @@ module.exports = (grunt) ->
 				files: [
 					{expand: true, cwd: 'src/', src: ['**/*.js', '**/*.png', '**/*.css', '**/*.html'], dest: 'ext/'}
 					{expand: true, cwd: 'handler/', src: ['**'], dest: 'ext/handler/'}
-					{expand: true, cwd: '.', src: 'icon*', dest: 'ext/'}
 				]
 		coffee:
 			src:
@@ -29,12 +28,7 @@ module.exports = (grunt) ->
 
 	grunt.registerTask 'build:manifest', 'Build chrome manifest file.', () ->
 		mnf = grunt.file.readJSON 'src/manifest.json'
-		
-		mnf.icons =
-			"16": "icon16.png"
-			"48": "icon48.png"
-			"128": "icon128.png"
-		
+		# Manipulate manifest here if necessary.
 		grunt.file.write 'ext/manifest.json', JSON.stringify(mnf)
 
 	grunt.registerTask 'build:sources', ['copy:src', 'coffee:src']

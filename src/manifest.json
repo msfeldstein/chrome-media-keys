@@ -22,7 +22,7 @@
   ],
   "description": "Media keys support for online radio and streaming music apps.",
   "background": {
-    "scripts":["background/jquery_1.10.2.min.js", "background/mappings.js", "background/background.js", "background/lastfm/lastfm.api.md5.js", "background/lastfm/lastfm.api.js", "background/scrobbler.js", "background/media_key_support_npapi.js"]
+    "page":"background/background.html"
   },
   "content_scripts": [
     {

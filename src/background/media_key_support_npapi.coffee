@@ -1,11 +1,18 @@
 window.useMediaKeys = () ->
+  pluginHolder = document.getElementById('pluginHolder')
+  if not pluginHolder
+    pluginHolder = document.createElement('div')
+    pluginHolder.id = 'pluginHolder';
+    document.body.appendChild(pluginHolder);
+
   plugin = document.getElementById('pluginId')
   if plugin
-    document.body.removeChild(plugin);
+    return
+
   embed = document.createElement('object')
   embed.type = 'application/x-unitycontrolplugin'
   embed.id = 'pluginId'
-  document.body.appendChild(embed)
+  pluginHolder.appendChild(embed)
   plugin = document.getElementById('pluginId')
   plugin.addEventListener 'next', () ->
     sendAction('next')
@@ -19,3 +26,5 @@ window.useMediaKeys = () ->
     sendAction('thumbsDown')
   plugin.addEventListener 'getState', () ->
     sendAction("getState");
+
+document.addEventListener('DOMContentLoaded', window.useMediaKeys);

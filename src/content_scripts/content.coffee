@@ -39,7 +39,7 @@ init = () ->
     success = controller.init();
     if success
       chrome.extension.sendRequest({action: "controller_loaded", host:window.location.host}, noop)
-	  else
+    else
       setTimeout(init, 500)
 
 # Check every 500 ms until the required elements are ready.

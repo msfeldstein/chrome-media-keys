@@ -25,9 +25,15 @@ controller = {
         this.stateChangeObserver = new WebKitMutationObserver(function(mutations, observer) {
             sendState();
         });
+        this.observe();
+        return true;
+    },
+
+    observe: function() {
+        var player = doc().getElementById('player');
+        var controls = doc().getElementById('controls');
         this.stateChangeObserver.observe(player, {attributes: true, characterData: true, subtree:true});
         this.stateChangeObserver.observe(controls, {attributes: true, characterData: true, subtree:true});
-        return true;
     },
     name: "Spotify",
     nextSong: function() {

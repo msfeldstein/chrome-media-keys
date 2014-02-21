@@ -24,4 +24,3 @@ controller.override('getAlbumArt', function(_super) {
   var art = _super();
   return art && art.replace('s130', 's300');
 })
-console.log("Got the controller")

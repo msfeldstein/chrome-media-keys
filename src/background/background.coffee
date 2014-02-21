@@ -70,7 +70,6 @@ handleRequestFromContentScript = (request, sender, sendResponse) ->
   else if request.action is 'injectController'
     script = findScriptByHost(request.host)
     if not script then return
-    console.log "Executing ", script
     chrome.tabs.executeScript(sender.tab.id, {file: script})
     if request.host.indexOf("youtube") > -1
       chrome.tabs.executeScript(sender.tab.id, {file: 'controllers/ShimController.js'})

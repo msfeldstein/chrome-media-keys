@@ -9,6 +9,12 @@
         #song-details
           #song-name
           #artist-name
+      #not-playing-container.no-player
+        %p
+          There's nothing playing right now.
+        - # Todo: add links to get started with sway
+      #art-holder
+        %img#album-art
         #controls
           #thumbs-down
           #thumbs-up
@@ -16,17 +22,10 @@
           #previous
           #play-pause
           #next
-      #not-playing-container.no-player
-        %p
-          There's nothing playing right now.
-        - # Todo: add links to get started with sway
-      #art-holder.yes-player{:style => "display: none;"}
-        %img#album-art
-        #sway-cta
-          Like Sway.fm?
-          %a{:href => "https://chrome.google.com/webstore/detail/swayfm-unified-music-medi/icckhjgjjompfgoiidainoapgjepncej/reviews?hl=en-US"}
-            Rate it
-          and
-          %a#share-link
-            Share with friends!
+      #sway-cta
+        Like Sway.fm?
+        %a{:href => "https://chrome.google.com/webstore/detail/swayfm-unified-music-medi/icckhjgjjompfgoiidainoapgjepncej/reviews?hl=en-US"} Rate it
+        and
+        %a#share-link
+          Share with friends!
     %script{:src => "popup.js"}

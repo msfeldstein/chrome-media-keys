@@ -33,6 +33,7 @@ mapping =
   'thesixtyone': 'ThesixtyoneController.js'
   'mog': 'MogController.js'
   'mixcloud': 'MixcloudController.js'
+  'mixrad': 'NokiaMixradioController.js',
   'napster': 'RhapsodyController.js'
   'playlist': 'PlaylistController.js'
   'rhapsody': 'RhapsodyController.js'

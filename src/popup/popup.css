@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -5,13 +9,24 @@ body {
   font-size: 16px;
 }
 
+a {
+  color: #00a4ff;
+}
+
+a:focus {
+  outline: none;
+}
+
 /* -----------------------------------------------------------------------------
  * Header
  * ---------------------------------------------------------------------------*/
 
-#header {
-  text-align: center;
-  padding: 10px 0;
+#playing-container { }
+
+#header,
+#not-playing-container {
+  margin: 10px 0;
+  text-align: center;  
 }
 
 /* -----------------------------------------------------------------------------
@@ -22,32 +37,99 @@ body {
   font-weight: bold;
 }
 
-#artist-name {
-
-}
+#artist-name { }
 
 /* -----------------------------------------------------------------------------
  * Controls
  * ---------------------------------------------------------------------------*/
 
-#controls { }
-#next { }
-#previous { }
-#play-pause { }
-#favorite { }
-#thumbs-up { }
-#thumbs-down { }
+#controls {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 0;
+  background: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  transition-property: background, opacity;
+  transition-timing-function: ease;
+  transition-duration: 0.5s;
+}
+
+.playing #controls {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+#controls > * {
+  flex: 1;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  height: 32px;
+  width: 32px;
+  display: inline-block;
+}
+
+#previous {
+  background-image: url(images/controls/back.png);
+}
+
+#play-pause {
+  background-image: url(images/controls/play.png);
+}
+
+.playing #play-pause {
+  background-image: url(images/controls/pause.png);
+}
+
+#next {
+  background-image: url(images/controls/next.png);
+}
+
+#thumbs-down {
+  background-image: url(images/controls/thumbsdown.png);
+}
+
+#thumbs-down.toggled {
+  background-image: url(images/controls/thumbsdown_active.png);
+}
+
+#thumbs-up {
+  background-image: url(images/controls/thumbsup.png);
+}
+
+#thumbs-up.toggled {
+  background-image: url(images/controls/thumbsup_active.png);
+}
+
+#favorite {
+  background-image: url(images/controls/heart.png);
+}
+
+#favorite.toggled {
+  background-image: url(images/controls/heart_active.png);
+}
 
 /* -----------------------------------------------------------------------------
  * Album Art
  * ---------------------------------------------------------------------------*/
 
 #art-holder {
-  display: none;
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background-image: radial-gradient(ellipse 125% 100% at 50% 0%, #434343 0%, #020202 100%);
 }
 
 #album-art {
+  opacity: 0;
+  transition: 0.5s opacity ease;
+}
 
+.playing #album-art {
+  opacity: 1;
 }
 
 /* -----------------------------------------------------------------------------
@@ -55,7 +137,32 @@ body {
  * ---------------------------------------------------------------------------*/
 
 #sway-cta {
-  padding: 10px 0;
+  padding: 10px;
   text-align: center;
   font-size: 12px;
-} 
+}
+
+#sway-share {
+  padding: 10px;
+  font-size: 12px;
+  display: none;
+}
+
+#sway-share label {
+  display: block;
+}
+
+#sway-share input {
+  width: 100%;
+  margin: 5px 0;
+  padding: 5px;
+}
+
+#sway-share a {
+  text-decoration: none;
+}
+
+#sway-share .share {
+  width: 32px;
+  height: 32px;
+}

@@ -42,6 +42,7 @@ updateUI = (uiState) ->
   shouldShow "#previous", support.previous
   shouldShow "#thumbs-up", support.thumbsUp
   shouldShow "#thumbs-down", support.thumbsDown
+  shouldShow "#favorite", support.favorite
 
   $("#header").classList.remove "no-music"
   $("#not-playing-container").style.display = "none"

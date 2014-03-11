@@ -1,99 +1,103 @@
-:focus {
-    outline:rgba(0,0,0,0);
-}
-
-::-webkit-scrollbar {
-    height: 0;
-}
-
-@font-face {
-  font-family: 'Museo Sans';
-  font-style: normal;
-  src: url(MuseoSans-300.otf) format("truetype");
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
+* {
+  box-sizing: border-box;
 }
 
 body {
-    color: #111;
-    width:400px;
-    height:280px;
-    background: #e8e8e8;
-    -webkit-user-select: none; 
-    font-family: "Museo Sans";
-    font-size: 22pt;
-    font-weight: 100;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  font-size: 16px;
 }
 
-#topbar {
-  height: 10px;
-  background: #00a0e0;
+a {
+  color: #00a4ff;
 }
 
-#header {
-  height: 62px;
-  background: -webkit-linear-gradient(top, #DDDDDD, #CCCCCC);
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: center;
+a:focus {
+  outline: none;
 }
+
+/* -----------------------------------------------------------------------------
+ * Header
+ * ---------------------------------------------------------------------------*/
+
+#playing-container { }
+
+#header,
+#not-playing-container {
+  margin: 10px 0;
+  padding: 0 10px;
+  text-align: center;
+}
+
+/* -----------------------------------------------------------------------------
+ * Song Details
+ * ---------------------------------------------------------------------------*/
+
+#song-name {
+  font-weight: bold;
+}
+
+#artist-name { }
+
+/* -----------------------------------------------------------------------------
+ * Controls
+ * ---------------------------------------------------------------------------*/
 
 #controls {
-    z-index: 100;
-    -webkit-box-flex: 0;
-    display:-webkit-box;
-    -webkit-box-orient:horizontal;
-    -webkit-box-pack:center;
-    -webkit-box-align:center;
-    margin-right: 10px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 0;
+  background: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  transition-property: background, opacity;
+  transition-timing-function: ease;
+  transition-duration: 0.5s;
 }
 
-.no-music #controls {
-  opacity: 0.4;
+#controls > * {
+  flex: 1;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  height: 32px;
+  width: 32px;
+  display: inline-block;
 }
 
-#controls > div {
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 40px;
-    width: 40px;
-    margin: 0;
-    padding: 0;
-}
-
-#controls > div:active {
-  -webkit-filter: drop-shadow(0px 0px 7px rgba(0,0,0,0.5))
-}
 #previous {
-    background-image: url(images/controls/back.png);
+  background-image: url(images/controls/back.png);
 }
 
 #play-pause {
-    background-image: url(images/controls/play.png);
+  background-image: url(images/controls/play.png);
 }
-body.playing #play-pause {
-    background-image: url(images/controls/pause.png);
+
+.playing #play-pause {
+  background-image: url(images/controls/pause.png);
 }
 
 #next {
-    background-image: url(images/controls/next.png);
+  background-image: url(images/controls/next.png);
 }
 
-#controls > #thumbs-down {
-    background-image: url(images/controls/thumbsdown.png);
+#thumbs-down {
+  background-image: url(images/controls/thumbsdown.png);
 }
 
-#controls > #thumbs-down.toggled {
+#thumbs-down.toggled {
   background-image: url(images/controls/thumbsdown_active.png);
 }
-#controls > #thumbs-up {
-    background-image: url(images/controls/thumbsup.png);
+
+#thumbs-up {
+  background-image: url(images/controls/thumbsup.png);
 }
 
-#controls > #thumbs-up.toggled {
+#thumbs-up.toggled {
   background-image: url(images/controls/thumbsup_active.png);
 }
 
@@ -105,81 +109,59 @@ body.playing #play-pause {
   background-image: url(images/controls/heart_active.png);
 }
 
-#song-details {
-  -webkit-box-flex: 1;
-  padding-left: 10px;
-}
-
-#artist-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 14pt;
-  opacity: 0.7;
-}
-
-#song-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 16pt;
-}
+/* -----------------------------------------------------------------------------
+ * Album Art
+ * ---------------------------------------------------------------------------*/
 
 #art-holder {
-  display: -webkit-box;
-  -webkit-box-align: center;
-  -webkit-box-pack: center;
-  height: 240px;
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background-image: radial-gradient(ellipse 125% 100% at 50% 0%, #434343 0%, #020202 100%);
 }
 
 #album-art {
-  min-width: 100px;
-  min-height: 100px;
-  max-width: 175px;
-  max-height: 175px;
-  background-size: cover;
-  -webkit-box-shadow: 0 0 25px rgba(0,0,0,0.8);
-  background-image: url(images/art.jpeg);
-  background-position: center;
+  opacity: 0.5;
+  transition: 0.5s opacity ease;
+  width: 100%;
+  height: auto;
 }
 
-#not-playing-container {
-  font-size: 18px;
-  text-align: center;
-  margin-top: 20px;
-  max-width: 300px;
-  margin: auto;
+.playing #album-art {
+  opacity: 1;
 }
+
+/* -----------------------------------------------------------------------------
+ * Footer
+ * ---------------------------------------------------------------------------*/
 
 #sway-cta {
-  display: none;
-
-  position: fixed;
-  bottom: 0;
-  left: 0;
-
-  font-size: 15px;
+  padding: 10px;
   text-align: center;
-  width: 100%;
-  background-color: rgb(252, 253, 186);
-  border-top: 2px solid rgb(0, 160, 224);
-  padding: 5px;
-  cursor: pointer;
+  font-size: 12px;
 }
 
-#art-holder.with-cta {
-  padding-bottom: 20px;
+#sway-share {
+  padding: 10px;
+  font-size: 12px;
+  display: none;
 }
 
-.with-cta #sway-cta {
+#sway-share label {
   display: block;
 }
 
-#sway-cta a, #sway-cta a:visited {
-  color: rgb(0, 0, 238);
+#sway-share input {
+  width: 100%;
+  margin: 5px 0;
+  padding: 5px;
 }
 
-#sway-cta .share-img {
-  height: 21px;
-  vertical-align: bottom;
+#sway-share a {
+  text-decoration: none;
+}
+
+#sway-share .share {
+  width: 32px;
+  height: 32px;
 }

@@ -20,7 +20,7 @@ module.exports = (grunt) ->
 		watch:
 			all:
 				files: ['src/**', 'handler/**']
-				tasks: ['build:manifest', 'copy:src', 'coffee:src', 'haml:src']
+				tasks: ['build:manifest', 'coffee:src', 'copy:src', 'haml:src']
 
 	grunt.loadNpmTasks 'grunt-contrib-copy'
 	grunt.loadNpmTasks 'grunt-contrib-watch'

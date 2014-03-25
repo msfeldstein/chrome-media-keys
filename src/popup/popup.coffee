@@ -40,6 +40,7 @@ updateUI = (uiState) ->
   shouldShow "#play-pause", support.playpause
   shouldShow "#next", support.next
   shouldShow "#previous", support.previous
+  shouldShow "#favorite", support.favorite
   shouldShow "#thumbs-up", support.thumbsUp
   shouldShow "#thumbs-down", support.thumbsDown
 

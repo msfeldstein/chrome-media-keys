@@ -152,7 +152,7 @@ if (!existing) {
                     playing:data.status == 'playing' || data.status == 'loading',
                     favorite:that.getFavorite()
                 };
-                domChanged(false);
+                sendState(false);
             });
             return true;
         },

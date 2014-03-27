@@ -25,6 +25,7 @@ mapping =
   'wearehunted': 'WeAreHuntedController.js'
   'turntable': 'TurntableController.js'
   'songza': 'SongzaController.js'
+  'mixrad': 'NokiaMixradioController.js'
   'thisismyjam': 'ThisIsMyJamController.js'
   'ex.fm': 'ExfmController.js'
   'jango': 'JangoController.js'

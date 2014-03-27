@@ -65,9 +65,6 @@ didStateChange = (newState) ->
   oldState = newState;
   changed
 
-domChanged = () ->
-  sendState(false)
-
 # Send an updated state to the popup. It does a diff between old states and
 # new states and wont send anything to the popup if nothings changed, unless
 # force is true. 

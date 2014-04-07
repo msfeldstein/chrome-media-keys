@@ -1,6 +1,6 @@
 {
   "name": "Sway.fm Unified Music Media Keys",
-  "version": "3.18",
+  "version": "3.19",
   "manifest_version": 2,
   "icons": { "16": "images/icon16.png",
            "48": "images/icon148.png",
@@ -39,7 +39,7 @@
     }
   ],
   "plugins" : [
-    {"path": "handler/UnityControlPlugin.plugin"},
+    {"path": "handler/npUnityControlPlugin.plugin"},
     {"path": "handler/npUnityControlPlugin.dll"}
   ],
   "options_page": "options/options.html",

@@ -1,4 +1,3 @@
-console.log("Got the basic controller")
 function throttle(fn, threshhold, scope) {
   threshhold || (threshhold = 250);
   var last,

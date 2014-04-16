@@ -10,6 +10,7 @@ window.findScriptByHost = (host) ->
 mapping =
   'amazon': 'AmazonController.js'
   'audiogalaxy': 'AudiogalaxyController.js'
+  'bop': 'BopController.js'
   'pandora': 'PandoraController.js'
   'di': 'DIController.js'
   'deezer': 'DeezerController.js'
@@ -25,6 +26,7 @@ mapping =
   'wearehunted': 'WeAreHuntedController.js'
   'turntable': 'TurntableController.js'
   'songza': 'SongzaController.js'
+  'mixrad': 'NokiaMixradioController.js'
   'thisismyjam': 'ThisIsMyJamController.js'
   'ex.fm': 'ExfmController.js'
   'jango': 'JangoController.js'
@@ -35,6 +37,7 @@ mapping =
   'mixcloud': 'MixcloudController.js'
   'napster': 'RhapsodyController.js'
   'playlist': 'PlaylistController.js'
+  'plex': 'PlexController.js'
   'rhapsody': 'RhapsodyController.js'
   'rbmaradio': 'RbmaController.js'
   'rdio': 'RdioController.js'

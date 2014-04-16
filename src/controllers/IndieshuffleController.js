@@ -17,6 +17,5 @@ controller = new BasicController({
 controller.override('getTitle', function() {
   var titleAndArtist = document.querySelector("#now-playing-title").textContent;
   var artist = this.getArtist();
-  console.log("TITLEANDARTIST", titleAndArtist, artist)
   return titleAndArtist.substring(artist.length);
 });

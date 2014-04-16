@@ -39,7 +39,7 @@ init = () ->
     success = controller.init();
     if success
       chrome.extension.sendRequest({action: "controller_loaded", host:window.location.host}, noop)
-	  else
+    else
       setTimeout(init, 500)
 
 # Check every 500 ms until the required elements are ready.
@@ -64,9 +64,6 @@ didStateChange = (newState) ->
       break
   oldState = newState;
   changed
-
-domChanged = () ->
-  sendState(false)
 
 # Send an updated state to the popup. It does a diff between old states and
 # new states and wont send anything to the popup if nothings changed, unless

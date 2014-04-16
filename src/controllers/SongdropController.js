@@ -1,5 +1,3 @@
-console.log("Controller")
-
 controller = new BasicController({
   supports: {
     playpause: true,

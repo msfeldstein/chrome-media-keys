@@ -3,14 +3,13 @@ controller = new BasicController({
     playpause: true,
     next: true
   },
-  playSelector: '#player .player-play',
-  pauseSelector: '#player .player-pause',
-  nextSelector: '#player .player-skip',
-  titleSelector: '.szi-title',
-  artistSelector: '.szi-artist',
-  playStateSelector: '.sz-player',
-  playStateClass: 'sz-player-play-state-play',
-  artworkImageSelector: '.player-state-display.player-state-display-song img'
+  playPauseSelector: '.miniplayer-control-play-pause',
+  nextSelector: '.miniplayer-control-skip',
+  titleSelector: '.miniplayer-info-track-title',
+  artistSelector: '.miniplayer-info-artist-name',
+  playStateSelector: '.player-state-song',
+  playStateClass: 'player-state-play',
+  artworkImageSelector: '.miniplayer-album-art'
 });
 
 

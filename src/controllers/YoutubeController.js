@@ -37,6 +37,7 @@ function runOnPage() {
   
   // The player obj (flash object) used by unity.
   var playerObjUnity;
+  var html5Video = null;
   
   function getLikeButton() {
     return document.getElementById('watch-like')
@@ -53,9 +54,11 @@ function runOnPage() {
   var doAction = {
     pause: function() {
       if (isPlaying()) {
-        playerObjUnity.pauseVideo();
+        if (html5Video) html5Video.pause();
+        else playerObjUnity.pauseVideo();
       } else {
-        playerObjUnity.playVideo();
+        if (html5Video) html5Video.play();
+        else playerObjUnity.playVideo();
       }
     },
     thumbsUp: function() {
@@ -79,7 +82,11 @@ function runOnPage() {
   }
 
   function isPlaying() {
-    return playerObjUnity.getPlayerState && playerObjUnity.getPlayerState() == 1;
+    if (html5Video) {
+      return !html5Video.paused;
+    } else {
+      return (playerObjUnity.getPlayerState && playerObjUnity.getPlayerState() == 1);  
+    }
   }
 
   function getUrlVars() {
@@ -155,19 +162,32 @@ function runOnPage() {
   
   function checkForPlayer() {
     var embed = document.getElementsByTagName('embed')[0];
-    if (!embed) {
+    var html5 = document.getElementsByTagName('video')[0];
+    if (!embed && !html5) {
       playerObjUnity = null;
       return;
     }
-    if (embed == playerObjUnity){
+    if ((embed && (embed == playerObjUnity)) || (html5 && (html5 == html5Video))) {
       return;
     }
-    playerObjUnity = embed;
-    function addListener() {
-      playerObjUnity.addEventListener("onStateChange", "window.unityOnStateChange");
-      sendState();
+    console.log("Embed", embed, "Html", html5)
+    if (embed) {
+      playerObjUnity = embed;
+      function addListener() {
+        playerObjUnity.addEventListener("onStateChange", "window.unityOnStateChange");
+        sendState();
+      }
+      setTimeout(addListener, 1000);
     }
-    setTimeout(addListener, 1000);
+    if (html5) {
+      isHTML5 = true;
+      html5Video = html5;
+      html5Video.addEventListener("play", window.unityOnStateChange)
+      html5Video.addEventListener("pause", window.unityOnStateChange)
+      html5Video.addEventListener("ended", window.unityOnStateChange)
+      html5Video.addEventListener("playing", window.unityOnStateChange)
+    }
+    
     if (getLikeContainer())
       getLikeContainer().addEventListener('DOMSubtreeModified', sendState);
     // Watch for when the artwork is loaded.

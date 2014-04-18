@@ -1,6 +1,7 @@
 npm-debug.log
 node_modules
 ext
+ext.zip
 .DS_Store
 *.sublime-project
 *.sublime-workspace

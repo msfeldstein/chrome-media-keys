@@ -26,5 +26,6 @@ window.useMediaKeys = () ->
     sendAction('thumbsDown')
   plugin.addEventListener 'getState', () ->
     sendAction("getState");
+  window.plugin = plugin
 
 document.addEventListener('DOMContentLoaded', window.useMediaKeys);

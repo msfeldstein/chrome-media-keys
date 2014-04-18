@@ -10,6 +10,7 @@ window.findScriptByHost = (host) ->
 mapping =
   'amazon': 'AmazonController.js'
   'audiogalaxy': 'AudiogalaxyController.js'
+  'bop': 'BopController.js'
   'pandora': 'PandoraController.js'
   'di': 'DIController.js'
   'deezer': 'DeezerController.js'

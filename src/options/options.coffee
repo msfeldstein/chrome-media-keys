@@ -42,6 +42,9 @@ allSet = () ->
   after.style.display = ""
   document.querySelector(".alert").classList.add("success")
 
+document.querySelector("#donate-button").addEventListener "click", () ->
+  document.querySelector("#donations").style.display = "block"
+
 
 # Don't do this until we are using native messaging
 # attempts = 0

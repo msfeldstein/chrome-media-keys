@@ -42,10 +42,14 @@
           from your extension bar for more options.
         
       %p{style: "margin-top: 30px;"}
+        %a#donate-button{href: "#"}
+          Donations
         %iframe{allowtransparency: "true", frameborder: "0", scrolling: "no", src: "http://platform.twitter.com/widgets/follow_button.html?screen_name=swayfm&show_count=false&show_screen_name=true", style: "width:120px; margin-left: 15px; height:20px; position: absolute;"}
         %span#lastfm{style: "margin-left: 135px;"}
           %a#lastfm-enable{href: "#"}
             Enable Last.fm Scrobbling
           %a#lastfm-loading{href: "#"}
             Logging in to last.fm
+      %p#donations{style: "margin-top: 30px;display: none;"}
+        BTC: 1CYdmU8MzqaAaAmmLZQckQgtya3ytKwL14 - DOGE: D87atj1uvNqdURMr1rVBg9AEzpfd9nENTW
     %script{src: "options.js", type: "text/javascript"}

@@ -72,11 +72,11 @@ function runOnPage() {
       setTimeout(sendState, 500);
     },
     next: function() {
-      var next = document.getElementsByClassName('yt-uix-button-icon-playlist-bar-next')[0];
+      var next = document.getElementsByClassName('next-playlist-list-item')[0];
       fireEvent(next, 'click');
     },
     previous: function() {
-      var prev = document.getElementsByClassName('yt-uix-button-icon-playlist-bar-prev')[0];
+      var prev = document.getElementsByClassName('prev-playlist-list-item')[0];
       fireEvent(prev, 'click');
     }
   }
@@ -152,8 +152,8 @@ function runOnPage() {
 
   function checkSupports() {
     var nav = true;
-    var playlistButton = document.querySelector('.yt-uix-button-icon-playlist-bar-next');
-    if (!playlistButton) {
+    var nextButton = document.getElementsByClassName('next-playlist-list-item')[0];
+    if (!nextButton) {
       nav = false;
     }
     var like = !!getLikeContainer();

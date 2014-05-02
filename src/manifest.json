@@ -18,7 +18,8 @@
     "http://*/*",
     "https://*/*",
     "notifications",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "nativeMessaging"
   ],
   "description": "Media keys support for online radio and streaming music apps.",
   "background": {
@@ -37,10 +38,6 @@
       "js": ["content_scripts/content.js", "controllers/BasicController.js"],
      	"run_at": "document_idle"
     }
-  ],
-  "plugins" : [
-    {"path": "handler/npUnityControlPlugin.plugin"},
-    {"path": "handler/npUnityControlPlugin.dll"}
   ],
   "options_page": "options/options.html",
   "content_security_policy": "script-src 'self' https://ws.audioscrobbler.com https://dc8na2hxrj29i.cloudfront.net; object-src 'self';"

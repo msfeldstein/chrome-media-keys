@@ -8,7 +8,7 @@
       #topbar
       %a{href: "http://sway.fm"}
         %img#logo{alt: "Unity", src: "logo.png"}/
-      .alert#install-package-message{:style => "display:none;"} 
+      .alert#install-package-message
         #after{style: "display:none;"}
           %h1
             You're all set
@@ -20,8 +20,8 @@
           .subtext
             Chrome has removed support for the plugins we were using to do media keys.  To continue using them, you'll need to install our helper script below, for windows or mac currently.
           .installers
-            %a.mac{download: "", href: "../handler/Media Keys Installer.zip"} Install for mac
-            %a.windows{href: "#"} Install for windows (Not Yet Available)
+            %a.mac{download: "", href: "../handler/MediaKeysInstallerMac.zip"} Install for mac
+            / %a.windows{href: "#"} Install for windows (Not Yet Available)
           
       %div
         .subhead

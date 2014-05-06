@@ -41,6 +41,8 @@ allSet = () ->
   after = document.querySelector("#after")
   after.style.display = ""
   document.querySelector(".alert").classList.add("success")
+  # Trigger it to connect to the extension
+  chrome.extension.getBackgroundPage().useMediaKeys()
 
 document.querySelector("#donate-button").addEventListener "click", () ->
   document.querySelector("#donations").style.display = "block"

@@ -1,6 +1,7 @@
 p = null
 
-useMediaKeys = () ->
+window.useMediaKeys = () ->
+
   p?.sendMessage({quit:true})
   p?.disconnect()
   p = chrome.runtime.connectNative('fm.sway.mediakeys')
@@ -14,6 +15,7 @@ useMediaKeys = () ->
       sendAction 'previous'
   p.onDisconnect.addListener (e) ->
     console.log 'Media Keys Disconnected'
+    p = null
 
 document.addEventListener 'DOMContentLoaded', useMediaKeys
 

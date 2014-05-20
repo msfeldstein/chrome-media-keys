@@ -60,3 +60,4 @@ mapping =
   'y.qq': 'QQMusicController.js'
   'bronytunes': 'BronyTunesController.js'
   'pony.fm': 'PonyFmController.js'
+  'ponyvillelive': 'PonyvilleLiveController.js'

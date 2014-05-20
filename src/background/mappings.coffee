@@ -58,3 +58,6 @@ mapping =
   'stitcher': 'StitcherController.js'
   'jing.fm': 'JingfmController.js'
   'y.qq': 'QQMusicController.js'
+  'bronytunes': 'BronyTunesController.js'
+  'pony.fm': 'PonyFmController.js'
+  'ponyvillelive': 'PonyvilleLiveController.js'

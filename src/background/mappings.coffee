@@ -57,5 +57,6 @@ mapping =
   'indieshuffle': 'IndieshuffleController.js'
   'stitcher': 'StitcherController.js'
   'jing.fm': 'JingfmController.js'
-  'y.qq': 'QQMusicController.js',
-  'bronytunes': 'BronyTunes.js'
+  'y.qq': 'QQMusicController.js'
+  'bronytunes': 'BronyTunesController.js'
+  'pony.fm': 'PonyFmController.js'

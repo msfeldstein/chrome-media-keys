@@ -2,7 +2,7 @@ p = null
 
 window.useMediaKeys = () ->
 
-  p?.sendMessage({quit:true})
+  p?.postMessage({quit:true})
   p?.disconnect()
   p = chrome.runtime.connectNative('fm.sway.mediakeys')
   p.onMessage.addListener (msg) ->
@@ -20,3 +20,9 @@ window.useMediaKeys = () ->
 document.addEventListener 'DOMContentLoaded', useMediaKeys
 
 window.useMediaKeys = useMediaKeys
+
+window.plugin = {
+  requestFocus: () ->
+    console.log "REQUEST FOCUS"
+    # p.postMessage({requestFocus: true})
+}

@@ -56,3 +56,8 @@ mapping =
   'tracksflow': 'TracksflowController.js'
   'indieshuffle': 'IndieshuffleController.js'
   'stitcher': 'StitcherController.js'
+  'jing.fm': 'JingfmController.js'
+  'y.qq': 'QQMusicController.js'
+  'bronytunes': 'BronyTunesController.js'
+  'pony.fm': 'PonyFmController.js'
+  'ponyvillelive': 'PonyvilleLiveController.js'

@@ -8,6 +8,6 @@ controller = new BasicController({
   artistSelector: "#player-artist-name",
   titleSelector: "#player-track-name",
   artworkImageSelector: "#track-art-current-img",
-  nextSelector: "#playerSkipButton",
+  nextSelector: ".mini-play-controls #mini-skip",
   playPauseSelector: "#playerPlayPauseButton"
 });

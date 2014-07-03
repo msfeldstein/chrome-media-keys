@@ -9,10 +9,11 @@ window.findScriptByHost = (host) ->
 
 mapping =
   'amazon': 'AmazonController.js'
+  'audible': 'AudibleController.js'
   'audiogalaxy': 'AudiogalaxyController.js'
   'bop': 'BopController.js'
   'pandora': 'PandoraController.js'
-  'di': 'DIController.js'
+  'di.fm': 'DIController.js'
   'deezer': 'DeezerController.js'
   'grooveshark': 'GroovesharkController.js'
   'bandcamp': 'BandcampController.js'
@@ -55,3 +56,8 @@ mapping =
   'tracksflow': 'TracksflowController.js'
   'indieshuffle': 'IndieshuffleController.js'
   'stitcher': 'StitcherController.js'
+  'jing.fm': 'JingfmController.js'
+  'y.qq': 'QQMusicController.js'
+  'bronytunes': 'BronyTunesController.js'
+  'pony.fm': 'PonyFmController.js'
+  'ponyvillelive': 'PonyvilleLiveController.js'

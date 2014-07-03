@@ -20,7 +20,14 @@ controller = new BasicController({
   isThumbsDownSelector: "li[data-rating='1'].selected",
 });
 
+controller.override('init', function(_super) {
+  if (document.querySelector(this.playStateSelector))
+    return _super();
+  else
+    return false;
+});
+
 controller.override('getAlbumArt', function(_super) {
   var art = _super();
   return art && art.replace('s130', 's300');
-})
+});

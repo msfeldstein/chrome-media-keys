@@ -3,7 +3,7 @@ module.exports = (grunt) ->
 		copy:
 			src:
 				files: [
-					{expand: true, cwd: 'src/', src: ['**/*.js', '**/*.png', '**/*.css', '**/*.html'], dest: 'ext/'}
+					{expand: true, cwd: 'src/', src: ['**/*.js', '**/*.png', '**/*.css', '**/*.html', '**/*.otf'], dest: 'ext/'}
 					{expand: true, cwd: 'handler/', src: ['**'], dest: 'ext/handler/'}
 				]
 		coffee:

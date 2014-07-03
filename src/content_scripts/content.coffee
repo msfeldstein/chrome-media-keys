@@ -32,7 +32,6 @@ window.isVisible = (el) ->
       return false;
     el = el.parentNode;
   return true;
-
 init = () ->
   success = false
   if controller

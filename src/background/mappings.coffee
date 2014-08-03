@@ -61,3 +61,4 @@ mapping =
   'bronytunes': 'BronyTunesController.js'
   'pony.fm': 'PonyFmController.js'
   'ponyvillelive': 'PonyvilleLiveController.js'
+  'themusicninja': 'TheMusicNinjaController.js'

@@ -24,6 +24,29 @@
   "background": {
     "page":"background/background.html"
   },
+  "commands": {
+    "pause": {
+      "suggested_key": {
+        "default": "MediaPlayPause"
+      },
+      "description": "Play/Pause",
+      "global": true
+    },
+    "next": {
+      "suggested_key": {
+        "default": "MediaNextTrack"
+      },
+      "description": "Next Song",
+      "global": true
+    },
+    "previous": {
+      "suggested_key": {
+        "default": "MediaPrevTrack"
+      },
+      "description": "Previous Song",
+      "global": true
+    }
+  },
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/*"],

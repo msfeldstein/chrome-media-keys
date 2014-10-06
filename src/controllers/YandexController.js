@@ -4,20 +4,20 @@ controller = new BasicController({
         next: true,
         previous: true
     },
-    playPauseSelector: '.b-jambox__play',
-    previousSelector: '.b-jambox__prev',
-    nextSelector: '.b-jambox__next',
-    titleSelector: '.js-player-title',
-    artistSelector: '.js-player-artist',
-    playStateSelector: '.b-jambox__play',
-    playStateClass: 'b-jambox__playing',
-    artworkImageSelector: '.b-jambox__display-img'
+    playPauseSelector: '.player-controls__btn_play',
+    previousSelector: '.player-controls__btn_prev',
+    nextSelector: '.player-controls__btn_next',
+    titleSelector: '.track__title',
+    artistSelector: '.track__artists',
+    playStateSelector: '.player-controls__btn_play',
+    playStateClass: 'player-controls__btn_pause',
+    artworkImageSelector: '.album-cover'
 });
  
 controller.override('getAlbumArt', function() {
     var img = document.querySelector(this.artworkImageSelector);
     if (img) {
-        return img.src.replace('30x30', '150x150');
+        return img.src.replace('40x40', '150x150');
     }
     return undefined
 });

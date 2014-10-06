@@ -2,16 +2,21 @@ controller = new BasicController({
     supports: {
         playpause: true,
         next: true,
-        previous: true
+        previous: true,
+        thumbsDown: true,
+        favorite: true
     },
     playPauseSelector: '.player-controls__btn_play',
     previousSelector: '.player-controls__btn_prev',
     nextSelector: '.player-controls__btn_next',
-    titleSelector: '.track__title',
-    artistSelector: '.track__artists',
+    titleSelector: '.player-controls .track__title',
+    artistSelector: '.player-controls .track__artists',
     playStateSelector: '.player-controls__btn_play',
     playStateClass: 'player-controls__btn_pause',
-    artworkImageSelector: '.album-cover'
+    artworkImageSelector: '.player-controls .album-cover',
+    favoriteSelector: '.player-controls .like',
+    isFavoriteSelector: '.player-controls .like_on',
+    thumbsDownSelector: '.player-controls__btn_dislike'
 });
  
 controller.override('getAlbumArt', function() {

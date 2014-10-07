@@ -1,6 +1,6 @@
 {
-  "name": "Sway.fm Unified Music Media Keys",
-  "version": "3.32",
+  "name": "Media Keys by Sway.fm",
+  "version": "3.53",
   "manifest_version": 2,
   "icons": { "16": "icon16.png",
            "48": "icon48.png",
@@ -11,7 +11,7 @@
         "38": "images/browser-action-icon.png"
       },
     "default_popup": "popup/popup.html",
-    "default_title": "Unity Music Media Keys"
+    "default_title": "Universal Media Keys"
   },
   "permissions": [
     "tabs",
@@ -60,10 +60,6 @@
       "js": ["content_scripts/content.js", "controllers/BasicController.js"],
      	"run_at": "document_idle"
     }
-  ],
-  "plugins" : [
-    {"path": "handler/npUnityControlPlugin.plugin"},
-    {"path": "handler/npUnityControlPlugin.dll"}
   ],
   "options_page": "options/options.html",
   "content_security_policy": "script-src 'self' https://ws.audioscrobbler.com https://dc8na2hxrj29i.cloudfront.net; object-src 'self';"

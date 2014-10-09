@@ -1,4 +1,7 @@
 window.findScriptByHost = (host) ->
+  if host.indexOf("youtube") != -1 && localStorage.getItem("ignore-youtube")
+    return "controllers/ShimController.js"
+
   host = host.toLowerCase()
   script = null
   for name, value of mapping

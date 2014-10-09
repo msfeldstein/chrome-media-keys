@@ -45,6 +45,13 @@ allSet = () ->
 document.querySelector("#donate-button").addEventListener "click", () ->
   document.querySelector("#donations").style.display = "block"
 
+youtubeBox = document.querySelector("#ignore-youtube-checkbox")
+if localStorage.getItem("ignore-youtube")
+  youtubeBox.checked = true
+youtubeBox.addEventListener "change", () ->
+  localStorage.setItem("ignore-youtube", youtubeBox.checked)
+
+
 
 # Don't do this until we are using native messaging
 # attempts = 0

@@ -54,6 +54,7 @@ mapping =
   'twitter': 'TwitterController.js'
   'vk': 'VkController.js'
   'yandex': 'YandexController.js'
+  'pleer.com': 'PleerController.js'
   'music.xbox': 'XboxController.js'
   'youtube': 'YoutubeController.js'
   'tracksflow': 'TracksflowController.js'

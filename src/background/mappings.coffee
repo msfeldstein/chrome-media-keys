@@ -69,3 +69,4 @@ mapping =
   'tunein': 'TuneinController.js'
   'one.npr': 'NPROneController.js'
   'reddit.music.player.il.ly': 'RedditplayerController.js'
+  'netflix': 'NetflixController.js'

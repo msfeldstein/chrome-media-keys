@@ -75,6 +75,7 @@ BasicController.prototype.init = function() {
 
 BasicController.prototype.observeStateChanges = function(key) {
   var el = document.querySelector(key);
+  console.log("KEY", key, "EL", el)
   if (el) 
     this.stateChangeObserver.observe(el, {attributes: true, characterData: true, subtree:true});
 }

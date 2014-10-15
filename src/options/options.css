@@ -1,33 +1,13 @@
-@font-face {  
-  font-family: museo ;  
-  src: url(http://sway.fm/MuseoSans-300.otf) format("truetype");
-  font-weight: 300;
-} 
-
-
-@font-face {  
-  font-family: museo ;  
-  src: url(http://sway.fm/MuseoSans-100.otf) format("truetype");
+html, body {
+  font-family: Avenir;
   font-weight: 100;
-} 
-
-
-body {
-  -webkit-transform: translateZ(0);
-  background: #E8E8E8;
-  font-family: museo;
-  font-weight: 100;
-  text-align: center;
   padding: 0;
   margin: 0;
-}
-a {
-  text-decoration: none;
-  color: blue;
+  height: 100%;
 }
 
-#logo {
-  margin-top: 55px;
+a {
+  color: blue;
 }
 
 #topbar {
@@ -35,47 +15,40 @@ a {
   height: 26px;
 }
 
-.subhead {
-  margin-top: 28px;
-  font-size: 30px;
+#sidebar {
+  float: left;
+  background: #E8E8E8;
+  display: block;
+  height: 100%;
+  width: 156px;
+  padding-top: 20px;
+  text-align: center;
 }
 
-.alert {
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  max-width: 500px;
-  background: #FFADB7;
-
-  padding: 10px;
-  padding-bottom: 20px;
-  box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
-  -webkit-transition: height .5s, background .5s;
+#content {
+  padding: 20px;
+  padding-left: 186px;
 }
 
-.alert.success {
-  background: #67A91B;
-}
-.installers a {
-  font-size: 0;
-  display: inline-block;
-  width: 60px;
-  height: 60px;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  opacity: 0.4;
-  -webkit-transition: opacity .2s;
+.main-title {
+  font-size: 36px;
 }
 
-.installers a:hover {
-  opacity: 1;
+.section {
+  margin-top: 30px;
+  max-width: 800px;
 }
 
-.installers .mac {
-  background-image: url("apple@2x.png");
+.section-title {
+  font-size: 24px;
 }
 
-.installers .windows {
-  background-image: url("windows@2x.png"); 
+.section-content {
+  opacity: 0.6;
+  font-size: 18px;
+}
+
+a.donate {
+  border: 0;
+  text-decoration: none;
 }

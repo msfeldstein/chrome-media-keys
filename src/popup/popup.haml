@@ -19,7 +19,12 @@
       #not-playing-container.no-player
         %p
           There's nothing playing right now.
-        - # Todo: add links to get started with sway
+          %a.launch-options
+            Problems?
+        .support
+          %a.launch-options
+            Support The Extension
+            %img{src: "images/bitcoin.png"}
       #art-holder.yes-player{:style => "display: none;"}
         %img#album-art
         #sway-cta

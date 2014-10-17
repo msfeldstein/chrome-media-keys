@@ -18,6 +18,7 @@ mapping =
   'pandora': 'PandoraController.js'
   'di.fm': 'DIController.js'
   'deezer': 'DeezerController.js'
+  'gaana': 'GaanaController.js'
   'grooveshark': 'GroovesharkController.js'
   'bandcamp': 'BandcampController.js'
   'beatsmusic': 'BeatsMusicController.js'

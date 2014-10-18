@@ -1,6 +1,6 @@
 {
   "name": "Media Keys by Sway.fm",
-  "version": "3.62",
+  "version": "3.65",
   "manifest_version": 2,
   "icons": { "16": "icon16.png",
            "48": "icon48.png",
@@ -62,5 +62,5 @@
     }
   ],
   "options_page": "options/options.html",
-  "content_security_policy": "script-src 'self' https://ws.audioscrobbler.com https://dc8na2hxrj29i.cloudfront.net; object-src 'self';"
+  "content_security_policy": "script-src 'self' https://ws.audioscrobbler.com https://dc8na2hxrj29i.cloudfront.net https://www.google-analytics.com; object-src 'self';"
 }

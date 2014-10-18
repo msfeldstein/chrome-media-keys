@@ -1,4 +1,5 @@
 controller = new BasicController({
+  useLazyObserving: true,
   supports: {
     playpause: true,
     next: true,
@@ -13,10 +14,7 @@ controller = new BasicController({
   artworkImageSelector: '.player-cover img',
   watchedElements: ['.player-controls .icon-play']
 });
-var init = function() {
-  controller.init()
-}
-setTimeout(init, 1000)
+
 controller.override('isPlaying', function() {
   return !!document.querySelector('.player-controls .control-pause');
 });

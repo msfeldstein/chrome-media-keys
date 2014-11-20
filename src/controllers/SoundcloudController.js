@@ -79,7 +79,7 @@ controller = {
     return playingDiv && playingDiv.classList.contains('playing');
   },
   getTitle: function() {
-    return querySelectorText('.header .playbackTitle');
+    return querySelectorText('.playbackTitle .playbackTitle__link');
   },
   getAlbumArt: function() {
     var imageTag = document.querySelector(".sound.playing .image__full") || document.querySelector(".listen-about .image__full");

@@ -4,52 +4,60 @@
     %link{href: "options.css", rel: "stylesheet", type: "text/css"}/
     %title Sway.fm's Media Keys
   %body
-    .column.light
-      #topbar
-      %a{href: "http://sway.fm"}
-        %img#logo{alt: "Unity", src: "logo.png"}/
-      .alert#install-package-message{:style => "display:none;"} 
-        #after{style: "display:none;"}
-          %h1
-            You're all set
-          .subtext
-            Go listen to some music.
-        #before
-          %h1
-            Something's changed!
-          .subtext
-            Chrome has removed support for the plugins we were using to do media keys.  To continue using them, you'll need to install our helper script below, for windows or mac currently.
-          .installers
-            %a.mac{download: "", href: "../handler/Media Keys Installer.zip"} Install for mac
-            %a.windows{href: "#"} Install for windows (Not Yet Available)
-          
-      %div
-        .subhead
-          Thanks for installing!
-        %p
-          While music is playing through Chrome, press
-          = succeed "," do
-            %img{src: "../popup/images/controls/back.png", style: "height: 15px;"}/
-          = succeed "/" do
-            %img{src: "../popup/images/controls/play.png", style: "height: 15px;"}/
-          %img{src: "../popup/images/controls/pause.png", style: "height: 15px;"}/
-          and
-          %img{src: "../popup/images/controls/next.png", style: "height: 15px;"}/
-          on your keyboard to control it.
-        %p
-          Click
-          %img{src: "extbutton.png", style: "vertical-align: bottom;"}/
-          from your extension bar for more options.
-        
-      %p{style: "margin-top: 30px;"}
-        %a#donate-button{href: "#"}
-          Donations
-        %iframe{allowtransparency: "true", frameborder: "0", scrolling: "no", src: "http://platform.twitter.com/widgets/follow_button.html?screen_name=swayfm&show_count=false&show_screen_name=true", style: "width:120px; margin-left: 15px; height:20px; position: absolute;"}
-        %span#lastfm{style: "margin-left: 135px;"}
+    #topbar
+    #sidebar
+      %img#logo{alt: "Unity", src: "logo.png"}
+    #content
+      .main-title
+        Thank you for installing!  
+      .section
+        .section-title
+          Problems?
+        .section-content
+          If you see the song information in the extensions popup window, but the media keys aren't working, go to 
+          %a{href:"chrome://extensions"}chrome://extensions
+          and click the Keyboard Shortcuts button at the bottom to make sure they are set.  Make sure you don't have any competing extensions stealing the keys, like Google Play Music.  If it still doesn't work, or the site you use isn't supported or is broken, email us at 
+          %a{href: "mailto:hello@sway.fm"}hello@sway.fm
+          for help.
+
+      .section
+        .section-title
+          Ignore Youtube
+          %input#ignore-youtube-checkbox{type: "checkbox"}
+        .section-content
+          Check this if you'd like to play youtube videos while listening to music, and don't want to auto-pause the music when you start playing a youtube video.
+
+      .section
+        .section-title
+          Scrobbling
+        .section-content
           %a#lastfm-enable{href: "#"}
             Enable Last.fm Scrobbling
           %a#lastfm-loading{href: "#"}
             Logging in to last.fm
-      %p#donations{style: "margin-top: 30px;display: none;"}
-        BTC: 1CYdmU8MzqaAaAmmLZQckQgtya3ytKwL14 - DOGE: D87atj1uvNqdURMr1rVBg9AEzpfd9nENTW
+
+      .section
+        .section-title
+          Support The Extension
+        .section-content
+          If you appreciate the extension and want to see more features and supported sites consider donating, or even just saying thanks.
+        %a.donate{href:"https://www.coinbase.com/msfeldstein"}
+          %img{src: "bitcoin.png"}
+        %a.donate.dogecoin-button{href:"#"}
+          %img{src: "dogecoin.png"}
+        %form{:action => "https://www.paypal.com/cgi-bin/webscr", :method => "post", :target => "_top", :style => "display:inline"}
+          %input{:name => "cmd", :type => "hidden", :value => "_donations"}/
+          %input{:name => "business", :type => "hidden", :value => "msfeldstein@gmail.com"}/
+          %input{:name => "lc", :type => "hidden", :value => "US"}/
+          %input{:name => "item_name", :type => "hidden", :value => "Sway.fm"}/
+          %input{:name => "no_note", :type => "hidden", :value => "0"}/
+          %input{:name => "currency_code", :type => "hidden", :value => "USD"}/
+          %input{:name => "bn", :type => "hidden", :value => "PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest"}/
+          %input{:alt => "PayPal - The safer, easier way to pay online!", :border => "0", :name => "submit", :src => "paypal.png", :type => "image"}/
+
+        %a.donate{href:"http://twitter.com/swayfm"}
+          %img{src: "twitter.png"}
+
+
+      
     %script{src: "options.js", type: "text/javascript"}

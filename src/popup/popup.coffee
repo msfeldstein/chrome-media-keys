@@ -76,3 +76,10 @@ convertCTAToShare = () ->
 $("#share-link").onclick = convertCTAToShare
 
 sendRequest "getState"
+
+buttons = document.querySelectorAll(".launch-options")
+for button in buttons
+  button.addEventListener 'click', () ->
+    chrome.tabs.create({
+      url: "options/options.html"
+    })

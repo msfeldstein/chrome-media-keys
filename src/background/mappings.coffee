@@ -1,4 +1,7 @@
 window.findScriptByHost = (host) ->
+  if host.indexOf("youtube") != -1 && localStorage.getItem("ignore-youtube")
+    return "controllers/ShimController.js"
+
   host = host.toLowerCase()
   script = null
   for name, value of mapping
@@ -15,6 +18,7 @@ mapping =
   'pandora': 'PandoraController.js'
   'di.fm': 'DIController.js'
   'deezer': 'DeezerController.js'
+  'gaana': 'GaanaController.js'
   'grooveshark': 'GroovesharkController.js'
   'bandcamp': 'BandcampController.js'
   'beatsmusic': 'BeatsMusicController.js'
@@ -51,6 +55,7 @@ mapping =
   'twitter': 'TwitterController.js'
   'vk': 'VkController.js'
   'yandex': 'YandexController.js'
+  'pleer.com': 'PleerController.js'
   'music.xbox': 'XboxController.js'
   'youtube': 'YoutubeController.js'
   'tracksflow': 'TracksflowController.js'
@@ -65,3 +70,4 @@ mapping =
   'tunein': 'TuneinController.js'
   'one.npr': 'NPROneController.js'
   'reddit.music.player.il.ly': 'RedditplayerController.js'
+  'netflix': 'NetflixController.js'

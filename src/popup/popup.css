@@ -12,6 +12,11 @@
   src: url(MuseoSans-300.otf) format("truetype");
 }
 
+a {
+  color: blue;
+  text-decoration: none;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -149,6 +154,7 @@ body.playing #play-pause {
   margin-top: 20px;
   max-width: 300px;
   margin: auto;
+  height: 100%;
 }
 
 #sway-cta {
@@ -182,4 +188,15 @@ body.playing #play-pause {
 #sway-cta .share-img {
   height: 21px;
   vertical-align: bottom;
+}
+
+.support {
+  font-size: 16px;
+  height: 100%;
+  vertical-align: bottom;
+}
+
+a.donate {
+  border: 0;
+  text-decoration: none;
 }

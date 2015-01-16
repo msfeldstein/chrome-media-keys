@@ -60,7 +60,7 @@ function runOnPage() {
     if (!window.c.ap.getItem()) return '';
     var img = _.where(window.c.dataSources.releases.models, {id: window.c.ap.getItem().model.attributes.albums[0].albumId})[0].attributes.coverArt;
     var labelName = _.where(window.c.dataSources.labels.models, {id: window.c.ap.getItem().model.attributes.label})[0].attributes.name;
-    return 'http://connect.monstercat.com/img/labels/' + (labelName.toLowerCase()) + '/album/' + img;
+    return 'https://' + window.location.host + '/img/labels/' + (labelName.toLowerCase()) + '/albums/' + img;
   }
   function getTitle() {
     return window.c.ap.getItem() ? window.c.ap.getItem().model.attributes.title : '';

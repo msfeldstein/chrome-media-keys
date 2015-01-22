@@ -37,6 +37,7 @@ mapping =
   'jango': 'JangoController.js'
   'last': 'LastfmController.js'
   'iheart': 'iHeartController.js'
+  'hearthis': 'HearThisController.js'
   'thesixtyone': 'ThesixtyoneController.js'
   'mog': 'MogController.js'
   'mixcloud': 'MixcloudController.js'

@@ -4,12 +4,12 @@ controller = new BasicController({
     "next": "true",
     "previous": "true"
   },
-  playStateSelector: '.mini-play-controls #mini-play',
-  playStateClass: 'pause',
-  artistSelector: "#player-artist-name",
-  titleSelector: "#player-track-name",
-  artworkImageSelector: "#track-art-current-img",
-  nextSelector: ".mini-play-controls #mini-skip",
-  previousSelector: ".mini-play-controls #mini-skip-back",
-  playPauseSelector: "#playerPlayPauseButton"
+  playStateSelector: '.playpause',
+  playStateClass: 'play',
+  artistSelector: "#bar .metadata span:first-child",
+  titleSelector: "#bar .metadata span:nth-child(3)",
+  artworkImageSelector: "#bar .art img",
+  nextSelector: ".skip-forward a",
+  previousSelector: ".skip-back a",
+  playPauseSelector: ".playpause a"
 });

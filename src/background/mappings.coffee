@@ -71,3 +71,6 @@ mapping =
   'one.npr': 'NPROneController.js'
   'reddit.music.player.il.ly': 'RedditplayerController.js'
   'netflix': 'NetflixController.js'
+  'connect.monstercat': 'MonstercatController.js'
+  'gold.monstercat': 'MonstercatController.js'
+  'license.monstercat': 'MonstercatController.js'

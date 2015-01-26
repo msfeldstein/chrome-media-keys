@@ -1,3 +1,4 @@
+console.log("Running youtube");
 // This script is injected into the page via a script tag,
 // so it runs in YouTube's context and can interact with its player object.
 function runOnPage() {

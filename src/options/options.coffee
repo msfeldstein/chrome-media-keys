@@ -46,7 +46,8 @@ allSet = () ->
   document.querySelector(".alert").classList.add("success")
 
 youtubeBox = document.querySelector("#ignore-youtube-checkbox")
-if localStorage.getItem("ignore-youtube")
+if JSON.parse(localStorage.getItem("ignore-youtube"))
   youtubeBox.checked = true
 youtubeBox.addEventListener "change", () ->
-  localStorage.setItem("ignore-youtube", youtubeBox.checked)
+  console.log("CHANGE", youtubeBox.checked)
+  localStorage.setItem("ignore-youtube", JSON.parse(youtubeBox.checked))

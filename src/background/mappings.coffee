@@ -1,5 +1,5 @@
 window.findScriptByHost = (host) ->
-  if host.indexOf("youtube") != -1 && localStorage.getItem("ignore-youtube")
+  if host.indexOf("youtube") != -1 && localStorage.getItem("ignore-youtube") == "true"
     return "controllers/ShimController.js"
 
   host = host.toLowerCase()

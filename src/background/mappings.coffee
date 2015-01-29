@@ -8,6 +8,7 @@ window.findScriptByHost = (host) ->
     if mapping.hasOwnProperty name
       if host.indexOf(name) != -1
         script = value
+  console.log "Script", script, host
   if script then "controllers/#{script}" else "controllers/ShimController.js"
 
 mapping =
@@ -32,6 +33,7 @@ mapping =
   'turntable': 'TurntableController.js'
   'songza': 'SongzaController.js'
   'mixrad': 'NokiaMixradioController.js'
+  'app.napster': 'NapsterController.js'
   'thisismyjam': 'ThisIsMyJamController.js'
   'ex.fm': 'ExfmController.js'
   'jango': 'JangoController.js'
@@ -41,7 +43,6 @@ mapping =
   'thesixtyone': 'ThesixtyoneController.js'
   'mog': 'MogController.js'
   'mixcloud': 'MixcloudController.js'
-  'napster': 'RhapsodyController.js'
   'playlist': 'PlaylistController.js'
   'plex': 'PlexController.js'
   'rhapsody': 'RhapsodyController.js'
@@ -64,6 +65,7 @@ mapping =
   'jing.fm': 'JingfmController.js'
   'y.qq': 'QQMusicController.js'
   'bronytunes': 'BronyTunesController.js'
+  'player.fm': 'PlayerFMController.js'
   'pony.fm': 'PonyFmController.js'
   'ponyvillelive': 'PonyvilleLiveController.js'
   'themusicninja': 'TheMusicNinjaController.js'

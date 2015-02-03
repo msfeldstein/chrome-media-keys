@@ -1,6 +1,6 @@
 {
   "name": "Media Keys by Sway.fm",
-  "version": "3.74",
+  "version": "3.75",
   "manifest_version": 2,
   "icons": { "16": "icon16.png",
            "48": "icon48.png",
@@ -11,7 +11,7 @@
         "38": "images/browser-action-icon.png"
       },
     "default_popup": "popup/popup.html",
-    "default_title": "Universal Media Keys"
+    "default_title": "Media Keys by Sway.fm"
   },
   "permissions": [
     "tabs",

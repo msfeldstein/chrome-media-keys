@@ -3,27 +3,11 @@ controller = new BasicController({
     playpause: true,
     next: true
   },
-  playStateSelector: '.js-play',
-  playStateClass: 'pause',
-  playPauseSelector: '.js-play',
-  nextSelector: '.js-next',
-  titleSelector: '.js-track-name',
-  artistSelector: '.js-artist-name'
+  playStateSelector: '.player-controls .play',
+  playStateClass: 'playing',
+  playPauseSelector: '.player-controls .play',
+  nextSelector: '.player-controls .icon-skip',
+  titleSelector: '.player-info .player-song',
+  artistSelector: '.player-info .player-artist',
+  artworkImageSelector: '#player .player-art img'
 });
-
-controller.override('getTrackName', function() {
-  var div = document.querySelector('.js-track-name') || document.querySelector('.js-station-name');
-  return div.textContent;
-});
-
-controller.override('getAlbumArt', function(_super) {
-  var art = document.querySelector('.js-song-art') || document.querySelector('.js-station-art');
-  var bg = art.style.backgroundImage;
-  var end = bg.indexOf("')");
-  var start = 5;
-  if (end == -1) {
-    end = bg.indexOf(")");
-    start = 4;
-  }
-  return bg && bg.substring(start, end);
-})

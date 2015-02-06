@@ -26,6 +26,7 @@ mapping =
   'di.fm': 'DIController.js'
   'earbits': 'EarbitsController.js'
   'ex.fm': 'ExfmController.js'
+  'feedly': 'FeedlyController.js'
   'gaana': 'GaanaController.js'
   'getworkdonemusic': 'GetWorkDoneController.js'
   'gold.monstercat': 'MonstercatController.js'

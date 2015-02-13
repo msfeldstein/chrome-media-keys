@@ -6,12 +6,6 @@
     height: 0;
 }
 
-@font-face {
-  font-family: 'Museo Sans';
-  font-style: normal;
-  src: url(MuseoSans-300.otf) format("truetype");
-}
-
 a {
   color: blue;
   text-decoration: none;
@@ -28,9 +22,9 @@ body {
     height:280px;
     background: #e8e8e8;
     -webkit-user-select: none; 
-    font-family: "Museo Sans";
     font-size: 22pt;
-    font-weight: 100;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 200;
 }
 
 #topbar {

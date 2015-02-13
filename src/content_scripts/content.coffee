@@ -79,7 +79,11 @@ window.sendState = (force) ->
     chrome.extension.sendRequest(state, noop);
 
 # Inject the specific music controller into the page.
-chrome.extension.sendRequest({action:'injectController', host: window.location.host}, noop);
+# Check for plex since it runs on various domains and IPs
+if document.querySelector("#plex.application")
+  chrome.extension.sendRequest({action:'injectController', host: "plex"}, noop);
+else
+  chrome.extension.sendRequest({action:'injectController', host: window.location.host}, noop);
 
 listener = (request, sender, sendResponse) ->
   if request.action is "lostFocus"
@@ -105,3 +109,4 @@ listener = (request, sender, sendResponse) ->
 
 chrome.extension.onRequest.addListener listener
 
+  

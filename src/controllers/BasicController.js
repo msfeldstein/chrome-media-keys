@@ -63,6 +63,14 @@ BasicController.prototype.init = function() {
     'favoriteSelector'
   ];
   for (var i = 0; i < observedKeys.length; ++i) {
+    if (this.useLazyObserving) {
+      if (this[observedKeys[i]] && !document.querySelector(this[observedKeys[i]])) {
+        console.log("Waiting for element: ", this[observedKeys[i]])
+        return false;
+      }
+    }
+  }
+  for (var i = 0; i < observedKeys.length; ++i) {
     this.observeStateChanges(this[observedKeys[i]]);
   }
   if (this.watchedElements) {
@@ -75,7 +83,6 @@ BasicController.prototype.init = function() {
 
 BasicController.prototype.observeStateChanges = function(key) {
   var el = document.querySelector(key);
-  console.log("KEY", key, "EL", el)
   if (el) 
     this.stateChangeObserver.observe(el, {attributes: true, characterData: true, subtree:true});
 }

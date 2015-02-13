@@ -1,32 +1,30 @@
 controller = new BasicController({
+  doThrottling: true,
   supports: {
     playpause: true,
     previous: true,
     next: true
   },
-  playStateSelector: '.play-btn',
+  playStateSelector: '.mini-player .play-btn',
   playStateClass: 'hidden',
-  playSelector: '.play-btn',
-  pauseSelector: '.pause-btn',
-  nextSelector: '.next-btn',
-  previousSelector: '.previous-btn',
-  titleSelector: '.track-title',
-  artistSelector: '.artist-title',
-  artworkImageSelector: '.playerBarArt',
+  playSelector: '.mini-player .play-btn',
+  pauseSelector: '.mini-player .pause-btn',
+  nextSelector: '.mini-player .next-btn',
+  previousSelector: '.mini-player .previous-btn',
+  titleSelector: '.mini-player .item-title',
+  artistSelector: '.mini-player .grandparent-title',
+  artworkImageSelector: '.mini-player .playerBarArt',
   watchedElements: ['#plex']
 });
-document.body.addEventListener('DOMSubtreeModified', function() {
-  sendState();
-});
 
+controller.override("getAlbumArt", function() {
+  var image = document.querySelector(".mini-player .media-poster");
+  if (!image) return null;
+  var url = image.style.backgroundImage;
+  return url.substring(4, url.length - 1);
+});
 var sendStateDebounced = throttle(sendState, 2000);
-
-var stateChangeObserver = new WebKitMutationObserver(function(mutations, observer) {
+document.body.addEventListener('DOMSubtreeModified', function() {
   sendStateDebounced();
-  console.log("Changed")
-  controller.init();
 });
-
-stateChangeObserver.observe(document.getElementById("plex"), {attributes: true, characterData: true, subtree:true});
-
 

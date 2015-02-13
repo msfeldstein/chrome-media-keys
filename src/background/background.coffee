@@ -21,7 +21,12 @@ chrome.windows.getAll {populate: true}, (windows) ->
     tabs = w.tabs
     for tab in tabs
       if tab.pinned then continue
-      chrome.tabs.executeScript tab.id, {file: 'content_scripts/content.js'}
+      cb = () ->
+        # Usually not an issue, just letting us know that it cannot script chrome: pages
+        if chrome.runtime.lastError
+          console.log("Last Error", chrome.runtime.lastError)
+      chrome.tabs.executeScript tab.id, {file: 'content_scripts/content.js'}, cb
+      
 
 # Launch the option page on the first run
 hasLaunchedOptions = localStorage.getItem("hasSeen2") # Has seen version of updates.  Increment every time there's something to alert
@@ -71,8 +76,10 @@ handleRequestFromContentScript = (request, sender, sendResponse) ->
   else if request.action is 'injectController'
     script = findScriptByHost(request.host)
     if not script then return
+    if script.indexOf('Shim') == -1
+      trackController(request.host)
     chrome.tabs.executeScript(sender.tab.id, {file: script})
-    if request.host.indexOf("youtube") > -1
+    if request.host.indexOf("youtube") > -1 || request.host.indexOf("monstercat") > -1
       chrome.tabs.executeScript(sender.tab.id, {file: 'controllers/ShimController.js'})
     sendResponse()
 
@@ -93,4 +100,3 @@ chrome.extension.onRequest.addListener (request, sender, sendResponse) ->
 chrome.tabs.onRemoved.addListener (tabId, removeInfo) ->
   if tabId is activeTab
     newState {playing: false, finished: true}
-

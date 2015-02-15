@@ -17,6 +17,7 @@ mapping =
   'app.napster': 'NapsterController.js'
   'audible': 'AudibleController.js'
   'audiogalaxy': 'AudiogalaxyController.js'
+  'audiomack': 'AudiomackController.js'
   'bandcamp': 'BandcampController.js'
   'beatsmusic': 'BeatsMusicController.js'
   'bop': 'BopController.js'

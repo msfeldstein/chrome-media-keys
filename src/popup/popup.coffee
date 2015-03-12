@@ -29,7 +29,7 @@ updateUI = (uiState) ->
   # Populate the UI with new player state values
   $("#song-name").textContent = uiState.title
   $("#artist-name").textContent = uiState.artist
-  $("#album-art").src = uiState.albumArt
+  $("#album-art").src = uiState.albumArt || "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
 
   setClass document.body, "playing", uiState.playing
   setClass $("#thumbs-up"), "toggled", uiState.thumbsUp

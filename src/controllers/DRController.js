@@ -9,3 +9,5 @@ controller = new BasicController({
   playPauseSelector: ".dr-widget-audio-player button[class$='large']",
   watchedElements: [".dr-widget-audio-player"]
 });
+
+controller.override("getTitle", function(){ return "Dr.dk Radio" })

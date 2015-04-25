@@ -47,6 +47,7 @@ mapping =
   'mog': 'MogController.js'
   'music.xbox': 'XboxController.js'
   'netflix': 'NetflixController.js'
+  'noonpacific': 'NoonPacificController.js'
   'one.npr': 'NPROneController.js'
   'pandora': 'PandoraController.js'
   'play.google': 'GoogleMusicController.js'

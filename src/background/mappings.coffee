@@ -12,6 +12,7 @@ window.findScriptByHost = (host) ->
   if script then "controllers/#{script}" else "controllers/ShimController.js"
 
 mapping =
+  '163': 'OneSixtyThreeController.js'
   '8tracks': 'EightTracksController.js'
   'amazon': 'AmazonController.js'
   'app.napster': 'NapsterController.js'

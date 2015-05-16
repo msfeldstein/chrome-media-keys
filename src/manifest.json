@@ -39,6 +39,13 @@
       "description": "Next Song",
       "global": true
     },
+    "stop": {
+      "suggested_key": {
+        "default": "MediaStop"
+      },
+      "description": "Stop Audio",
+      "global": true
+    },
     "previous": {
       "suggested_key": {
         "default": "MediaPrevTrack"

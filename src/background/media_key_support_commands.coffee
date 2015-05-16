@@ -5,6 +5,8 @@ document.addEventListener 'DOMContentLoaded', ->
       sendAction 'pause'
     else if command is 'next'
       sendAction 'next'
+    else if command is 'stop'
+      sendAction 'stop'
     else if command is 'previous'
       sendAction 'previous'
 

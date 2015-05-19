@@ -3,7 +3,7 @@ controller = new BasicController({
     playpause: true,
     next: true,
     previous: true,
-	favorite: true
+    favorite: true
   },
   playStateSelector: '.playControl',
   playStateClass: 'playing',

@@ -35,15 +35,10 @@ controller = {
   getAlbumArt: function() {
     var img = document.querySelector("#nowPlayingSection .albumImage");
     if (!img) return "";
-    return img.src
+	return img.src && img.src.replace('45_', '500_');
   },
   getArtist: function() {
-    var spans = document.querySelectorAll(".currentSongDetails span");
-    if (spans.length < 3) return "";
-
-    var artist = spans[2].innerText || spans[2].textContent;
-    if (artist.length < 4) return artist;
-    return artist.substring(3);
+    return querySelectorText("#nowPlayingSection .artistName span");
   },
   getState: function() {
     var state = {};

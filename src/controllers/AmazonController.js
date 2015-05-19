@@ -38,12 +38,7 @@ controller = {
     return img.src
   },
   getArtist: function() {
-    var spans = document.querySelectorAll(".currentSongDetails span");
-    if (spans.length < 3) return "";
-
-    var artist = spans[2].innerText || spans[2].textContent;
-    if (artist.length < 4) return artist;
-    return artist.substring(3);
+    return querySelectorText("#nowPlayingSection .artistName span");
   },
   getState: function() {
     var state = {};

@@ -16,5 +16,5 @@ controller = new BasicController({
 });
 
 controller.override('getAlbumArt', function() {
-    return document.querySelector('.playbackSoundBadge__avatar > div > span.image__full').style.backgroundImage.slice(4, -1);
+    return document.querySelector('.playbackSoundBadge__avatar > div > span.image__full').style.backgroundImage.slice(4, -1).replace("-t120x120.jpg", "-t500x500.jpg");
 });

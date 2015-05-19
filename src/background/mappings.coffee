@@ -20,6 +20,7 @@ mapping =
   'audiogalaxy': 'AudiogalaxyController.js'
   'audiomack': 'AudiomackController.js'
   'bandcamp': 'BandcampController.js'
+  'bbc': 'BBCRadioPopOutController.js'
   'beatsmusic': 'BeatsMusicController.js'
   'bop': 'BopController.js'
   'bronytunes': 'BronyTunesController.js'

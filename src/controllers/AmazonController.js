@@ -35,7 +35,7 @@ controller = {
   getAlbumArt: function() {
     var img = document.querySelector("#nowPlayingSection .albumImage");
     if (!img) return "";
-    return img.src
+	return img.src && img.src.replace('45_', '500_');
   },
   getArtist: function() {
     return querySelectorText("#nowPlayingSection .artistName span");

@@ -19,6 +19,10 @@ var BasicController = function(params) {
   }
 };
 
+BasicController.prototype.doc = function() {
+  return (this.frameSelector) ? document.querySelector(this.frameSelector).contentWindow.document : document;
+}
+
 BasicController.prototype.init = function() {
   var observedKeys = [
     'playStateSelector',
@@ -31,7 +35,7 @@ BasicController.prototype.init = function() {
   ];
   for (var i = 0; i < observedKeys.length; ++i) {
     if (this.useLazyObserving) {
-      if (this[observedKeys[i]] && !document.querySelector(this[observedKeys[i]])) {
+      if (this[observedKeys[i]] && !this.doc().querySelector(this[observedKeys[i]])) {
         console.log("Waiting for element: ", this[observedKeys[i]])
         return false;
       }
@@ -49,7 +53,7 @@ BasicController.prototype.init = function() {
 }
 
 BasicController.prototype.observeStateChanges = function(key) {
-  var el = document.querySelector(key);
+  var el = this.doc().querySelector(key);
   if (el)
     this.stateChangeObserver.observe(el, {attributes: true, characterData: true, subtree:true});
 }
@@ -62,17 +66,17 @@ BasicController.prototype.fireEvent = function(element,event, data){
 }
 
 BasicController.prototype.clickQS = function(qs) {
-  this.fireEvent(document.querySelector(qs), 'click');
+  this.fireEvent(this.doc().querySelector(qs), 'click');
 }
 
 BasicController.prototype.querySelectorText = function(qs) {
-  var div = document.querySelector(qs);
+  var div = this.doc().querySelector(qs);
   if (!div) return null;
   return div.innerText || div.textContent;
 }
 
 BasicController.prototype.querySelectorContainsClass = function(qs, clazz) {
-  var div = document.querySelector(qs);
+  var div = this.doc().querySelector(qs);
   if (!div) return false;
   return div.classList.contains(clazz);
 }
@@ -120,7 +124,7 @@ BasicController.prototype.isPlaying = function() {
 
 BasicController.prototype.getAlbumArt = function () {
   if (this.artworkImageSelector) {
-    var img = document.querySelector(this.artworkImageSelector);
+    var img = this.doc().querySelector(this.artworkImageSelector);
     return img && img.src;
   }
   return undefined;
@@ -141,9 +145,9 @@ BasicController.prototype.getState = function() {
   state.albumArt = this.getAlbumArt();
   state.playing = this.isPlaying();
   state.service = document.location.host;
-  if (this.isThumbsUpSelector) state.thumbsUp = !!document.querySelector(this.isThumbsUpSelector);
-  if (this.isThumbsDownSelector) state.thumbsDown = !!document.querySelector(this.isThumbsDownSelector);
-  if (this.isFavoriteSelector) state.favorite = !!document.querySelector(this.isFavoriteSelector);
+  if (this.isThumbsUpSelector) state.thumbsUp = !!this.doc().querySelector(this.isThumbsUpSelector);
+  if (this.isThumbsDownSelector) state.thumbsDown = !!this.doc().querySelector(this.isThumbsDownSelector);
+  if (this.isFavoriteSelector) state.favorite = !!this.doc().querySelector(this.isFavoriteSelector);
   return state;
 }
 

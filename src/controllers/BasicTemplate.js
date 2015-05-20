@@ -10,6 +10,7 @@ controller = new BasicController({
     thumbsDown: true,
     favorite: true,
   },
+  frameSelector: '', // Element to identify the frame that contains the rest of the elements
   playStateSelector: '', // Element to observe to see if it's playing or not
   playStateClass: '', // Class to check if the playStateSelector element has to determine if its playing
   playPauseSelector: '', // Element to click to toggle play/pause

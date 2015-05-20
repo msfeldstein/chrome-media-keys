@@ -1,30 +1,7 @@
 /*
-
-properties:
-  supports:
-    playpause, next, previous, thumbsUp, thumbsDown, favorite
-  playStateSelector: Element to observe to see if it's playing or not
-  playStateClass: Class to check if the playStateSelector element has to determine if its playing
-  playPauseSelector: Element to click to toggle play/pause
-  nextSelector: Element to click to go to the next track
-  previousSelector: Element to click to go previous track
-  titleSelector: Element to pull text from for the title
-  artistSelector: Element to pull text from for the artist
-  artworkImageSelector:Element to pull src from for the artwork
-
-  watchedElements: Elements to watch for changes in order to send an update in play state.
-    Control elements specified by the selectors above are watched automatically.
-
-
-methods:
-  override: Overrides certain methods that don't adhere to the simple querySelectory / click event style.
-    possible overrides are getTitle, getArtist, isPlaying, getAlbumArt, play, pause, nextSong, previousSong
-    basically you can override any method in BasicController
-
-
-
-
+See BasicTemplate.js for documentation and an example of a BasicController
 */
+
 var BasicController = function(params) {
   this.name = document.location.hostname;
   for (var key in params) {

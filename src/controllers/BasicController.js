@@ -191,7 +191,7 @@ BasicController.prototype.runInPage = function(code) {
   setTimeout(f, 1000);
 }
 
-BasicController.prototype.throttle = (fn, threshhold, scope) {
+BasicController.prototype.throttle = function(fn, threshhold, scope) {
   threshhold || (threshhold = 250);
   var last,
       deferTimer;

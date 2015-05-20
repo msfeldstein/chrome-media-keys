@@ -1,27 +1,3 @@
-function throttle(fn, threshhold, scope) {
-  threshhold || (threshhold = 250);
-  var last,
-      deferTimer;
-  return function () {
-    var context = scope || this;
-
-    var now = +new Date,
-        args = arguments;
-    if (last && now < last + threshhold) {
-      // hold on to it
-      clearTimeout(deferTimer);
-      deferTimer = setTimeout(function () {
-        last = now;
-        fn.apply(context, args);
-      }, threshhold);
-    } else {
-      last = now;
-      fn.apply(context, args);
-    }
-  };
-}
-
-
 /*
 
 properties:
@@ -34,6 +10,18 @@ properties:
   artistSelector: Element to pull text from for the artist
   artworkImageSelector:Element to pull src from for the artwork
 
+  watchedElements: Elements to watch for changes in order to send an update in play state.
+    Control elements specified by the selectors above are watched automatically.
+
+
+methods:
+  override: Overrides certain methods that don't adhere to the simple querySelectory / click event style.
+    possible overrides are getTitle, getArtist, isPlaying, getAlbumArt, play, pause, nextSong, previousSong
+    basically you can override any method in BasicController
+
+
+
+
 */
 var BasicController = function(params) {
   this.name = document.location.hostname;
@@ -41,7 +29,7 @@ var BasicController = function(params) {
     this[key] = params[key];
   }
   if (params.doThrottling) {
-    var sendStateThrottled = throttle(sendState, 250);  
+    var sendStateThrottled = this.throttle(sendState, 250);
     this.stateChangeObserver = new WebKitMutationObserver(function(mutations, observer) {
       sendStateThrottled();
     });
@@ -83,7 +71,7 @@ BasicController.prototype.init = function() {
 
 BasicController.prototype.observeStateChanges = function(key) {
   var el = document.querySelector(key);
-  if (el) 
+  if (el)
     this.stateChangeObserver.observe(el, {attributes: true, characterData: true, subtree:true});
 }
 
@@ -112,7 +100,7 @@ BasicController.prototype.querySelectorContainsClass = function(qs, clazz) {
 
 BasicController.prototype.play = function() {
   if (this.playPauseSelector) {
-    this.clickQS(this.playPauseSelector);  
+    this.clickQS(this.playPauseSelector);
   } else if (this.playSelector) {
     if (this.isPlaying()) {
       this.clickQS(this.pauseSelector);
@@ -120,7 +108,7 @@ BasicController.prototype.play = function() {
       this.clickQS(this.playSelector);
     }
   }
-  
+
 };
 
 BasicController.prototype.nextSong = function () {
@@ -201,3 +189,25 @@ BasicController.prototype.runInPage = function(code) {
   setTimeout(f, 1000);
 }
 
+BasicController.prototype.throttle = (fn, threshhold, scope) {
+  threshhold || (threshhold = 250);
+  var last,
+      deferTimer;
+  return function () {
+    var context = scope || this;
+
+    var now = +new Date,
+        args = arguments;
+    if (last && now < last + threshhold) {
+      // hold on to it
+      clearTimeout(deferTimer);
+      deferTimer = setTimeout(function () {
+        last = now;
+        fn.apply(context, args);
+      }, threshhold);
+    } else {
+      last = now;
+      fn.apply(context, args);
+    }
+  };
+}

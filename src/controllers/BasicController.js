@@ -1,7 +1,9 @@
 /*
 
 properties:
-  playStateSelector: Element to observer to see if it's playing or not
+  supports:
+    playpause, next, previous, thumbsUp, thumbsDown, favorite
+  playStateSelector: Element to observe to see if it's playing or not
   playStateClass: Class to check if the playStateSelector element has to determine if its playing
   playPauseSelector: Element to click to toggle play/pause
   nextSelector: Element to click to go to the next track

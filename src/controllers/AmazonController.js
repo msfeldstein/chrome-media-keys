@@ -15,7 +15,7 @@ controller = new BasicController({
   isThumbsUpSelector: '#thumbsUp > span.selected',
   thumbsDownSelector: '#thumbsDown > span',
   isThumbsDownSelector: '#thumbsDown > span.selected',
-	click: function(div) {
+  click: function(div) {
     fireEvent(div, 'mousedown');
     fireEvent(div, 'mouseup');
     fireEvent(div, 'mouseout');

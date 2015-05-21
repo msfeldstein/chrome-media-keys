@@ -56,12 +56,6 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.youtube.com/*"],
-      "patterns": ["http://*/*", "https://*/*"],
-      "js": ["content_scripts/shim.js"],
-      "run_at": "document_end"
-    },
-    {
       "matches": ["<all_urls>"],
       "patterns": ["http://*/*", "https://*/*"],
       "js": ["content_scripts/content.js", "controllers/BasicController.js"],

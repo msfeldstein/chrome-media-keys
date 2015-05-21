@@ -1,213 +1,74 @@
-console.log("Running youtube");
-// This script is injected into the page via a script tag,
-// so it runs in YouTube's context and can interact with its player object.
-function runOnPage() {
-  function fireEvent(element,event, data){
-    var evt = document.createEvent("HTMLEvents");
-    evt.initEvent(event, true, true );
-    if (data) evt.data = data;
-    return!element.dispatchEvent(evt);
-  }
-  
-  // UnityObj.sendState sends 'playing', 'thumbsUp', 'thumbsDown', 'title', 'artist', 'albumArt', 'domainIcon'
-  var UnityMusicShim = function() {
-    var UnityObj = {};
-    UnityObj.sendState = function(state) {
-      var evt = document.createEvent("CustomEvent");
-      evt.initEvent("UnityStateEvent", true, true );
-      document.body.setAttribute('data-unity-state', JSON.stringify(state));
-      document.body.dispatchEvent(evt, state);
-    }
+controller = new BasicController({
+  supports: {
+    playpause: true,
+    next: true,
+    previous: (!!document.querySelector('.ytp-prev-button')) ? (document.querySelector('.ytp-prev-button') && document.querySelector('.ytp-prev-button').style.display != 'none') : (document.querySelector('.ytp-button-prev') && document.querySelector('.ytp-button-prev').style.display != 'none'),
+    thumbsUp: true,
+    thumbsDown: true,
+  },
+  playStateSelector: '#movie_player',
+  playStateClass: 'playing-mode',
+  titleSelector: '.watch-title',
+  artistSelector: '.yt-user-info > a',
+  isThumbsUpSelector: '.like-button-renderer-like-button-unclicked.hid',
+  isThumbsDownSelector: '.like-button-renderer-dislike-button-unclicked.hid',
+});
 
-    document.body.addEventListener('UnityActionEvent', function(e) {
-      var action = JSON.parse(document.body.getAttribute('data-unity-action'));
-      if (UnityObj._callbackObject) UnityObj._callbackObject[action]();
-    });
-
-    UnityObj.addCallbackObject = function(cbObj) {
-      UnityObj._callbackObject = cbObj;
-    };
-    UnityObj.setSupports = function(supports) {
-      var evt = document.createEvent("CustomEvent");
-      evt.initEvent("UnitySupportsEvent", true, true );
-      document.body.setAttribute('data-unity-supports', JSON.stringify(supports));
-      document.body.dispatchEvent(evt, supports);
+controller.override('getAlbumArt', function() {
+  function getQueryParams(qs) {
+    qs = qs.split('+').join(' ');
+    var params = {},
+      tokens,
+      re = /[?&]?([^=]+)=([^&]*)/g;
+    while (tokens = re.exec(qs)) {
+      params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
     }
-    return UnityObj;
-  };
-  
-  // The player obj (flash object) used by unity.
-  var playerObjUnity;
-  var html5Video = null;
-  
-  function getLikeButton() {
-    return document.getElementById('watch-like')
+    return params;
   }
-  
-  function getDislikeButton() {
-    return document.getElementById('watch-dislike');
-  }
-  
-  function getLikeContainer() {
-    return document.getElementById('watch-like-dislike-buttons');
-  }
-  
-  var doAction = {
-    pause: function() {
-      if (isPlaying()) {
-        if (html5Video) html5Video.pause();
-        else playerObjUnity.pauseVideo();
-      } else {
-        if (html5Video) html5Video.play();
-        else playerObjUnity.playVideo();
-      }
-    },
-    thumbsUp: function() {
-      fireEvent(getLikeButton(), 'click');
-      sendState();
-      setTimeout(sendState, 500);
-    },
-    thumbsDown: function() {
-      fireEvent(getDislikeButton(), 'click');
-      sendState();
-      setTimeout(sendState, 500);
-    },
-    next: function() {
-      var next = document.getElementsByClassName('next-playlist-list-item')[0];
-      fireEvent(next, 'click');
-    },
-    previous: function() {
-      var prev = document.getElementsByClassName('prev-playlist-list-item')[0];
-      fireEvent(prev, 'click');
-    }
-  }
+  var vidId = getQueryParams(document.location.search).v;
+  return "http://img.youtube.com/vi/" + vidId + "/0.jpg";
+});
 
-  function isPlaying() {
-    if (html5Video) {
-      return !html5Video.paused;
+controller.override('play', function() {
+  if (!!document.querySelector('.ytp-play-button')) {
+    this.clickQS('.ytp-play-button');
+  } else {
+    if (this.isPlaying()) {
+      this.clickQS('.ytp-button-pause');
     } else {
-      return (playerObjUnity.getPlayerState && playerObjUnity.getPlayerState() == 1);  
+      this.clickQS('.ytp-button-play');
     }
   }
+});
 
-  function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
+controller.override('nextSong', function() {
+  if (!!document.querySelector('.ytp-next-button')) {
+    this.clickQS('.ytp-next-button');
+  } else {
+    this.clickQS('.ytp-button-next');
   }
-  function getAlbumArt() {
-    var urlVars = getUrlVars();
-    var vidId = urlVars["v"];
-    return "http://img.youtube.com/vi/"+vidId+"/0.jpg";
-  }
-  function getTitleText() {
-    var div = document.getElementById('eow-title') ||
-              document.querySelector('.channels-featured-video-details a') ||
-              document.getElementById('builder-preview-title') ||
-              document.querySelector('#watch-headline-title');
-    return div && (div.innerText || div.textContent);
-  }
-  
-  function getThumbsUp() {
-    if (getLikeContainer()) 
-      return getLikeContainer().classList.contains('liked');
-    return false;
-  }
-  function getThumbsDown() {
-    if (getLikeContainer())
-      return getLikeContainer().classList.contains('unliked');
-    return false;
-  }
-  function sendState() {
-    var title, artist;
-    var titletext = getTitleText();
-    var hyphen = titletext.indexOf(' - ');
-    if (hyphen > 0) {
-      artist = titletext.substring(0, hyphen);
-      title = titletext.substring(hyphen + 3);
-    } else {
-      title = titletext;
-      artist = '';
-    }
-    var state = {
-      playing: isPlaying(),
-      artist: artist,
-      title: title,
-      service: 'Youtube',
-      thumbsUp: getThumbsUp(),
-      thumbsDown: getThumbsDown(),
-      albumArt: getAlbumArt()
-    }
-    unity.sendState(state);
-  }
-  
-  window.unityOnStateChange = function(state) {
-    checkSupports();
-    sendState();
-  }
-  
-  var unity = UnityMusicShim();
-  unity.addCallbackObject(doAction);
+});
 
-  function checkSupports() {
-    var nav = true;
-    var nextButton = document.getElementsByClassName('next-playlist-list-item')[0];
-    if (!nextButton) {
-      nav = false;
-    }
-    var like = !!getLikeContainer();
-    unity.setSupports({playpause:true, thumbsUp: like, thumbsDown: like, next: nav, previous: nav});
+controller.override('previousSong', function() {
+  if (!!document.querySelector('.ytp-prev-button')) {
+    this.clickQS('.ytp-prev-button');
+  } else {
+    this.clickQS('.ytp-button-prev');
   }
-  
-  function checkForPlayer() {
-    var embed = document.getElementsByTagName('embed')[0];
-    var html5 = document.getElementsByTagName('video')[0];
-    if (!embed && !html5) {
-      playerObjUnity = null;
-      return;
-    }
-    if ((embed && (embed == playerObjUnity)) || (html5 && (html5 == html5Video))) {
-      return;
-    }
-    console.log("Embed", embed, "Html", html5)
-    if (embed) {
-      playerObjUnity = embed;
-      function addListener() {
-        playerObjUnity.addEventListener("onStateChange", "window.unityOnStateChange");
-        sendState();
-      }
-      setTimeout(addListener, 1000);
-    }
-    if (html5) {
-      isHTML5 = true;
-      html5Video = html5;
-      html5Video.addEventListener("play", window.unityOnStateChange)
-      html5Video.addEventListener("pause", window.unityOnStateChange)
-      html5Video.addEventListener("ended", window.unityOnStateChange)
-      html5Video.addEventListener("playing", window.unityOnStateChange)
-    }
-    
-    if (getLikeContainer())
-      getLikeContainer().addEventListener('DOMSubtreeModified', sendState);
-    // Watch for when the artwork is loaded.
-    var watchMoreBox = document.getElementById('watch-more-from-user');
-    if (watchMoreBox) {
-      watchMoreBox.addEventListener('DOMSubtreeModified', sendState);
-      // Click the "more from user" button twice so it loads the artwork inside.
-      var button = document.getElementById('watch-mfu-button');
-      fireEvent(button, 'click');
-      fireEvent(button, 'click');
-    }
-    sendState();
-    checkSupports()
-  }
-  
-  document.body.addEventListener('DOMSubtreeModified', checkForPlayer);
-}
+});
 
-// Append and run the script.
-var script = document.createElement('script');
-script.innerHTML = runOnPage + "\nrunOnPage();";
-document.body.appendChild(script);
+controller.override('thumbsUp', function() {
+  if (this.querySelectorContainsClass(".like-button-renderer-like-button-clicked", "hid")) {
+    this.clickQS(".like-button-renderer-like-button-unclicked");
+  } else {
+    this.clickQS(".like-button-renderer-like-button-clicked");
+  }
+});
+
+controller.override('thumbsDown', function() {
+  if (this.querySelectorContainsClass(".like-button-renderer-dislike-button-clicked", "hid")) {
+    this.clickQS(".like-button-renderer-dislike-button-unclicked");
+  } else {
+    this.clickQS(".like-button-renderer-dislike-button-clicked");
+  }
+});

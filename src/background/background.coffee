@@ -79,7 +79,7 @@ handleRequestFromContentScript = (request, sender, sendResponse) ->
     if script.indexOf('Shim') == -1
       trackController(request.host)
     chrome.tabs.executeScript(sender.tab.id, {file: script})
-    if request.host.indexOf("youtube") > -1 || request.host.indexOf("monstercat") > -1
+    if request.host.indexOf("monstercat") > -1
       chrome.tabs.executeScript(sender.tab.id, {file: 'controllers/ShimController.js'})
     sendResponse()
 

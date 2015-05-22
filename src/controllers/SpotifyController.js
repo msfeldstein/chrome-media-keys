@@ -1,4 +1,3 @@
-console.log("Running Spotify");
 controller = new BasicController({
   supports: {
     playpause: true,

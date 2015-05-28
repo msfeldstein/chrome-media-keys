@@ -9,6 +9,7 @@ controller = new BasicController({
   nextSelector: '.player-control-button.player-next-episode',
   titleSelector: '.player-status > span:nth-child(3)',
   artistSelector: '.player-status-main-title',
+  watchedElements: ['body']
 });
 
 controller.override('getAlbumArt', function() {

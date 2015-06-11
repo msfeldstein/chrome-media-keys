@@ -5,17 +5,16 @@ controller = new BasicController({
     previous: true
   },
   useLazyObserving: true,
-  frameSelector: '#app-player',
-  playStateSelector: '#play-pause',
+  frameSelector: '#main',
+  playStateSelector: '#play',
   playStateClass: 'playing',
-  playPauseSelector: '#play-pause',
+  playPauseSelector: '#play',
   nextSelector: '#next',
   previousSelector: '#previous',
-  titleSelector: '#track-name',
-  artistSelector: '#track-artist',
-  artworkImageSelector: '#cover-art .sp-image-img',
+  titleSelector: '.caption .track',
+  artistSelector: '.caption .artist'
 });
 
 controller.override('getAlbumArt', function() {
-  return document.querySelector(this.frameSelector).contentDocument.querySelector('#cover-art .sp-image-img').style.backgroundImage.slice(4, -1);
+  return document.querySelector(this.frameSelector).contentDocument.querySelector('#large-cover-image').style.backgroundImage.slice(4, -1);
 });

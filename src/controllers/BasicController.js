@@ -20,7 +20,8 @@ var BasicController = function(params) {
 };
 
 BasicController.prototype.doc = function() {
-  return (this.frameSelector && document.querySelector(this.frameSelector).tagName === "IFRAME") ? document.querySelector(this.frameSelector).contentWindow.document : document;
+  var useFrameSelector = (this.frameSelector && document.querySelector(this.frameSelector).tagName === "IFRAME");
+  return (useFrameSelector) ? document.querySelector(this.frameSelector).contentWindow.document : document;
 }
 
 BasicController.prototype.init = function() {
@@ -33,6 +34,8 @@ BasicController.prototype.init = function() {
     'thumbsDownSelector',
     'favoriteSelector'
   ];
+  if (this.frameSelector && document.querySelector(this.frameSelector).tagName !== "IFRAME")
+    console.log("frameSelector is defined but the element is not an IFRAME so it will be ignored.");
   for (var i = 0; i < observedKeys.length; ++i) {
     if (this.useLazyObserving) {
       if (this[observedKeys[i]] && !this.doc().querySelector(this[observedKeys[i]])) {

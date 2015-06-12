@@ -20,7 +20,7 @@ var BasicController = function(params) {
 };
 
 BasicController.prototype.doc = function() {
-  return (this.frameSelector) ? document.querySelector(this.frameSelector).contentWindow.document : document;
+  return (this.frameSelector && document.querySelector(this.frameSelector).tagName === "IFRAME") ? document.querySelector(this.frameSelector).contentWindow.document : document;
 }
 
 BasicController.prototype.init = function() {

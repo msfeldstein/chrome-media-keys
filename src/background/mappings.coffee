@@ -64,6 +64,7 @@ mapping =
   'rbmaradio': 'RbmaController.js'
   'rdio': 'RdioController.js'
   'reddit.music.player.il.ly': 'RedditplayerController.js'
+  'reddit.musicplayer.io': 'RedditplayerController.js'
   'rhapsody': 'RhapsodyController.js'
   'saavn': 'SaavnController.js'
   'scmplayer': 'SCMFramelessController.js'

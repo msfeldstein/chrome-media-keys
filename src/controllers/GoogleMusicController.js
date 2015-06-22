@@ -2,15 +2,13 @@ controller = new BasicController({
   supports: {
     playpause: true,
     next: true,
-    previous: true,
-    thumbsUp: true,
-    thumbsDown: true
+    previous: true
   },
-  playStateSelector: 'button[data-id=play-pause]',
+  playStateSelector: '[data-id=play-pause]',
   playStateClass: 'playing',
-  playPauseSelector: 'button[data-id=play-pause]',
-  nextSelector: 'button[data-id=forward]',
-  previousSelector: 'button[data-id=rewind]',
+  playPauseSelector: '[data-id=play-pause]',
+  nextSelector: '[data-id=forward]',
+  previousSelector: '[data-id=rewind]',
   titleSelector: '#playerSongTitle',
   artistSelector: '#player-artist',
   artworkImageSelector: '#playingAlbumArt',

@@ -1,47 +1,14 @@
-function throttle(fn, threshhold, scope) {
-  threshhold || (threshhold = 250);
-  var last,
-      deferTimer;
-  return function () {
-    var context = scope || this;
-
-    var now = +new Date,
-        args = arguments;
-    if (last && now < last + threshhold) {
-      // hold on to it
-      clearTimeout(deferTimer);
-      deferTimer = setTimeout(function () {
-        last = now;
-        fn.apply(context, args);
-      }, threshhold);
-    } else {
-      last = now;
-      fn.apply(context, args);
-    }
-  };
-}
-
-
 /*
-
-properties:
-  playStateSelector: Element to observer to see if it's playing or not
-  playStateClass: Class to check if the playStateSelector element has to determine if its playing
-  playPauseSelector: Element to click to toggle play/pause
-  nextSelector: Element to click to go to the next track
-  previousSelector: Element to click to go previous track
-  titleSelector: Element to pull text from for the title
-  artistSelector: Element to pull text from for the artist
-  artworkImageSelector:Element to pull src from for the artwork
-
+See BasicTemplate.js for documentation and an example of a BasicController
 */
+
 var BasicController = function(params) {
   this.name = document.location.hostname;
   for (var key in params) {
     this[key] = params[key];
   }
   if (params.doThrottling) {
-    var sendStateThrottled = throttle(sendState, 250);  
+    var sendStateThrottled = this.throttle(sendState, 250);
     this.stateChangeObserver = new WebKitMutationObserver(function(mutations, observer) {
       sendStateThrottled();
     });
@@ -51,6 +18,11 @@ var BasicController = function(params) {
     });
   }
 };
+
+BasicController.prototype.doc = function() {
+  var useFrameSelector = (this.frameSelector && document.querySelector(this.frameSelector).tagName === "IFRAME");
+  return (useFrameSelector) ? document.querySelector(this.frameSelector).contentWindow.document : document;
+}
 
 BasicController.prototype.init = function() {
   var observedKeys = [
@@ -62,9 +34,11 @@ BasicController.prototype.init = function() {
     'thumbsDownSelector',
     'favoriteSelector'
   ];
+  if (this.frameSelector && document.querySelector(this.frameSelector).tagName !== "IFRAME")
+    console.log("frameSelector is defined but the element is not an IFRAME so it will be ignored.");
   for (var i = 0; i < observedKeys.length; ++i) {
     if (this.useLazyObserving) {
-      if (this[observedKeys[i]] && !document.querySelector(this[observedKeys[i]])) {
+      if (this[observedKeys[i]] && !this.doc().querySelector(this[observedKeys[i]])) {
         console.log("Waiting for element: ", this[observedKeys[i]])
         return false;
       }
@@ -82,8 +56,8 @@ BasicController.prototype.init = function() {
 }
 
 BasicController.prototype.observeStateChanges = function(key) {
-  var el = document.querySelector(key);
-  if (el) 
+  var el = this.doc().querySelector(key);
+  if (el)
     this.stateChangeObserver.observe(el, {attributes: true, characterData: true, subtree:true});
 }
 
@@ -95,24 +69,24 @@ BasicController.prototype.fireEvent = function(element,event, data){
 }
 
 BasicController.prototype.clickQS = function(qs) {
-  this.fireEvent(document.querySelector(qs), 'click');
+  this.fireEvent(this.doc().querySelector(qs), 'click');
 }
 
 BasicController.prototype.querySelectorText = function(qs) {
-  var div = document.querySelector(qs);
+  var div = this.doc().querySelector(qs);
   if (!div) return null;
   return div.innerText || div.textContent;
 }
 
 BasicController.prototype.querySelectorContainsClass = function(qs, clazz) {
-  var div = document.querySelector(qs);
+  var div = this.doc().querySelector(qs);
   if (!div) return false;
   return div.classList.contains(clazz);
 }
 
 BasicController.prototype.play = function() {
   if (this.playPauseSelector) {
-    this.clickQS(this.playPauseSelector);  
+    this.clickQS(this.playPauseSelector);
   } else if (this.playSelector) {
     if (this.isPlaying()) {
       this.clickQS(this.pauseSelector);
@@ -120,7 +94,7 @@ BasicController.prototype.play = function() {
       this.clickQS(this.playSelector);
     }
   }
-  
+
 };
 
 BasicController.prototype.nextSong = function () {
@@ -153,7 +127,7 @@ BasicController.prototype.isPlaying = function() {
 
 BasicController.prototype.getAlbumArt = function () {
   if (this.artworkImageSelector) {
-    var img = document.querySelector(this.artworkImageSelector);
+    var img = this.doc().querySelector(this.artworkImageSelector);
     return img && img.src;
   }
   return undefined;
@@ -174,9 +148,9 @@ BasicController.prototype.getState = function() {
   state.albumArt = this.getAlbumArt();
   state.playing = this.isPlaying();
   state.service = document.location.host;
-  if (this.isThumbsUpSelector) state.thumbsUp = !!document.querySelector(this.isThumbsUpSelector);
-  if (this.isThumbsDownSelector) state.thumbsDown = !!document.querySelector(this.isThumbsDownSelector);
-  if (this.isFavoriteSelector) state.favorite = !!document.querySelector(this.isFavoriteSelector);
+  if (this.isThumbsUpSelector) state.thumbsUp = !!this.doc().querySelector(this.isThumbsUpSelector);
+  if (this.isThumbsDownSelector) state.thumbsDown = !!this.doc().querySelector(this.isThumbsDownSelector);
+  if (this.isFavoriteSelector) state.favorite = !!this.doc().querySelector(this.isFavoriteSelector);
   return state;
 }
 
@@ -201,3 +175,25 @@ BasicController.prototype.runInPage = function(code) {
   setTimeout(f, 1000);
 }
 
+BasicController.prototype.throttle = function(fn, threshhold, scope) {
+  threshhold || (threshhold = 250);
+  var last,
+      deferTimer;
+  return function () {
+    var context = scope || this;
+
+    var now = +new Date,
+        args = arguments;
+    if (last && now < last + threshhold) {
+      // hold on to it
+      clearTimeout(deferTimer);
+      deferTimer = setTimeout(function () {
+        last = now;
+        fn.apply(context, args);
+      }, threshhold);
+    } else {
+      last = now;
+      fn.apply(context, args);
+    }
+  };
+}

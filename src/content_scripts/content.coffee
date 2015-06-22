@@ -99,6 +99,7 @@ listener = (request, sender, sendResponse) ->
   if request.action is "thumbsUp" then controller.thumbsUp()
   if request.action is "thumbsDown" then controller.thumbsDown()
   if request.action is "pause" then controller.play()
+  if (request.action is "stop" && controller.isPlaying()) then controller.play()
   if request.action is "previous" then controller.previousSong()
   if request.action is "favorite" then controller.favorite()
   if request.action is "getState"

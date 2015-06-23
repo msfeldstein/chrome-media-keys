@@ -1,20 +1,22 @@
+console.log("DIFMs")
 controller = new BasicController({
   supports: {
     playpause: true
   },
-  playStateSelector: '#ctl-play',
-  playStateClass: 'pause',
-  playPauseSelector: '#ctl-play',
-  artworkImageSelector: '#art img',
-  titleSelector: "#now-playing .title"
+  playStateSelector: '.controls .ico',
+  playStateClass: 'icon-pause',
+  playPauseSelector: '.controls .ico',
+  artworkImageSelector: '.track-region .artwork img',
+  titleSelector: ".track-name",
+  watchedElements: ["body"]
 });
 
 controller.override("getTitle", function() {
-  var info = this.querySelectorText("#now-playing .title")
+  var info = this.querySelectorText(".track-title")
   return info && info.split(" - ")[1];
 })
 
 controller.override("getArtist", function() {
-  var info = this.querySelectorText("#now-playing .title")
+  var info = this.querySelectorText(".track-title")
   return info && info.split(" - ")[0];
 })

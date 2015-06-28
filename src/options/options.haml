@@ -1,6 +1,6 @@
 !!!
 %html
-  %head 
+  %head
     %link{:href => "http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700", :rel => "stylesheet", :type => "text/css"}
     %link{href: "options.css", rel: "stylesheet", type: "text/css"}
     %title Sway.fm's Media Keys
@@ -10,14 +10,23 @@
       %img#logo{alt: "Unity", src: "logo.png"}
     #content
       .main-title
-        Thank you for installing!  
+        Thank you for installing!
       .section
         .section-title
           Problems?
         .section-content
-          If you see the song information in the extensions popup window, but the media keys aren't working, go to 
+          If you see the song information in the extensions popup window, but the media keys aren't working, go to
           %a{href:"chrome://extensions"}chrome://extensions
-          and click the Keyboard Shortcuts button at the bottom to make sure they are set.  Make sure you don't have any competing extensions stealing the keys, like Google Play Music.  If it still doesn't work, or the site you use isn't supported or is broken, email us at 
+          and click the Keyboard Shortcuts button at the bottom to make sure they are set.
+          %br
+          %br
+          Make sure you don't have any competing extensions stealing the keys, like Google Play Music.
+          %br
+          %br
+          If you're on Windows, Microsoft Keyboard and Mouse center or Logitech SetPoint can interfere with media keys.  Uninstall them if possible.
+          %br
+          %br
+          If it still doesn't work, or the site you use isn't supported or is broken, email us at
           %a{href: "mailto:hello@sway.fm"}hello@sway.fm
           for help.
 
@@ -60,6 +69,6 @@
           %img{src: "twitter.png"}
 
 
-      
+
     %script{src: "options.js", type: "text/javascript"}
     %script{src: "track.js", type: "text/javascript"}

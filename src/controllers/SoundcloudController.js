@@ -11,6 +11,7 @@ controller = new BasicController({
   nextSelector: '.skipControl__next',
   previousSelector: '.skipControl__previous',
   titleSelector: '.playbackSoundBadge__title > span:nth-child(2)',
+  artistSelector: '.m-playing > .sc-type-light > .soundTitle__username > .soundTitle__usernameText',
   favoriteSelector: '.playbackSoundBadge__like',
   isFavoriteSelector: '.playbackSoundBadge__like.sc-button-selected'
 });

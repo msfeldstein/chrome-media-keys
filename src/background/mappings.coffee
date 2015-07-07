@@ -52,6 +52,7 @@ mapping =
   'netflix': 'NetflixController.js'
   'noonpacific': 'NoonPacificController.js'
   'one.npr': 'NPROneController.js'
+  'overcast': 'OvercastController.js'
   'pandora': 'PandoraController.js'
   'play.google': 'GoogleMusicController.js'
   'player.fm': 'PlayerFMController.js'

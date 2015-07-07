@@ -11,7 +11,7 @@ controller = new BasicController({
   nextSelector: '.skipControl__next',
   previousSelector: '.skipControl__previous',
   titleSelector: '.playbackSoundBadge__title > span:nth-child(2)',
-  artistSelector: '.m-playing > .sc-type-light > .soundTitle__username > .soundTitle__usernameText',
+  artistSelector: '.m-playing .soundTitle__username',
   favoriteSelector: '.playbackSoundBadge__like',
   isFavoriteSelector: '.playbackSoundBadge__like.sc-button-selected'
 });
@@ -21,7 +21,7 @@ controller.override('getArtist', function() {
   if (!el) return "";
   var s = el.textContent;
   var parts = s.split(" - ");
-  return parts.length > 1 ? parts[0] : "";
+  return parts.length > 1 ? parts[0] : this.querySelectorText(this.artistSelector);
 });
 
 controller.override('getTitle', function() {
@@ -29,6 +29,12 @@ controller.override('getTitle', function() {
   if (!el) return "";
   var s = el.textContent;
   var parts = s.split(" - ");
+  if (parts.length > 1) {
+    parts.splice(0, 1);
+    return parts.join(" - ");
+  } else {
+    return parts[0];
+  }
   return parts.length > 1 ? parts[1] : parts[0];
 });
 

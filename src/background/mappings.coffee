@@ -87,6 +87,7 @@ mapping =
   'tunein': 'TuneinController.js'
   'turntable': 'TurntableController.js'
   'twitter': 'TwitterController.js'
+  'vessel': 'VesselController.js'
   'vimeo': 'VimeoController.js'
   'vk': 'VkController.js'
   'wearehunted': 'WeAreHuntedController.js'

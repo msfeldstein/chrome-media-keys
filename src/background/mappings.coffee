@@ -48,7 +48,7 @@ mapping =
   'mixcloud': 'MixcloudController.js'
   'mixrad': 'NokiaMixradioController.js'
   'mog': 'MogController.js'
-  'music.xbox': 'XboxController.js'
+  'music.microsoft': 'XboxController.js'  
   'netflix': 'NetflixController.js'
   'noonpacific': 'NoonPacificController.js'
   'one.npr': 'NPROneController.js'

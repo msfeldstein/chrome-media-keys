@@ -10,5 +10,6 @@ controller = new BasicController({
   titleSelector: '.font-mscon500',
   dontScrobble: function() {
     return true;
-  }
+  },
+  watchedElements: ['body']
 });

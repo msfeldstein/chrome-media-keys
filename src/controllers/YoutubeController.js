@@ -48,7 +48,7 @@ controller.override('play', function() {
     if (this.isPlaying()) {
       this.clickQS('.ytp-button-pause');
     } else {
-      this.clickQS('.ytp-button-play');
+      this.clickQS('.ytp-button-play, .ytp-button-replay');
     }
   }
 });

@@ -26,7 +26,7 @@ chrome.windows.getAll {populate: true}, (windows) ->
         if chrome.runtime.lastError
           console.log("Last Error", chrome.runtime.lastError)
       chrome.tabs.executeScript tab.id, {file: 'content_scripts/content.js'}, cb
-      
+
 
 # Launch the option page on the first run
 hasLaunchedOptions = localStorage.getItem("hasSeen2") # Has seen version of updates.  Increment every time there's something to alert
@@ -68,6 +68,7 @@ newState = (state) ->
     listener(state)
 
 handleRequestFromContentScript = (request, sender, sendResponse) ->
+  console.log("REQ", request)
   # Todo: Add sending of tracks back here
   if request.action is 'newState' and sender.tab.id == activeTab()
     newState(request)

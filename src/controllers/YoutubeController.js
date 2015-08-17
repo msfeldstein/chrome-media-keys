@@ -6,13 +6,18 @@ controller = new BasicController({
     thumbsUp: true,
     thumbsDown: true,
   },
-  playStateSelector: '#movie_player',
+  playStateSelector: '.ytp-play-button',
   playStateClass: 'playing-mode',
   titleSelector: '.watch-title',
   artistSelector: '.yt-user-info > a',
   isThumbsUpSelector: '.like-button-renderer-like-button-unclicked.hid',
   isThumbsDownSelector: '.like-button-renderer-dislike-button-unclicked.hid',
 });
+
+controller.override('isPlaying', function() {
+  var button = document.querySelector('.ytp-play-button')
+  return button && button.getAttribute('aria-label') == "Pause"
+})
 
 controller.override('getTitle', function() {
   var text = this.querySelectorText('.watch-title');

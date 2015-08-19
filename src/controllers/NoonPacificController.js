@@ -2,7 +2,7 @@ controller = new BasicController({
   supports: {
     playpause: true,
     next: true,
-    previous: true,
+    previous: true
   },
   playStateSelector: '[ng-click="PlayPauseClick()"] i',
   playStateClass: 'fa-play',

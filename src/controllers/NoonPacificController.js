@@ -5,7 +5,7 @@ controller = new BasicController({
     previous: true
   },
   playStateSelector: '[ng-click="PlayPauseClick()"] i',
-  playStateClass: 'fa-play',
+  playStateClass: 'fa-pause',
   playSelector: '[ng-click="PlayPauseClick()"]',
   pauseSelector: '[ng-click="PlayPauseClick()"]',
   nextSelector: '[ng-click="audio.PlayNextSong()"]',

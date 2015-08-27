@@ -12,6 +12,7 @@ controller = new BasicController({
   artistSelector: '.yt-user-info > a',
   isThumbsUpSelector: '.like-button-renderer-like-button-unclicked.hid',
   isThumbsDownSelector: '.like-button-renderer-dislike-button-unclicked.hid',
+  watchedElements: ['body']
 });
 
 controller.override('isPlaying', function() {
@@ -22,13 +23,13 @@ controller.override('isPlaying', function() {
 controller.override('getTitle', function() {
   var text = this.querySelectorText('.watch-title');
   var parts = text.split(" - ");
-  return parts.length == 2 ? parts[1] : text;
+  return parts && parts.length == 2 ? parts[1] : text;
 })
 
 controller.override('getArtist', function() {
   var text = this.querySelectorText('.watch-title');
   var parts = text.split(" - ");
-  return parts.length == 2 ? parts[0] : this.querySelectorText(this.artistSelector);
+  return parts && parts.length == 2 ? parts[0] : this.querySelectorText(this.artistSelector);
 })
 
 controller.override('getAlbumArt', function() {

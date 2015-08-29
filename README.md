@@ -1,3 +1,5 @@
+Copyright 2013-2015 Michael Feldstein
+
 The extension can be installed from the Chrome Web Store [here](https://chrome.google.com/webstore/detail/swayfm-unified-music-medi/icckhjgjjompfgoiidainoapgjepncej)
 
 #### Building
@@ -34,3 +36,8 @@ you won't need `playPauseSelector` and `playSelector`, just one or the other,   
 of the player to the controller file you just wrote.
 
 That's it.
+
+#### License
+
+The source files for this extension are made available under the AGPLv3 license.
+A copy of the text of the license can be found in `LICENSE.txt`

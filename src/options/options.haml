@@ -2,12 +2,12 @@
 %html
   %head
     %link{:href => "http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700", :rel => "stylesheet", :type => "text/css"}
-    %link{href: "options.css", rel: "stylesheet", type: "text/css"}
+    %link{:href => "options.css", :rel => "stylesheet", :type => "text/css"}
     %title Sway.fm's Media Keys
   %body
     #topbar
     #sidebar
-      %img#logo{alt: "Unity", src: "logo.png"}
+      %img#logo{:alt => "Unity", :src => "logo.png"}
     #content
       .main-title
         Thank you for installing!
@@ -16,24 +16,24 @@
           Problems?
         .section-content
           If you see the song information in the extensions popup window, but the media keys aren't working, go to
-          %a{href:"chrome://extensions"}chrome://extensions
+          %a{:href => "chrome://extensions"}chrome://extensions
           and click the Keyboard Shortcuts button at the bottom to make sure they are set.
           %br
           %br
           Make sure you don't have any competing extensions stealing the keys, like Google Play Music.
           %br
           %br
-          If you're on Windows, Microsoft Keyboard and Mouse center or Logitech SetPoint can interfere with media keys.  Uninstall them if possible.
+          If you're on Windows, Microsoft Keyboard and Mouse center or Logitech SetPoint can interfere with media keys. Uninstall them if possible.
           %br
           %br
           If it still doesn't work, or the site you use isn't supported or is broken, email us at
-          %a{href: "mailto:hello@sway.fm"}hello@sway.fm
+          %a{:href => "mailto:hello@sway.fm"}hello@sway.fm
           for help.
 
       .section
         .section-title
           Ignore Youtube
-          %input#ignore-youtube-checkbox{type: "checkbox"}
+          %input#ignore-youtube-checkbox{:type => "checkbox"}
         .section-content
           Check this if you'd like to play youtube videos while listening to music, and don't want to auto-pause the music when you start playing a youtube video.
 
@@ -41,9 +41,9 @@
         .section-title
           Scrobbling
         .section-content
-          %a#lastfm-enable{href: "#"}
+          %a#lastfm-enable{:href => "#"}
             Enable Last.fm Scrobbling
-          %a#lastfm-loading{href: "#"}
+          %a#lastfm-loading{:href => "#"}
             Logging in to last.fm
 
       .section
@@ -51,10 +51,10 @@
           Support The Extension
         .section-content
           If you appreciate the extension and want to see more features and supported sites consider donating, or even just saying thanks.
-        %a.donate{href:"https://www.coinbase.com/msfeldstein"}
-          %img{src: "bitcoin.png"}
-        %a.donate.dogecoin-button{href:"#"}
-          %img{src: "dogecoin.png"}
+        %a.donate{:href => "https://www.coinbase.com/msfeldstein"}
+          %img{:src => "bitcoin.png"}
+        %a.donate.dogecoin-button{:href => "#"}
+          %img{:src => "dogecoin.png"}
         %form{:action => "https://www.paypal.com/cgi-bin/webscr", :method => "post", :target => "_top", :style => "display:inline"}
           %input{:name => "cmd", :type => "hidden", :value => "_donations"}/
           %input{:name => "business", :type => "hidden", :value => "msfeldstein@gmail.com"}/
@@ -65,10 +65,10 @@
           %input{:name => "bn", :type => "hidden", :value => "PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest"}/
           %input{:alt => "PayPal - The safer, easier way to pay online!", :border => "0", :name => "submit", :src => "paypal.png", :type => "image"}/
 
-        %a.donate{href:"http://twitter.com/swayfm"}
-          %img{src: "twitter.png"}
+        %a.donate{:href => "http://twitter.com/swayfm"}
+          %img{:src => "twitter.png"}
 
 
 
-    %script{src: "options.js", type: "text/javascript"}
-    %script{src: "track.js", type: "text/javascript"}
+    %script{:src => "options.js", :type => "text/javascript"}
+    %script{:src => "track.js", :type => "text/javascript"}

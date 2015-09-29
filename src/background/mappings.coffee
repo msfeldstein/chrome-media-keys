@@ -98,3 +98,4 @@ mapping =
   'y.qq': 'QQMusicController.js'
   'radio.yandex': 'YandexRadioController.js'
   'youtube': 'YoutubeController.js'
+  'albumkings': 'AlbumKingsController.js'

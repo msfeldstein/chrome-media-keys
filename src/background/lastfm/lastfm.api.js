@@ -31,6 +31,9 @@ function LastFM(options){
 		cache = _cache;
 	};
 
+	/* Set the JSONP callback identifier counter. This is used to ensure the callbacks are unique */
+	var jsonpCounter = 0;
+
 	/* Internal call (POST, GET). */
 	var internalCall = function(params, callbacks, requestMethod){
 		/* Cross-domain POST request (doesn't return any data, always successful). */
@@ -44,18 +47,18 @@ function LastFM(options){
 			iframe.width        = 1;
 			iframe.height       = 1;
 			iframe.style.border = 'none';
-			iframe.addEventListener("load", function(){
+
+			/* Append iframe. */
+			html.appendChild(iframe);
+			iframe.onload       = function(){
 				/* Remove iframe element. */
-				//html.removeChild(iframe);
+				html.removeChild(iframe);
 
 				/* Call user callback. */
 				if(typeof(callbacks.success) != 'undefined'){
 					callbacks.success();
 				}
-			});
-
-			/* Append iframe. */
-			html.appendChild(iframe);
+			};
 
 			/* Get iframe document. */
 			if(typeof(iframe.contentWindow) != 'undefined'){
@@ -80,8 +83,8 @@ function LastFM(options){
 
 			/* Write automatic form submission code. */
 			doc.write('</form>');
-			var source = chrome.extension.getURL("background/lastfm/submitform.js");
-			doc.write('<script type="application/x-javascript" src="' + source + '">');
+			doc.write('<script type="application/x-javascript">');
+			doc.write('document.getElementById("form").submit();');
 			doc.write('</script>');
 
 			/* Close iframe document. */
@@ -90,7 +93,10 @@ function LastFM(options){
 		/* Cross-domain GET request (JSONP). */
 		else{
 			/* Get JSONP callback name. */
-			var jsonp = 'jsonp' + new Date().getTime();
+			var jsonp = 'jsonp' + new Date().getTime() + jsonpCounter;
+
+			/* Update the unique JSONP callback counter */
+			jsonpCounter += 1;
 
 			/* Calculate cache hash. */
 			var hash = auth.getApiSignature(params);
@@ -223,6 +229,10 @@ function LastFM(options){
 
 		getTags : function(params, session, callbacks){
 			signedCall('album.getTags', params, session, callbacks);
+		},
+
+		getTopTags: function(params, callbacks){
+			signedCall('album.getTopTags', params, callbacks);
 		},
 
 		removeTag : function(params, session, callbacks){
@@ -820,20 +830,13 @@ function LastFM(options){
 	/* Private auth methods. */
 	var auth = {
 		getApiSignature : function(params){
-			var keys   = [];
+			var keys = Object.keys(params);
 			var string = '';
 
-			for(var key in params){
-				keys.push(key);
-			}
-
 			keys.sort();
-
-			for(var index in keys){
-				var key = keys[index];
-
+			keys.forEach(function(key) {
 				string += key + params[key];
-			}
+			});
 
 			string += apiSecret;
 

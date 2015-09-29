@@ -1,6 +1,6 @@
 {
   "name": "Media Keys by Sway.fm",
-  "version": "3.98",
+  "version": "4.29",
   "manifest_version": 2,
   "icons": { "16": "icon16.png",
            "48": "icon48.png",
@@ -55,12 +55,6 @@
     }
   },
   "content_scripts": [
-    {
-      "matches": ["*://*.youtube.com/*"],
-      "patterns": ["http://*/*", "https://*/*"],
-      "js": ["content_scripts/shim.js"],
-      "run_at": "document_end"
-    },
     {
       "matches": ["<all_urls>"],
       "patterns": ["http://*/*", "https://*/*"],

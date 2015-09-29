@@ -151,7 +151,12 @@ BasicController.prototype.getState = function() {
   if (this.isThumbsUpSelector) state.thumbsUp = !!this.doc().querySelector(this.isThumbsUpSelector);
   if (this.isThumbsDownSelector) state.thumbsDown = !!this.doc().querySelector(this.isThumbsDownSelector);
   if (this.isFavoriteSelector) state.favorite = !!this.doc().querySelector(this.isFavoriteSelector);
+  state.dontScrobble = this.dontScrobble();
   return state;
+}
+
+BasicController.prototype.dontScrobble = function() {
+  return false;
 }
 
 BasicController.prototype.override = function(methodName, newMethod) {

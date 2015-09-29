@@ -1,3 +1,25 @@
+throttle = function(fn, threshhold, scope) {
+  threshhold || (threshhold = 250);
+  var last,
+      deferTimer;
+  return function () {
+    var context = scope || this;
+
+    var now = +new Date,
+        args = arguments;
+    if (last && now < last + threshhold) {
+      // hold on to it
+      clearTimeout(deferTimer);
+      deferTimer = setTimeout(function () {
+        last = now;
+        fn.apply(context, args);
+      }, threshhold);
+    } else {
+      last = now;
+      fn.apply(context, args);
+    }
+  };
+}
 document.body.addEventListener('DOMSubtreeModified', throttle(sendState));
 controller = new BasicController({
   supports: {
@@ -5,27 +27,21 @@ controller = new BasicController({
     next: true,
     previous: true
   },
-  playSelector: '#player-play',
-  pauseSelector: '#player-pause',
-  nextSelector: '#player-next',
-  previousSelector: '#player-previous',
-  titleSelector: '#player-track',
-  artistSelector: '#player-artist',
+  playPauseSelector: '.player-play-button div',
+  nextSelector: '.icon-next',
+  previousSelector: '.icon-previous',
+  titleSelector: '.player-track',
+  artistSelector: '.player-artist',
   watchedElements: ['#player-pause', '#player-info']
 });
 
 controller.override('isPlaying', function() {
-  var button = document.querySelector('#player-pause');
-  return button && button.style.display == "block"
+  var button = document.querySelector('.player-play-button .icon-pause');
+  return !!button;
 });
 
 controller.override('getAlbumArt', function(_super) {
-  var containers = document.querySelectorAll(".player-album-thumbnail");
-  for (var i = 0; i < containers.length; i++) {
-    var container = containers[i];
-    if (container.style.opacity > 0.2) {
-      return container.querySelector('img').src;
-    }
-  }
-  return containers[0].querySelector('img') && containers[0].querySelector('img').src;
+  var container = document.querySelector(".player-album-thumbnail");
+  if (!container) return null;
+  return container.querySelector('img') && container.querySelector('img').src;
 })

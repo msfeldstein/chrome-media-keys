@@ -5,26 +5,20 @@ controller = new BasicController({
     previous: true,
     next: true
   },
-  playStateSelector: '.mini-player .play-btn',
+  playStateSelector: '.play-btn',
   playStateClass: 'hidden',
-  playSelector: '.mini-player .play-btn',
-  pauseSelector: '.mini-player .pause-btn',
-  nextSelector: '.mini-player .next-btn',
-  previousSelector: '.mini-player .previous-btn',
-  titleSelector: '.mini-player .item-title',
-  artistSelector: '.mini-player .grandparent-title',
+  playSelector: '.play-btn',
+  pauseSelector: '.pause-btn',
+  nextSelector: '.next-btn',
+  previousSelector: '.previous-btn',
+  titleSelector: '.video-title',
   artworkImageSelector: '.mini-player .playerBarArt',
-  watchedElements: ['#plex']
+  watchedElements: ['body']
 });
 
 controller.override("getAlbumArt", function() {
-  var image = document.querySelector(".mini-player .media-poster");
+  var image = document.querySelector(".media-poster");
   if (!image) return null;
   var url = image.style.backgroundImage;
   return url.substring(4, url.length - 1);
 });
-var sendStateDebounced = throttle(sendState, 2000);
-document.body.addEventListener('DOMSubtreeModified', function() {
-  sendStateDebounced();
-});
-

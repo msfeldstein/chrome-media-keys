@@ -90,7 +90,7 @@ var scope = function() {
         track: track,
         duration: 30,
         timestamp: Math.floor(new Date().getTime() / 1000)
-      }, session, scrobbleCallbacks);      
+      }, session, scrobbleCallbacks);
     }
   }
   window.scrobbler = scrobbler;
@@ -101,7 +101,7 @@ var scope = function() {
 
   var currentTrackState = {};
   function updateScrobbleState(state) {
-    if (!shouldScrobble()) return;
+    if (!shouldScrobble() || state.dontScrobble) return;
     var updateNowPlaying = false;
     // If it's a new song set duration back to 0
     if (state.title && currentTrackState.title != state.title) {

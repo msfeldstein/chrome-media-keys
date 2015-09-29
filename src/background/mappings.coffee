@@ -1,5 +1,6 @@
 window.findScriptByHost = (host) ->
   if host.indexOf("youtube") != -1 && localStorage.getItem("ignore-youtube") == "true"
+    debugger
     return "controllers/ShimController.js"
 
   host = host.toLowerCase()
@@ -29,6 +30,7 @@ mapping =
   'deezer': 'DeezerController.js'
   'di.fm': 'DIController.js'
   'dr.dk': 'DRController.js'
+  'dreamfm': 'DreamfmController.js'
   'earbits': 'EarbitsController.js'
   'ex.fm': 'ExfmController.js'
   'feedly': 'FeedlyController.js'
@@ -48,10 +50,11 @@ mapping =
   'mixcloud': 'MixcloudController.js'
   'mixrad': 'NokiaMixradioController.js'
   'mog': 'MogController.js'
-  'music.xbox': 'XboxController.js'
+  'music.microsoft': 'XboxController.js'
   'netflix': 'NetflixController.js'
   'noonpacific': 'NoonPacificController.js'
   'one.npr': 'NPROneController.js'
+  'overcast': 'OvercastController.js'
   'pandora': 'PandoraController.js'
   'play.google': 'GoogleMusicController.js'
   'player.fm': 'PlayerFMController.js'
@@ -59,6 +62,7 @@ mapping =
   'playlist.me': 'SCMController.js'
   'pleer.com': 'PleerController.js'
   'plex': 'PlexController.js'
+  'poolside': 'PoolsideController.js'
   'pony.fm': 'PonyFmController.js'
   'ponyvillelive': 'PonyvilleLiveController.js'
   'rbmaradio': 'RbmaController.js'
@@ -67,6 +71,7 @@ mapping =
   'reddit.musicplayer.io': 'RedditplayerController.js'
   'rhapsody': 'RhapsodyController.js'
   'saavn': 'SaavnController.js'
+  'scribd': 'ScribdController.js'
   'scmplayer': 'SCMFramelessController.js'
   'shuffler': 'ShufflerController.js'
   'slacker': 'SlackerController.js'
@@ -86,8 +91,10 @@ mapping =
   'tunein': 'TuneinController.js'
   'turntable': 'TurntableController.js'
   'twitter': 'TwitterController.js'
+  'vessel': 'VesselController.js'
   'vimeo': 'VimeoController.js'
   'vk': 'VkController.js'
   'wearehunted': 'WeAreHuntedController.js'
   'y.qq': 'QQMusicController.js'
+  'radio.yandex': 'YandexRadioController.js'
   'youtube': 'YoutubeController.js'

@@ -9,7 +9,7 @@ controller = new BasicController({
   playPauseSelector: '[data-id=play-pause]',
   nextSelector: '[data-id=forward]',
   previousSelector: '[data-id=rewind]',
-  titleSelector: '#playerSongTitle',
+  titleSelector: '#player-song-title',
   artistSelector: '#player-artist',
   artworkImageSelector: '#playingAlbumArt',
   thumbsUpSelector: "li[data-rating='5']",

@@ -99,3 +99,4 @@ mapping =
   'radio.yandex': 'YandexRadioController.js'
   'youtube': 'YoutubeController.js'
   'albumkings': 'AlbumKingsController.js'
+  'itunes.apple.com': 'AppleMusicController.js'

@@ -96,6 +96,7 @@ mapping =
   'vk': 'VkController.js'
   'wearehunted': 'WeAreHuntedController.js'
   'y.qq': 'QQMusicController.js'
+  'music.yandex': 'YandexMusicController.js'
   'radio.yandex': 'YandexRadioController.js'
   'youtube': 'YoutubeController.js'
   'albumkings': 'AlbumKingsController.js'

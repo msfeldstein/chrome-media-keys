@@ -3,7 +3,8 @@ controller = new BasicController({
         playpause: true,
         next: true,
         previous: true,
-        favorite: true
+        favorite: true,
+        thumbsDown: false  // Changes dynamically
     },
     playPauseSelector: '.player-controls__btn_play',
     previousSelector: '.player-controls__btn_prev',
@@ -14,7 +15,8 @@ controller = new BasicController({
     playStateClass: 'player-controls__btn_pause',
     artworkImageSelector: '.player-controls .album-cover',
     favoriteSelector: '.player-controls .like',
-    isFavoriteSelector: '.player-controls .like_on'
+    isFavoriteSelector: '.player-controls .like_on',
+    thumbsDownSelector: '.player-controls__btn_dislike'
 });
  
 controller.override('getAlbumArt', function() {
@@ -23,4 +25,9 @@ controller.override('getAlbumArt', function() {
         return img.src.replace('40x40', '150x150');
     }
     return undefined
+});
+
+controller.override('isPlaying', function(_super) {
+    this.supports.thumbsDown = window.getComputedStyle(document.querySelector(this.thumbsDownSelector)).display != 'none'
+    return _super()
 });

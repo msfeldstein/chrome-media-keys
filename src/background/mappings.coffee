@@ -15,6 +15,7 @@ window.findScriptByHost = (host) ->
 mapping =
   '163': 'OneSixtyThreeController.js'
   '8tracks': 'EightTracksController.js'
+  '22tracks': '22tracksController.js'
   '99percentinvisible' : 'SCMController.js'
   'amazon': 'AmazonController.js'
   'app.napster': 'NapsterController.js'

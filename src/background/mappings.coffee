@@ -27,6 +27,7 @@ mapping =
   'beatsmusic': 'BeatsMusicController.js'
   'bop': 'BopController.js'
   'bronytunes': 'BronyTunesController.js'
+  'cliggo': 'CliggoController.js'
   'connect.monstercat': 'MonstercatController.js'
   'deezer': 'DeezerController.js'
   'di.fm': 'DIController.js'

@@ -39,6 +39,7 @@ mapping =
   'focusatwill': 'FocusAtWillController.js'
   'gaana': 'GaanaController.js'
   'getworkdonemusic': 'GetWorkDoneController.js'
+  'giantbomb': 'GiantBombController.js'
   'gold.monstercat': 'MonstercatController.js'
   'grooveshark': 'GroovesharkController.js'
   'hearthis': 'HearThisController.js'

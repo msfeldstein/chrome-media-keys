@@ -9,13 +9,9 @@ controller = new BasicController({
   playPauseSelector: '[data-id=play-pause]',
   nextSelector: '[data-id=forward]',
   previousSelector: '[data-id=rewind]',
-  titleSelector: '#player-song-title',
+  titleSelector: '#currently-playing-title',
   artistSelector: '#player-artist',
-  artworkImageSelector: '#playingAlbumArt',
-  thumbsUpSelector: "li[data-rating='5']",
-  thumbsDownSelector: "li[data-rating='1']",
-  isThumbsUpSelector: "li[data-rating='5'].selected",
-  isThumbsDownSelector: "li[data-rating='1'].selected",
+  artworkImageSelector: '#playerBarArt'
 });
 
 controller.override('init', function(_super) {

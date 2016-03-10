@@ -65,6 +65,7 @@ mapping =
   'playlist.me': 'SCMController.js'
   'pleer.com': 'PleerController.js'
   'plex': 'PlexController.js'
+  'pocketcasts.com': 'PocketCastsController.js'
   'poolside': 'PoolsideController.js'
   'pony.fm': 'PonyFmController.js'
   'ponyvillelive': 'PonyvilleLiveController.js'

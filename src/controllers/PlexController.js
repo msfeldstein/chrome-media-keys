@@ -5,20 +5,20 @@ controller = new BasicController({
     previous: true,
     next: true
   },
-  playStateSelector: '.play-btn',
+  playStateSelector: '.mini-player .play-btn',
   playStateClass: 'hidden',
-  playSelector: '.play-btn',
-  pauseSelector: '.pause-btn',
-  nextSelector: '.next-btn',
-  previousSelector: '.previous-btn',
-  titleSelector: '.video-title',
-  artworkImageSelector: '.mini-player .playerBarArt',
+  playSelector: '.mini-player .play-btn',
+  pauseSelector: '.mini-player .pause-btn',
+  nextSelector: '.mini-player .next-btn',
+  previousSelector: '.mini-player .previous-btn',
+  artistSelector: '.mini-player .grandparent-title-container .grandparent-title',
+  titleSelector: '.mini-player .title-container .item-title',
+  artworkImageSelector: '.mini-player .media-poster-container .media-poster',
   watchedElements: ['body']
 });
 
 controller.override("getAlbumArt", function() {
-  var image = document.querySelector(".media-poster");
+  var image = document.querySelector('.mini-player').querySelector('.media-poster');
   if (!image) return null;
-  var url = image.style.backgroundImage;
-  return url.substring(4, url.length - 1);
+  return image.getAttribute('data-image-url');
 });

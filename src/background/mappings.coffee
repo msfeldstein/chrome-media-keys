@@ -86,6 +86,7 @@ mapping =
   'spotify': 'SpotifyController.js'
   'smule': 'SmuleController.js'
   'stitcher': 'StitcherController.js'
+  'subsonic': 'SubsonicController.js'
   'sverigesradio': 'SverigesradioController.js'
   'themusicninja': 'TheMusicNinjaController.js'
   'thesixtyone': 'ThesixtyoneController.js'

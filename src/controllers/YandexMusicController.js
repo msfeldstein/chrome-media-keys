@@ -22,7 +22,7 @@ controller = new BasicController({
 controller.override('getAlbumArt', function() {
     var img = document.querySelector(this.artworkImageSelector);
     if (img) {
-        return img.src.replace('40x40', '150x150');
+        return img.src.replace('50x50', '150x150');
     }
     return undefined
 });

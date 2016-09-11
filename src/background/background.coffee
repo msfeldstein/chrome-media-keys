@@ -61,11 +61,9 @@ window.addStateListener = (l) ->
   stateListeners.push l
 
 newState = (state) ->
-  if not wasPlaying and state.playing
-    useMediaKeys()
+  useMediaKeys() if not wasPlaying and state.playing
   wasPlaying = state.playing
-  for listener in stateListeners
-    listener(state)
+  listener(state) for listener in stateListeners
 
 handleRequestFromContentScript = (request, sender, sendResponse) ->
   console.log("REQ", request)

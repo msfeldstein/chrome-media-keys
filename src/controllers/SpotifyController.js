@@ -1,43 +1,33 @@
-if (!!document.querySelector('#app-player')) { // Old Player
-  controller = new BasicController({
-    supports: {
+var config = {
+  supports: {
     playpause: true,
     next: true,
     previous: true
-    },
-    useLazyObserving: true,
-    frameSelector: '#app-player',
-    playStateSelector: '#play-pause',
-    playStateClass: 'playing',
-    playPauseSelector: '#play-pause',
-    nextSelector: '#next',
-    previousSelector: '#previous',
-    titleSelector: '#track-name',
-    artistSelector: '#track-artist'
-  });
-
-  controller.override('getAlbumArt', function() {
-    return document.querySelector(this.frameSelector).contentDocument.querySelector('#cover-art .sp-image-img').style.backgroundImage.slice(4, -1);
-  });
-} else { // New Player
-  controller = new BasicController({
-    supports: {
-    playpause: true,
-    next: true,
-    previous: true
-    },
-    useLazyObserving: true,
-    frameSelector: '#main',
-    playStateSelector: '#play',
-    playStateClass: 'playing',
-    playPauseSelector: '#play',
-    nextSelector: '#next',
-    previousSelector: '#previous',
-    titleSelector: '.caption .track',
-    artistSelector: '.caption .artist'
-  });
-
-  controller.override('getAlbumArt', function() {
-    return document.querySelector(this.frameSelector).contentDocument.querySelector('#large-cover-image').style.backgroundImage.slice(4, -1);
-  });
+  },
+  useLazyObserving: true,
+  playStateClass: 'playing',
+  nextSelector: '#next',
+  previousSelector: '#previous'
 }
+
+if (document.querySelector('#app-player')) { // Old Player
+  config.artworkImageSelector = '#cover-art .sp-image-img';
+  config.frameSelector = '#app-player';
+  config.playStateSelector = '#play-pause';
+  config.playPauseSelector = '#play-pause';
+  config.titleSelector = '#track-name';
+  config.artistSelector = '#track-artist';
+} else { // New Player
+  config.artworkImageSelector = '#large-cover-image';
+  config.frameSelector = '#main';
+  config.playStateSelector = '#play';
+  config.playPauseSelector = '#pause';
+  config.titleSelector = '.caption .track';
+  config.artistSelector = '.caption .artist';
+}
+
+controller = new BasicController(config);
+controller.override('getAlbumArt', function() {
+  var img = this.doc().querySelector(this.artworkImageSelector);
+  return img && img.style.backgroundImage.slice(5, -2);
+});

@@ -34,7 +34,7 @@ window.isVisible = (el) ->
   return true;
 init = () ->
   success = false
-  if controller
+  if controller?
     success = controller.init();
     if success
       chrome.extension.sendRequest({action: "controller_loaded", host:window.location.host}, noop)

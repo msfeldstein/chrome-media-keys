@@ -22,6 +22,7 @@ mapping =
   'audible': 'AudibleController.js'
   'audiogalaxy': 'AudiogalaxyController.js'
   'audiomack': 'AudiomackController.js'
+  'audiosplitter': 'AudiosplitterController.js'
   'bandcamp': 'BandcampController.js'
   'bbc': 'BBCRadioPopOutController.js'
   'beatsmusic': 'BeatsMusicController.js'

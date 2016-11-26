@@ -2,9 +2,9 @@
 	"name": "bootstrap-chrome-extension",
 	"description": "Bootstrap your Google Chrome extensions.",
 	"version": "0.1.0",
-	
+
 	"private": true,
-	
+
 	"devDependencies": {
 		"grunt": "0.4.1",
 		"grunt-image-resize": "0.2.0",
@@ -12,5 +12,10 @@
 		"grunt-contrib-watch": "0.5.3",
 		"grunt-contrib-coffee": "0.7.0",
 		"grunt-contrib-haml": "0.1.1"
-	}
+	},
+
+  "scripts": {
+    "build": "grunt build",
+    "start": "grunt run"
+  }
 }

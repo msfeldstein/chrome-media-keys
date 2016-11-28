@@ -9,6 +9,12 @@ document.addEventListener 'DOMContentLoaded', ->
       sendAction 'stop'
     else if command is 'previous'
       sendAction 'previous'
+    else if command is 'thumbsUp'
+      sendAction 'thumbsUp'
+    else if command is 'thumbsDown'
+      sendAction 'thumbsDown'
+    else if command is 'favorite'
+      sendAction 'favorite'
 
 # They only need to be registered once.
 window.useMediaKeys = -> null

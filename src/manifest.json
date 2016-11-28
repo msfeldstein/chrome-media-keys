@@ -52,6 +52,18 @@
       },
       "description": "Previous Song",
       "global": true
+    },
+    "thumbsUp": {
+      "description": "Thumbs Up Song (If supported)",
+      "global": true
+    },
+    "thumbsDown": {
+      "description": "Thumbs Down Song (If supported)",
+      "global": true
+    },
+    "favorite": {
+      "description": "Mark Song as Favorite (If supported)",
+      "global": true
     }
   },
   "content_scripts": [

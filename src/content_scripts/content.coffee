@@ -96,12 +96,12 @@ listener = (request, sender, sendResponse) ->
       else
         if (controller.isPlaying()) then controller.play()
   if request.action is "next" then controller.nextSong()
-  if request.action is "thumbsUp" then controller.thumbsUp()
-  if request.action is "thumbsDown" then controller.thumbsDown()
+  if (request.action is "thumbsUp" && controller.supports.thumbsUp) then controller.thumbsUp()
+  if (request.action is "thumbsDown" && controller.supports.thumbsDown) then controller.thumbsDown()
   if request.action is "pause" then controller.play()
   if (request.action is "stop" && controller.isPlaying()) then controller.play()
   if request.action is "previous" then controller.previousSong()
-  if request.action is "favorite" then controller.favorite()
+  if (request.action is "favorite" && controller.supports.favorite) then controller.favorite()
   if request.action is "getState"
     sendState(true)
   else

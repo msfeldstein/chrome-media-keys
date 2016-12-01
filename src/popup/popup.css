@@ -106,7 +106,15 @@ body.playing #play-pause {
 
 #song-details {
   -webkit-box-flex: 1;
-  padding-left: 10px;
+  margin-left: 10px;
+  position: relative;
+  overflow: hidden;
+  height: 60px;
+}
+
+#song-details>.marquee{
+  transform: translateX(100%);
+  animation: marquee 15s linear infinite;
 }
 
 #artist-name {
@@ -115,6 +123,8 @@ body.playing #play-pause {
   white-space: nowrap;
   font-size: 14pt;
   opacity: 0.7;
+  top: 24px;
+  position: absolute;
 }
 
 #song-name {
@@ -122,6 +132,7 @@ body.playing #play-pause {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 16pt;
+  position: absolute;
 }
 
 #art-holder {
@@ -194,3 +205,14 @@ a.donate {
   border: 0;
   text-decoration: none;
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(220px);
+  }  
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+

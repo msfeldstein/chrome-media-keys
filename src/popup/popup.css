@@ -27,6 +27,18 @@ body {
     font-weight: 200;
 }
 
+.loading #playing-container {
+  display: none;
+}
+
+#loading {
+  display: none;
+}
+
+.loading #loading {
+  display: block;
+}
+
 #topbar {
   height: 10px;
   background: #00a0e0;

@@ -18,7 +18,9 @@ controller = new BasicController([{
   isThumbsUpSelector: '.thumbUpButton.indicator',
   isThumbsDownSelector: '.thumbDownButton.indicator',
   watchedElements: ['.albumArt'],
-  isPlaying: () => document.querySelector(this.pauseSelector).style.display == 'block'
+  isPlaying: function () {
+    return document.querySelector(this.pauseSelector).style.display == 'block';
+  }
 }, {
   test: () => !!document.querySelector('.Container'),
   supports: {
@@ -39,5 +41,11 @@ controller = new BasicController([{
   thumbsDownSelector: '.ThumbDownButton',
   isThumbsUpSelector: '.ThumbUpButton--active',
   isThumbsDownSelector: '.ThumbDownButton--active',
-  isPlaying: () => true,
+  isPlaying: function () {
+    debugger;
+    return true;
+  },
+  play: function () {
+    debugger;
+  },
 }]);

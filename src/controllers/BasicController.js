@@ -64,7 +64,7 @@ class BasicController {
     // Apply settings to controller
     for (const key in settings) {
       if (settings.hasOwnProperty(key) && acceptedSettings.includes(key)) {
-        this[key] = settings[key];
+        this[key] = typeof settings[key] === 'function' ? settings[key].bind(this) : settings[key];
       }
     }
     
@@ -115,8 +115,6 @@ class BasicController {
     this.watchedElements = this.watchedElements || [];
     this.watchedElements.forEach(element =>  this.observeStateChanges(element));
 
-    debugger;
-    
     return true;
   }
   
@@ -159,7 +157,6 @@ class BasicController {
   play () {
     let selector;
     
-    debugger; 
     const isPlaying = this.isPlaying();
     
     if (this.playPauseSelector) {
@@ -242,8 +239,6 @@ class BasicController {
   }
   
   runInPage (code) {
-    debugger;
-    alert('boo');
     const script = document.createElement('script');
     
     script.innerHTML = code;

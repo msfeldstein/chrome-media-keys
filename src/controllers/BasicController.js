@@ -1,204 +1,278 @@
+'use strict';
+
 /*
 See BasicTemplate.js for documentation and an example of a BasicController
 */
 
-var BasicController = function(params) {
-  this.name = document.location.hostname;
-  for (var key in params) {
-    this[key] = params[key];
-  }
-  if (params.doThrottling) {
-    var sendStateThrottled = this.throttle(sendState, 250);
+class BasicController {
+  constructor (params) {
+    
+    // Settings that are not named here are ignored
+    const acceptedSettings = [
+      'artistSelector',
+      'artworkImageSelector',
+      'favoriteSelector',
+      'frameSelector',
+      'getAlbumArt',
+      'getArtist',
+      'getTitle',
+      'isFavoriteSelector',
+      'isPlaying',
+      'isThumbsDownSelector',
+      'isThumbsUpSelector',
+      'nextSelector',
+      'nextSong',
+      'pause',
+      'pauseSelector',
+      'play',
+      'playPauseSelector',
+      'playSelector',
+      'playStateClass',
+      'playStateSelector',
+      'previousSelector',
+      'previousSong',
+      'supports',
+      'test',
+      'thumbsDownSelector',
+      'thumbsUpSelector',
+      'titleSelector',
+      'useLazyObserving',
+      'watchedElements',
+    ];
+    
+    this.name = document.location.hostname;
+    
+    // Page has multiple versions
+    if (!Array.isArray(params)) {
+      params = [params];
+    }
+    
+    let settings;
+    
+    // Find proper settings
+    for (const param of params) {
+      // If there is no test, then always use this setting set
+      if (param.test && !param.test()) {
+        continue;
+      }
+      
+      settings = param;
+      
+      break;
+    }
+    
+    // Apply settings to controller
+    for (const key in settings) {
+      if (settings.hasOwnProperty(key) && acceptedSettings.includes(key)) {
+        this[key] = settings[key];
+      }
+    }
+    
+    // Send state
+    const sendStateThrottled = settings.doThrottling ? this.throttle(sendState, 250) : sendState;
+    
     this.stateChangeObserver = new WebKitMutationObserver(function(mutations, observer) {
       sendStateThrottled();
     });
-  } else {
-    this.stateChangeObserver = new WebKitMutationObserver(function(mutations, observer) {
-      sendState();
-    });
+    
+    this.document = document;
   }
-};
+  
+  doc () {
+    const iframe = this.frameSelector && document.querySelector(this.frameSelector);
+    
+    return iframe && iframe.tagName.toLowerCase() === 'iframe' ? iframe.contentWindow.document : document;
+  }
 
-BasicController.prototype.doc = function() {
-  var useFrameSelector = (this.frameSelector && document.querySelector(this.frameSelector).tagName === "IFRAME");
-  return (useFrameSelector) ? document.querySelector(this.frameSelector).contentWindow.document : document;
-}
-
-BasicController.prototype.init = function() {
-  var observedKeys = [
-    'playStateSelector',
-    'titleSelector',
-    'artistSelector',
-    'artworkImageSelector',
-    'thumbsUpSelector',
-    'thumbsDownSelector',
-    'favoriteSelector'
-  ];
-  if (this.frameSelector && document.querySelector(this.frameSelector).tagName !== "IFRAME")
-    console.log("frameSelector is defined but the element is not an IFRAME so it will be ignored.");
-  for (var i = 0; i < observedKeys.length; ++i) {
-    if (this.useLazyObserving) {
-      if (this[observedKeys[i]] && !this.doc().querySelector(this[observedKeys[i]])) {
-        console.log("Waiting for element: ", this[observedKeys[i]])
+  init () {
+    const observedKeys = [
+      'playStateSelector',
+      'titleSelector',
+      'artistSelector',
+      'artworkImageSelector',
+      'thumbsUpSelector',
+      'thumbsDownSelector',
+      'favoriteSelector'
+    ];
+    
+    this.document = this.doc();
+    
+    // Warn controller developer when frameSelector fails
+    if (this.frameSelector && this.document != document) {
+      console.warn("frameSelector is defined but the element is not an IFRAME so it will be ignored.");
+    }
+    
+    for (const key of observedKeys) {
+      if (this.useLazyObserving && this[key] && !this.document.querySelector(this[key])) {
+        console.info('Waiting for element: ', this[key]);
+        
         return false;
       }
+      
+      this.observeStateChanges(this[key]);
+    }
+    
+    this.watchedElements = this.watchedElements || [];
+    this.watchedElements.forEach(element =>  this.observeStateChanges(element));
+
+    debugger;
+    
+    return true;
+  }
+  
+  observeStateChanges (key) {
+    const el = this.document.querySelector(key);
+    
+    if (el) {
+      this.stateChangeObserver.observe(el, {attributes: true, characterData: true, subtree:true});
     }
   }
-  for (var i = 0; i < observedKeys.length; ++i) {
-    this.observeStateChanges(this[observedKeys[i]]);
-  }
-  if (this.watchedElements) {
-    for (var i = 0; i < this.watchedElements.length; ++i) {
-      this.observeStateChanges(this.watchedElements[i]);
+  
+  fireEvent (element, event, data) {
+    const evt = this.document.createEvent("HTMLEvents");
+    
+    evt.initEvent(event, true, true);
+    
+    if (data) {
+      evt.data = data;
     }
+    
+    return !element.dispatchEvent(evt);
   }
-  return true;
-}
-
-BasicController.prototype.observeStateChanges = function(key) {
-  var el = this.doc().querySelector(key);
-  if (el)
-    this.stateChangeObserver.observe(el, {attributes: true, characterData: true, subtree:true});
-}
-
-BasicController.prototype.fireEvent = function(element,event, data){
-  var evt = document.createEvent("HTMLEvents");
-  evt.initEvent(event, true, true );
-  if (data) evt.data = data;
-  return!element.dispatchEvent(evt);
-}
-
-BasicController.prototype.clickQS = function(qs) {
-  this.fireEvent(this.doc().querySelector(qs), 'click');
-}
-
-BasicController.prototype.querySelectorText = function(qs) {
-  var div = this.doc().querySelector(qs);
-  if (!div) return null;
-  return div.innerText || div.textContent;
-}
-
-BasicController.prototype.querySelectorContainsClass = function(qs, clazz) {
-  var div = this.doc().querySelector(qs);
-  if (!div) return false;
-  return div.classList.contains(clazz);
-}
-
-BasicController.prototype.play = function() {
-  if (this.playPauseSelector) {
-    this.clickQS(this.playPauseSelector);
-  } else if (this.playSelector) {
-    if (this.isPlaying()) {
-      this.clickQS(this.pauseSelector);
-    } else {
-      this.clickQS(this.playSelector);
+  
+  clickQS (qs) {
+    this.fireEvent(this.document.querySelector(qs), 'click');
+  }
+  
+  querySelectorText (qs) {
+    const div = this.document.querySelector(qs);
+    
+    return div || div.innerText || div.textContent;
+  }
+  
+  querySelectorContainsClass (qs, descendantClass) {
+    const div = this.document.querySelector(qs);
+    
+    return div || div.classList.contains(descendantClass);
+  }
+  
+  play () {
+    let selector;
+    
+    debugger; 
+    const isPlaying = this.isPlaying();
+    
+    if (this.playPauseSelector) {
+      selector = this.playPauseSelector;
+    } else if (this.playSelector && this.pauseSelector) {
+      selector = isPlaying ? this.pauseSelector : this.playSelector;
     }
+    
+    if (selector) {
+      this.clickQS(selector);
+      return true;
+    }
+    
+    return false;
   }
-
-};
-
-BasicController.prototype.nextSong = function () {
-  if (this.nextSelector)
+  
+  nextSong () {
     this.clickQS(this.nextSelector);
-  else if (this.nextScript)
-    this.runInPage(this.nextScript);
-}
+  }
+  
+  previousSong () {
+    this.clickQS(this.previousSelector);
+  }
 
-BasicController.prototype.previousSong = function () {
-  this.clickQS(this.previousSelector);
-}
+  thumbsUp () {
+    this.clickQS(this.thumbsUpSelector);
+  }
 
-BasicController.prototype.thumbsUp = function() {
-  this.clickQS(this.thumbsUpSelector);
-}
+  thumbsDown () {
+    this.clickQS(this.thumbsDownSelector);
+  }
 
-BasicController.prototype.thumbsDown = function() {
-  this.clickQS(this.thumbsDownSelector);
-}
+  favorite () {
+    this.clickQS(this.favoriteSelector);
+  }
 
-BasicController.prototype.favorite = function() {
-  this.clickQS(this.favoriteSelector);
-}
+  isPlaying () {
+    return this.querySelectorContainsClass(this.playStateSelector, this.playStateClass);
+  }
 
-BasicController.prototype.isPlaying = function() {
-  var i = this.querySelectorContainsClass(this.playStateSelector, this.playStateClass);
-  return i;
-}
+  override (methodName, newMethod) {
+    const oldMethod = this[methodName];
+    this[methodName] = newMethod.bind(this, oldMethod.bind(this));
+  }
 
-BasicController.prototype.getAlbumArt = function () {
-  if (this.artworkImageSelector) {
-    var img = this.doc().querySelector(this.artworkImageSelector);
+  getAlbumArt () {
+    if (!this.artworkImageSelector) {
+      return undefined;
+    }
+
+    const img = this.document.querySelector(this.artworkImageSelector);
+    
     return img && img.src;
   }
-  return undefined;
-}
 
-BasicController.prototype.getTitle = function() {
-  return this.querySelectorText(this.titleSelector);
-}
-
-BasicController.prototype.getArtist = function() {
-  return this.querySelectorText(this.artistSelector);
-}
-
-BasicController.prototype.getState = function() {
-  var state = {};
-  state.title = this.getTitle();
-  state.artist = this.getArtist();
-  state.albumArt = this.getAlbumArt();
-  state.playing = this.isPlaying();
-  state.service = document.location.host;
-  if (this.isThumbsUpSelector) state.thumbsUp = !!this.doc().querySelector(this.isThumbsUpSelector);
-  if (this.isThumbsDownSelector) state.thumbsDown = !!this.doc().querySelector(this.isThumbsDownSelector);
-  if (this.isFavoriteSelector) state.favorite = !!this.doc().querySelector(this.isFavoriteSelector);
-  state.dontScrobble = this.dontScrobble();
-  return state;
-}
-
-BasicController.prototype.dontScrobble = function() {
-  return false;
-}
-
-BasicController.prototype.override = function(methodName, newMethod) {
-  var oldMethod = this[methodName];
-  var that = this;
-  var superMethod = function() {
-    return oldMethod.call(that);
+  getTitle () {
+    return this.querySelectorText(this.titleSelector);
   }
-  this[methodName] = function() {
-    return newMethod.call(that, superMethod);
+
+  getArtist () {
+    return this.querySelectorText(this.artistSelector);
   }
-}
 
-BasicController.prototype.runInPage = function(code) {
-  var script = document.createElement("script");
-  script.innerHTML = code;
-  document.body.appendChild(script);
-  var f = function() {
-    document.body.removeChild(script);
+  getState () {
+    return {
+      title: this.getTitle(),
+      artist: this.getArtist(),
+      albumArt: this.getAlbumArt(),
+      playing: this.isPlaying(),
+      service: document.location.host,
+      thumbsUp: this.isThumbsUpSelector && !!this.document.querySelector(this.isThumbsUpSelector),
+      thumbsDown: this.isThumbsDownSelector && !!this.document.querySelector(this.isThumbsDownSelector),
+      favorite: this.isFavoriteSelector && !!this.document.querySelector(this.isFavoriteSelector),
+      dontScrobble: this.dontScrobble(),
+    };
   }
-  setTimeout(f, 1000);
-}
 
-BasicController.prototype.throttle = function(fn, threshhold, scope) {
-  threshhold || (threshhold = 250);
-  var last,
-      deferTimer;
-  return function () {
-    var context = scope || this;
+  dontScrobble () {
+    return false;
+  }
+  
+  runInPage (code) {
+    debugger;
+    alert('boo');
+    const script = document.createElement('script');
+    
+    script.innerHTML = code;
+    document.body.appendChild(script);
+    setTimeout(() => document.body.removeChild(script), 1000);
+  }
 
-    var now = +new Date,
-        args = arguments;
-    if (last && now < last + threshhold) {
-      // hold on to it
-      clearTimeout(deferTimer);
-      deferTimer = setTimeout(function () {
+  throttle (fn, threshhold, scope) {
+    threshold = threshhold || 250;
+    
+    let last = 0;
+    let deferTimer;
+    
+    return function () {
+      const context = scope || this;
+      const now = Date.now();
+      const args = arguments;
+      
+      if (last && now < last + threshhold) {
+        clearTimeout(deferTimer);
+        
+        deferTimer = setTimeout(function () {
+          last = now;
+          fn.apply(context, args);
+        }, threshhold);
+      } else {
         last = now;
         fn.apply(context, args);
-      }, threshhold);
-    } else {
-      last = now;
-      fn.apply(context, args);
-    }
-  };
+      }
+    };
+  }
 }

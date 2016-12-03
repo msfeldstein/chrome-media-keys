@@ -71,9 +71,7 @@ class BasicController {
     // Send state
     const sendStateThrottled = settings.doThrottling ? this.throttle(sendState, 250) : sendState;
     
-    this.stateChangeObserver = new WebKitMutationObserver(function(mutations, observer) {
-      sendStateThrottled();
-    });
+    this.stateChangeObserver = new WebKitMutationObserver(() => sendStateThrottled());
     
     this.document = document;
   }
@@ -145,13 +143,13 @@ class BasicController {
   querySelectorText (qs) {
     const div = this.document.querySelector(qs);
     
-    return div || div.innerText || div.textContent;
+    return div && (div.innerText || div.textContent);
   }
   
   querySelectorContainsClass (qs, descendantClass) {
     const div = this.document.querySelector(qs);
     
-    return div || div.classList.contains(descendantClass);
+    return div && (div.classList.contains(descendantClass));
   }
   
   play () {

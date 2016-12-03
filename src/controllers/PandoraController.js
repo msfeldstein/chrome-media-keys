@@ -41,11 +41,21 @@ controller = new BasicController([{
   thumbsDownSelector: '.ThumbDownButton',
   isThumbsUpSelector: '.ThumbUpButton--active',
   isThumbsDownSelector: '.ThumbDownButton--active',
+  useLazyObserving: true,
   isPlaying: function () {
-    debugger;
-    return true;
+    let icon = document.querySelector(`${this.playStateSelector}>svg>use`);
+
+    if (icon) {
+      return icon.getAttribute('xlink:href').indexOf('#ic_pause') === 0;
+    }
+    
+    return false;
   },
-  play: function () {
-    debugger;
-  },
+  getAlbumArt: function () {
+    const imageHolder = document.querySelector(this.artworkImageSelector);
+    
+    const backgroundImage = imageHolder ? window.getComputedStyle(imageHolder).getPropertyValue('background-image') : '';
+    
+    return backgroundImage.replace(/^url\(['"]?([^'"\)]*)['"]?\).*$/, '$1');
+  }
 }]);

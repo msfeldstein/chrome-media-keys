@@ -37,7 +37,7 @@ init = () ->
   if controller?
     success = controller.init();
     if success
-      chrome.extension.sendRequest({action: "controller_loaded", host:window.location.host}, noop)
+      chrome.extension.sendRequest({action: "controller_loaded", host: window.location.host}, noop)
     else
       setTimeout(init, 500)
 

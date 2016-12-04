@@ -20,6 +20,7 @@ document.addEventListener "keydown", (e) ->
     sendRequest "next"
 
 setClass = (el, className, show) ->
+  if !el then return
   if show then el.classList.add(className) else el.classList.remove(className)
 
 shouldShow = (qs, should) ->
@@ -30,6 +31,9 @@ updateUI = (uiState) ->
   $("#song-name").textContent = uiState.title
   $("#artist-name").textContent = uiState.artist
   $("#album-art").src = uiState.albumArt || "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+
+  setClass $("#song-name"), "marquee", $("#song-name").clientWidth > $("#song-name").parentNode.clientWidth
+  setClass $("#artist-name"), "marquee", $("#artist-name").clientWidth > $("#artist-name").parentNode.clientWidth
 
   setClass document.body, "playing", uiState.playing
   setClass $("#thumbs-up"), "toggled", uiState.thumbsUp
@@ -67,6 +71,8 @@ load = () ->
   bindClickToAction "#next", "next"
   bindClickToAction "#song-details", "focus"
   bindClickToAction "#album-art", "focus"
+  document.body.classList.remove("loading")
+  
 document.addEventListener "DOMContentLoaded", load, false
 
 convertCTAToShare = () ->

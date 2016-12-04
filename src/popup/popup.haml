@@ -3,7 +3,7 @@
   %head
     %link{:href => "http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700", :rel => "stylesheet", :type => "text/css"}
     %link{:href => "popup.css", :rel => "stylesheet", :type => "text/css"}
-  %body
+  %body.loading
     #topbar
     #playing-container
       #header.no-music
@@ -31,5 +31,8 @@
           and
           %a#share-link
             Share with friends!
+    #loading
+      %p
+        Loading...
     %script{:src => "popup.js"}
     -# %script{:src => "track.js", :async => true}

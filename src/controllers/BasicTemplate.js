@@ -1,7 +1,10 @@
-// This is a template file and should not be included anywhere
-// Copy this file to create new basic controllers
-// It is probably a good idea to remove all the comments for the final submission of a controller
-controller = new BasicController({
+// This is a template file and should not be included anywhere. To create a new
+// controller, copy this file to create a new basic controller, and create an
+// entry in the `mappings.coffee` file. 
+// 
+// Be sure to remove all all unused elements as well as all of the comments for
+// the final submission of a controller.
+controller = new BasicController([{
   supports: { // Supports can be true or false, or not included
     playpause: true,
     next: true,
@@ -27,40 +30,63 @@ controller = new BasicController({
   isThumbsUpSelector: '', // Element to check if the current song has a thumbs up
   thumbsDownSelector: '', // Element to click to toggle thumbs down
   isThumbsDownSelector: '', // Element to check if the current song has a thumbs down
+  
   watchedElements: ['',''], // Additional elements to watch for changes in order to send an update in play state.
-    // Control elements specified by the selectors above are watched automatically.
-});
+  // Control elements specified by the selectors above are watched automatically.
 
-// These methods can be used to override the above selectors. It is still recommended to declare the selectors above
-// This is useful when players have elements that don't adhere to the simple querySelectory / click event style.
-controller.override('getTitle', function() {
-  // getTitle needs to return something
-});
+  // This method determines whether this configuration object should be used. If
+  // there is no test method, then the configuration is used by default. Only
+  // the object with the first successful test is used to create the controller.
+  test: function () {
+    // returns a boolean 
+  }
+  
+  // These methods can be used to override the above selectors. It is still
+  // recommended to declare the selectors above. This is useful when players
+  // have elements that don't adhere to the simple querySelectory / click event
+  // style.  
+  
+  getTitle: function () {
+    // returns a string of the title of the track
+  },
 
-controller.override('getArtist', function() {
-  // getArtist needs to return something
-});
+  getArtist: function () {
+    // returns a string of the artist
+  },
 
-controller.override('isPlaying', function() {
-  // isPlaying needs to return something
-});
+  isPlaying: function () {
+    // returns a boolean, true when playing, false when not
+  },
 
-controller.override('getAlbumArt', function() {
-  // getAlbumArt needs to return something
-});
+  getAlbumArt: function () {
+    // returns a string representing the URL of the ablum art
+  },
 
-controller.override('play', function() {
-  // used to replace the action of clicking the play button
-});
+  play: function () {
+    // plays current track
+  },
 
-controller.override('pause', function() {
-  // used to replace the action of clicking the pause button
-});
+  pause: function () {
+    // pauses current track
+  },
 
-controller.override('nextSong', function() {
-  // used to replace the action of clicking the next button
-});
+  nextSong: function () {
+    // advances to next track
+  },
 
-controller.override('previousSong', function() {
-  // used to replace the action of clicking the previous button
-});
+  previousSong: function () {
+    // rewinds or goes previous track
+  },
+  
+  favorite: function () {
+    // marks track as favorite
+  },
+  
+  thumbsUp: function () {
+    // thumbs-up current track
+  },
+  
+  thumbsDown: function () {
+    // thumbs-down current track
+  },
+}]);

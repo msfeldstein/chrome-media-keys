@@ -17,7 +17,7 @@ controller = new BasicController({
   isThumbsUpSelector: 'interesting-button>button.card__button--active', 
 });
 
-controller.override('isPlaying', function() {
+controller.override('isPlaying', function () {
   var isPaused = !!document.querySelector('.player__play-control__icon--play');
   var isLoading = !!document.querySelector('.player__play-control__icon--loading');
   var isPlaying = !!document.querySelector('.player__play-control__icon--pause');

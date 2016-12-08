@@ -10,7 +10,7 @@ chrome.tabs.onRemoved.addListener (tabId, removeInfo) ->
 if localStorage.getItem('installId') == null
   localStorage.setItem("installId", ''+(Math.floor(Math.random()*100000000000000)))
 trackActivity = (eventName, attributes={}) ->
-  attributes.installId = localStorage.getItem('isntallId')
+  attributes.installId = localStorage.getItem('installId')
   # Add keen tracking here
 
 # Inject into all tabs to get immediate control of any playing services.

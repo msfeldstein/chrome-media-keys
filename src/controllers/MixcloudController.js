@@ -1,16 +1,37 @@
-controller = new BasicController({
-  supports: {
-    playpause: true,
-    previous: true,
-    next: true
+var isBeta = !!document.querySelector('.mz-player-control');
+
+var config = [
+  {
+    test: () => !isBeta,
+    supports: {
+      playpause: true,
+      previous: true,
+      next: true
+    },
+    playStateSelector: '.player-control',
+    playStateClass: 'pause-state',
+    playPauseSelector: '.player-control',
+    titleSelector: '.player-cloudcast-title',
+    artistSelector: '.player-cloudcast-author-link',
+    artworkImageSelector: '.player-cloudcast-image img'
   },
-  playStateSelector: '.player-control',
-  playStateClass: 'pause-state',
-  playPauseSelector: '.player-control',
-  titleSelector: '.player-cloudcast-title',
-  artistSelector: '.player-cloudcast-author-link',
-  artworkImageSelector: '.player-cloudcast-image img',
-});
+  {
+    test: () => isBeta,
+    supports: {
+      playpause: true,
+      previous: true,
+      next: true
+    },
+    playStateSelector: '.mz-player-control',
+    playStateClass: 'mz-pause-state',
+    playPauseSelector: '.mz-player-control',
+    titleSelector: '.mz-player-cloudcast-title',
+    artistSelector: '.mz-player-cloudcast-author-link',
+    artworkImageSelector: '.mz-player-cloudcast-image img'
+  }
+];
+
+controller = new BasicController(config);
 
 controller.override('getAlbumArt', function(_super) {
   var art = _super();
@@ -34,6 +55,7 @@ controller.override('previousSong', function() {
 var actualCode = `
 window.mxsway = {
   // const
+  SCRUBBER_SELECTOR: '.${isBeta ? 'mz-' : ''}player-scrubber',
   SKIP_TIME: 60, // 1 minute
 
   // private vars
@@ -51,7 +73,7 @@ window.mxsway = {
   moveTo: function(delta) {
     // micro-singleton
     if (!mxsway.entity) {
-      mxsway.entity = $('.player-scrubber').scope();
+      mxsway.entity = $(mxsway.SCRUBBER_SELECTOR).scope();
     }
 
     var entity = mxsway.entity;

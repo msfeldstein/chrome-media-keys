@@ -32,20 +32,30 @@ window.isVisible = (el) ->
       return false;
     el = el.parentNode;
   return true;
-init = () ->
-  success = false
-  if controller?
-    success = controller.init();
-    if success
-      chrome.extension.sendRequest({action: "controller_loaded", host: window.location.host}, noop)
-    else
-      setTimeout(init, 500)
 
-# Check every 500 ms until the required elements are ready.
-# The controller will return true when it was able to pull all the DOM
-# elements it needs.  If it returns false it means the page isn't ready
-# yet and we should try again until it is.
-setTimeout init, 500
+initIfReady = () ->
+  # If `controller` is not defined, that means the relevant
+  # controller script hasn't finished being injected and
+  # executing yet (this is controlled by the background script).
+
+  # `controller.init` will return true when it was able to pull
+  # all the DOM elements it needs. If it returns false it means
+  # the page isn't ready yet.
+
+  if controller? and controller.init()
+    chrome.extension.sendRequest(
+      {
+        action: "controller_loaded",
+        host: window.location.host
+      },
+      noop
+    )
+  else
+    # Check every 500 ms until `controller` is defined and the
+    # required elements are ready.
+    setTimeout initIfReady, 500
+
+initIfReady()
 
 wasPlaying = false
 oldState = null

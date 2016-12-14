@@ -1,26 +1,48 @@
-controller = new BasicController({
-  supports: {
-    playpause: true,
-    previous: true,
-    next: true
+const isNewPlayer = () => !!document.querySelector('.mz-player-control');
+
+const config = [
+  {
+    test: () => !isNewPlayer(),
+    supports: {
+      playpause: true,
+      previous: true,
+      next: true
+    },
+    playStateSelector: '.player-control',
+    playStateClass: 'pause-state',
+    playPauseSelector: '.player-control',
+    titleSelector: '.player-cloudcast-title',
+    artistSelector: '.player-cloudcast-author-link',
+    artworkImageSelector: '.player-cloudcast-image img'
   },
-  playStateSelector: '.player-control',
-  playStateClass: 'pause-state',
-  playPauseSelector: '.player-control',
-  titleSelector: '.player-cloudcast-title',
-  artistSelector: '.player-cloudcast-author-link',
-  artworkImageSelector: '.player-cloudcast-image img',
-});
+  {
+    test: () => isNewPlayer(),
+    supports: {
+      playpause: true,
+      previous: true,
+      next: true
+    },
+    playStateSelector: '.mz-player-control',
+    playStateClass: 'mz-pause-state',
+    playPauseSelector: '.mz-player-control',
+    titleSelector: '.mz-player-cloudcast-title',
+    artistSelector: '.mz-player-cloudcast-author-link',
+    artworkImageSelector: '.mz-player-cloudcast-image img'
+  }
+];
+
+controller = new BasicController(config);
 
 controller.override('getAlbumArt', function(_super) {
-  var art = _super();
-  return art && art.replace(/\/60\//g, '\/300\/');
+  let art = _super();
+  return art && art.replace(/\/60\//g, '\/300\/')
+                   .replace(/\/60x60\//g, '\/300x300\/');
 });
 
+const CUSTOM_EVENT_TYPE = 'mxswayEvent';
 function mxTriggerEvent(type) {
-  var evt = document.createEvent('CustomEvent');
-  evt.initCustomEvent('mxswayEvent', true, true, type);
-  document.dispatchEvent(evt);
+  const event = new CustomEvent(CUSTOM_EVENT_TYPE, { detail: type });
+  document.dispatchEvent(event);
 }
 
 controller.override('nextSong', function() {
@@ -31,51 +53,54 @@ controller.override('previousSong', function() {
   mxTriggerEvent('prev');
 });
 
-var actualCode = `
-window.mxsway = {
-  // const
-  SKIP_TIME: 60, // 1 minute
+const scrubbingCode = `
+(function() {
+  const SCRUBBER_SELECTOR_OLD = '.player-scrubber';
+  const SCRUBBER_SELECTOR_NEW = '.mz-player-scrubber';
+  const SKIP_TIME = 60; // 1 minute
 
-  // private vars
-  entity: null,
+  const getScrubberScope = (function() {
+    let scope;
 
-  // methods
-  scrub: function(type) {
-    if (type == 'next' || type == 1) {
-      mxsway.moveTo(mxsway.SKIP_TIME);
-    } else if (type == 'prev' || type == -1) {
-      mxsway.moveTo(mxsway.SKIP_TIME * -1);
-    }
-  },
+    return function() {
+      if (!scope) {
+        let $scrubber = $(SCRUBBER_SELECTOR_OLD);
+        $scrubber = ($scrubber.length > 0) ? $scrubber : $(SCRUBBER_SELECTOR_NEW);
+        scope = $scrubber.scope();
+      }
 
-  moveTo: function(delta) {
-    // micro-singleton
-    if (!mxsway.entity) {
-      mxsway.entity = $('.player-scrubber').scope();
-    }
+      return scope;
+    };
+  })();
 
-    var entity = mxsway.entity;
+  function scrub(type) {
+    const delta = type === 'next' ? SKIP_TIME : -SKIP_TIME;
+    moveScrubber(delta);
+  }
+
+  function getNewPosition(delta) {
+    const { audioPosition, audioLength } = getScrubberScope().player;
 
     // setup new time, and check for overflow
-    var time = entity.player.audioPosition + delta;
+    let position = audioPosition + delta;
 
-    if (time > entity.player.audioLength) {
-      time = entity.player.audioLength;
-    } else if (time < 0) {
-      time = 0;
+    if (position > audioLength) {
+      position = audioLength;
+    } else if (position < 0) {
+      position = 0;
     }
 
-    // trigger actual change
-    entity.$emit('slider:stop', time);
+    return position;
   }
-}
 
-document.addEventListener('mxswayEvent', function (e) {
-  mxsway.scrub(e.detail);
-});
+  function moveScrubber(delta) {
+    getScrubberScope().$emit('slider:stop', getNewPosition(delta));
+  }
+
+  document.addEventListener('${CUSTOM_EVENT_TYPE}', function ({ detail: type }) {
+    scrub(type);
+  });
+}());
 `;
 
-var script = document.createElement('script');
-script.textContent = actualCode;
-(document.head||document.documentElement).appendChild(script);
-script.remove();
+controller.runInPage(scrubbingCode);

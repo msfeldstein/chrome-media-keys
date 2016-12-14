@@ -1,8 +1,9 @@
+const isOldPlayer = () => !!document.querySelector('.player-control');
 const isNewPlayer = () => !!document.querySelector('.mz-player-control');
 
 const config = [
   {
-    test: () => !isNewPlayer(),
+    test: isOldPlayer,
     supports: {
       playpause: true,
       previous: true,
@@ -16,7 +17,7 @@ const config = [
     artworkImageSelector: '.player-cloudcast-image img'
   },
   {
-    test: () => isNewPlayer(),
+    test: isNewPlayer,
     supports: {
       playpause: true,
       previous: true,

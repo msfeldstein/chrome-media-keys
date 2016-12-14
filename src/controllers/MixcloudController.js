@@ -34,8 +34,9 @@ const config = [
 controller = new BasicController(config);
 
 controller.override('getAlbumArt', function(_super) {
-  var art = _super();
-  return art && art.replace(/\/60\//g, '\/300\/');
+  let art = _super();
+  return art && art.replace(/\/60\//g, '\/300\/')
+                   .replace(/\/60x60\//g, '\/300x300\/');
 });
 
 const CUSTOM_EVENT_TYPE = 'mxswayEvent';

@@ -80,7 +80,6 @@ mapping =
   'sverigesradio': 'SverigesradioController.js'
   'themusicninja': 'TheMusicNinjaController.js'
   'thesixtyone': 'ThesixtyoneController.js'
-  'thisismyjam': 'ThisIsMyJamController.js'
   'tumblr': 'SCMController.js'
   'tunein': 'TuneinController.js'
   'twitter': 'TwitterController.js'

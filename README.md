@@ -1,5 +1,3 @@
-Copyright 2013-2015 Michael Feldstein
-
 The extension can be installed from the Chrome Web Store [here](https://chrome.google.com/webstore/detail/swayfm-unified-music-medi/icckhjgjjompfgoiidainoapgjepncej)
 
 #### Building

@@ -27,7 +27,7 @@ controller.override('nextSong', function(_super) {
   if (this.querySelectorContainsClass('#player_stop', 'active'))
     _super()
   else {
-    var nextEpisode = this.document.querySelector('#episodes span.selected ~ a:first-of-type')
+    var nextEpisode = this.document.querySelector('#episodes span.selected ~ a')
     if (nextEpisode)
       nextEpisode.click()
     else

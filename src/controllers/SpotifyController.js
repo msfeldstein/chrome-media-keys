@@ -25,7 +25,7 @@ if (window.location.hostname === 'open.spotify.com') {
   controller = new BasicController(config);
 
   controller.override('isPlaying', function () {
-    return isPlaying = this.doc().querySelector('.now-playing-bar .spoticon-pause-32');
+    return this.doc().querySelector('.now-playing-bar .spoticon-pause-32');
   })
 } else {
   if (document.querySelector('#app-player')) { // Old Player

@@ -27,6 +27,13 @@ if (window.location.hostname === 'open.spotify.com') {
   controller.override('isPlaying', function () {
     return this.doc().querySelector('.now-playing-bar .spoticon-pause-32');
   })
+
+  // The album image also links to `/album/...`. Take last link for the title
+  controller.override('getTitle', function () {
+    const titleNodes = [...this.doc().querySelectorAll('.now-playing-bar [href^="/album"]')]
+
+    return titleNodes.pop().textContent
+  })
 } else {
   if (document.querySelector('#app-player')) { // Old Player
     config.artworkImageSelector = '#cover-art .sp-image-img';

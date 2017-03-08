@@ -34,6 +34,14 @@ if (window.location.hostname === 'open.spotify.com') {
 
     return titleNodes.pop().textContent
   })
+
+  // There may be multiple artists linked per title
+  controller.override('getArtist', function () {
+    // Spread into array because `map` does not work reliably over NodeList.
+    const artistNodes = [...this.doc().querySelectorAll(config.artistSelector)]
+
+    return artistNodes.map(artist => artist.textContent).join(', ');
+  })
 } else {
   if (document.querySelector('#app-player')) { // Old Player
     config.artworkImageSelector = '#cover-art .sp-image-img';

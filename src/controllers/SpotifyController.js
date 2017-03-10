@@ -27,6 +27,21 @@ if (window.location.hostname === 'open.spotify.com') {
   controller.override('isPlaying', function () {
     return this.doc().querySelector('.now-playing-bar .spoticon-pause-32');
   })
+
+  // The album image also links to `/album/...`. Take last link for the title
+  controller.override('getTitle', function () {
+    const titleNodes = [...this.doc().querySelectorAll('.now-playing-bar [href^="/album"]')]
+
+    return titleNodes.pop().textContent
+  })
+
+  // There may be multiple artists linked per title
+  controller.override('getArtist', function () {
+    // Spread into array because `map` does not work reliably over NodeList.
+    const artistNodes = [...this.doc().querySelectorAll(config.artistSelector)]
+
+    return artistNodes.map(artist => artist.textContent).join(', ');
+  })
 } else {
   if (document.querySelector('#app-player')) { // Old Player
     config.artworkImageSelector = '#cover-art .sp-image-img';

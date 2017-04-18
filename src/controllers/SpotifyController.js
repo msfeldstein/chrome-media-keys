@@ -13,19 +13,19 @@ const config = {
 // New version of spotify
 if (window.location.hostname === 'open.spotify.com') {
   delete config.playStateClass;
-  config.playStateSelector = '.now-playing-bar .spoticon-play-32';
-  config.playSelector = '.now-playing-bar .spoticon-play-32';
-  config.pauseSelector = '.now-playing-bar .spoticon-pause-32';
+  config.playStateSelector = '.now-playing-bar .control-button[class*="spoticon-play"]';
+  config.playSelector = '.now-playing-bar .control-button[class*="spoticon-play"]';
+  config.pauseSelector = '.now-playing-bar .control-button[class*="spoticon-pause"]';
   config.artworkImageSelector = '.now-playing-bar .cover-art-image';
   config.artistSelector = '.now-playing-bar [href^="/artist"]';
   config.titleSelector = '.now-playing-bar [href^="/album"]';
-  config.nextSelector = '.now-playing-bar .spoticon-skip-forward-24';
-  config.previousSelector = '.now-playing-bar .spoticon-skip-back-24';
+  config.nextSelector = '.now-playing-bar .control-button[class*="spoticon-skip-forward"]';
+  config.previousSelector = '.now-playing-bar .control-button[class*="spoticon-skip-back"]';
 
   controller = new BasicController(config);
 
   controller.override('isPlaying', function () {
-    return this.doc().querySelector('.now-playing-bar .spoticon-pause-32');
+    return this.doc().querySelector('.now-playing-bar .control-button[class*="spoticon-pause"]');
   })
 
   // The album image also links to `/album/...`. Take last link for the title

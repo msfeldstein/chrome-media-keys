@@ -45,9 +45,12 @@ controller.override('getArtist', function(_super) {
 
 controller.override('getAlbumArt', function() {
     var img = document.querySelector(this.artworkImageSelector)
-    if (img) {
-        var style = img.currentStyle || window.getComputedStyle(img, false)
-        return style.backgroundImage.slice(5, -2)
-    }
-    return undefined
+    if (!img)
+        return undefined
+    var style = img.currentStyle || window.getComputedStyle(img, false)
+    var url = style.backgroundImage.slice(5, -2)
+    if (url.startsWith('data:image/svg+xml'))  // The note sign
+        return undefined
+    else
+        return url
 });

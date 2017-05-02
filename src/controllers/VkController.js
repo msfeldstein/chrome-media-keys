@@ -9,6 +9,7 @@ controller = new BasicController({
     nextSelector: '.top_audio_player_next',
     titleSelector: '.audio_page_player_title_song',
     artistSelector: '.audio_page_player_title_performer',
+    artworkImageSelector: '.audio_page_player__cover',
     playStateSelector: '#top_audio_player',
     playStateClass: 'top_audio_player_playing'
 })
@@ -41,3 +42,15 @@ controller.override('getArtist', function(_super) {
     }
     return artist
 })
+
+controller.override('getAlbumArt', function() {
+    var img = document.querySelector(this.artworkImageSelector)
+    if (!img)
+        return undefined
+    var style = img.currentStyle || window.getComputedStyle(img, false)
+    var url = style.backgroundImage.slice(5, -2)
+    if (url.startsWith('data:image/svg+xml'))  // The note sign
+        return undefined
+    else
+        return url
+});

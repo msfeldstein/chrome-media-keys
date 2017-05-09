@@ -8,8 +8,8 @@ controller = new BasicController({
   },
   playStateSelector: '.ytp-play-button',
   playStateClass: 'playing-mode',
-  titleSelector: '.watch-title',
-  artistSelector: '.yt-user-info > a',
+  titleSelector: 'h1.ytd-video-primary-info-renderer, .watch-title',
+  artistSelector: '.ytd-video-owner-renderer > a, .yt-user-info > a',
   isThumbsUpSelector: '.like-button-renderer-like-button-unclicked.hid',
   isThumbsDownSelector: '.like-button-renderer-dislike-button-unclicked.hid',
   watchedElements: ['body']
@@ -21,13 +21,13 @@ controller.override('isPlaying', function() {
 })
 
 controller.override('getTitle', function() {
-  var text = this.querySelectorText('.watch-title');
+  var text = this.querySelectorText(this.titleSelector);
   var parts = text.split(" - ");
   return parts && parts.length == 2 ? parts[1] : text;
 })
 
 controller.override('getArtist', function() {
-  var text = this.querySelectorText('.watch-title');
+  var text = this.querySelectorText(this.titleSelector);
   var parts = text.split(" - ");
   return parts && parts.length == 2 ? parts[0] : this.querySelectorText(this.artistSelector);
 })
@@ -92,7 +92,7 @@ controller.override('thumbsDown', function() {
 });
 
 controller.override('dontScrobble', function() {
-  var text = this.querySelectorText('.watch-title');
+  var text = this.querySelectorText(this.titleSelector);
   var parts = text.split(" - ");
   return parts.length != 2;
 });

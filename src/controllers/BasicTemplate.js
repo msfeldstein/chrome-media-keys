@@ -39,7 +39,7 @@ controller = new BasicController([{
   // the object with the first successful test is used to create the controller.
   test: function () {
     // returns a boolean 
-  }
+  },
   
   // These methods can be used to override the above selectors. It is still
   // recommended to declare the selectors above. This is useful when players

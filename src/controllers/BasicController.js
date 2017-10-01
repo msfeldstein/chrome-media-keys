@@ -244,8 +244,8 @@ class BasicController {
     setTimeout(() => document.body.removeChild(script), 1000);
   }
 
-  throttle (fn, threshhold, scope) {
-    threshold = threshhold || 250;
+  throttle (fn, threshold, scope) {
+    threshold = threshold || 250;
     
     let last = 0;
     let deferTimer;
@@ -255,13 +255,13 @@ class BasicController {
       const now = Date.now();
       const args = arguments;
       
-      if (last && now < last + threshhold) {
+      if (last && now < last + threshold) {
         clearTimeout(deferTimer);
         
         deferTimer = setTimeout(function () {
           last = now;
           fn.apply(context, args);
-        }, threshhold);
+        }, threshold);
       } else {
         last = now;
         fn.apply(context, args);

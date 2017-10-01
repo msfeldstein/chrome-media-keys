@@ -4,10 +4,9 @@ window.findScriptByHost = (host) ->
 
   host = host.toLowerCase()
   script = null
-  for name, value of mapping
-    if mapping.hasOwnProperty name
-      if host.indexOf(name) != -1
-        script = value
+  for own name, value of mapping
+    if host.indexOf(name) != -1
+      script = value
   console.log "Script", script, host
   if script then "controllers/#{script}" else "controllers/ShimController.js"
 

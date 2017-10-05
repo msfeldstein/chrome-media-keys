@@ -4,10 +4,9 @@ window.findScriptByHost = (host) ->
 
   host = host.toLowerCase()
   script = null
-  for name, value of mapping
-    if mapping.hasOwnProperty name
-      if host.indexOf(name) != -1
-        script = value
+  for own name, value of mapping
+    if host.indexOf(name) != -1
+      script = value
   console.log "Script", script, host
   if script then "controllers/#{script}" else "controllers/ShimController.js"
 
@@ -54,10 +53,11 @@ mapping =
   'overcast': 'OvercastController.js'
   'pandora': 'PandoraController.js'
   'play.google': 'GoogleMusicController.js'
+  'play.pocketcasts': 'PocketCastsController.js'
+  'playbeta.pocketcasts': 'PocketCasts2Controller.js'
   'player.fm': 'PlayerFMController.js'
   'pleer.com': 'PleerController.js'
   'plex': 'PlexController.js'
-  'pocketcasts.com': 'PocketCastsController.js'
   'poolside': 'PoolsideController.js'
   'pony.fm': 'PonyFmController.js'
   'ponyvillelive': 'PonyvilleLiveController.js'

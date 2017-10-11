@@ -14,6 +14,7 @@ mapping =
   '8tracks': 'EightTracksController.js'
   '22tracks': '22tracksController.js'
   '99percentinvisible' : 'SCMController.js'
+  'accuradio': 'AccuRadioController.js'
   'amazon': 'AmazonController.js'
   'app.napster': 'NapsterController.js'
   'audible': 'AudibleController.js'

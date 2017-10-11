@@ -77,6 +77,7 @@ handleRequestFromContentScript = (request, sender, sendResponse) ->
     if not script then return
     if script.indexOf('Shim') == -1
       trackController(request.host)
+    chrome.tabs.executeScript sender.tab.id, {file: 'controllers/BasicController.js'}
     chrome.tabs.executeScript(sender.tab.id, {file: script})
     if request.host.indexOf("monstercat") > -1
       chrome.tabs.executeScript(sender.tab.id, {file: 'controllers/ShimController.js'})

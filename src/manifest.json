@@ -70,7 +70,7 @@
     {
       "matches": ["<all_urls>"],
       "patterns": ["http://*/*", "https://*/*"],
-      "js": ["content_scripts/content.js", "controllers/BasicController.js"],
+      "js": ["content_scripts/content.js"],
      	"run_at": "document_idle"
     }
   ],

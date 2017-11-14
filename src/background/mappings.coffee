@@ -84,6 +84,7 @@ mapping =
   'tidal': 'TidalController.js'
   'tumblr': 'SCMController.js'
   'tunein': 'TuneinController.js'
+  'twitch': 'TwitchController.js'
   'twitter': 'TwitterController.js'
   'vimeo': 'VimeoController.js'
   'vk': 'VkController.js'

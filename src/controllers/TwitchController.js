@@ -3,13 +3,13 @@ controller = new BasicController({
     playpause: true
   },
   playPauseSelector: '.qa-pause-play-button',
-  titleSelector: '.qa-stream-title',
-  artistSelector: '.qa-display-name',
-  artworkImageSelector: '.qa-broadcaster-logo',
+  titleSelector: '.tw-mg-b-05',
+  artistSelector: '.channel-header h5',
+  artworkImageSelector: '.channel-header .tw-avatar__img',
   watchedElements: ['body'],
 
   isPlaying: function () {
-    return document.querySelector('.qa-pause-play-button svg use').getAttribute('xlink:href') === "#icon_pause";
+    return document.querySelector('.qa-pause-play-button svg').id === "icon_pause";
   },
 
   dontScrobble: function () {

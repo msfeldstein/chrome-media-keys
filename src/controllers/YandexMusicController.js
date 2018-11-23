@@ -14,8 +14,8 @@ controller = new BasicController({
     playStateSelector: '.player-controls__btn_play',
     playStateClass: 'player-controls__btn_pause',
     artworkImageSelector: '.player-controls .track-cover',
-    favoriteSelector: '.player-controls .like',
-    isFavoriteSelector: '.player-controls .like_on',
+    favoriteSelector: '.player-controls .d-like',
+    isFavoriteSelector: '.player-controls .d-like_on',
     thumbsDownSelector: '.dislike.player-controls__btn'
 });
  

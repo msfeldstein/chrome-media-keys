@@ -16,7 +16,8 @@ controller = new BasicController({
     artworkImageSelector: '.player-controls .track-cover',
     favoriteSelector: '.player-controls .d-like',
     isFavoriteSelector: '.player-controls .d-like_on',
-    thumbsDownSelector: '.dislike.player-controls__btn'
+    thumbsDownSelector: '.dislike.player-controls__btn',
+    watchedElements: ['.player-controls__track-container']
 });
  
 controller.override('getAlbumArt', function() {

@@ -13,10 +13,11 @@ controller = new BasicController({
     artistSelector: '.player-controls .track__artists',
     playStateSelector: '.player-controls__btn_play',
     playStateClass: 'player-controls__btn_pause',
-    artworkImageSelector: '.player-controls .album-cover',
-    favoriteSelector: '.player-controls .like',
-    isFavoriteSelector: '.player-controls .like_on',
-    thumbsDownSelector: '.dislike.player-controls__btn'
+    artworkImageSelector: '.player-controls .track-cover',
+    favoriteSelector: '.player-controls .d-like',
+    isFavoriteSelector: '.player-controls .d-like_on',
+    thumbsDownSelector: '.dislike.player-controls__btn',
+    watchedElements: ['.player-controls__track-container']
 });
  
 controller.override('getAlbumArt', function() {
@@ -28,6 +29,9 @@ controller.override('getAlbumArt', function() {
 });
 
 controller.override('isPlaying', function(_super) {
-    this.supports.thumbsDown = window.getComputedStyle(document.querySelector(this.thumbsDownSelector)).display != 'none'
+    var thumbsDown = document.querySelector(this.thumbsDownSelector);
+    if (thumbsDown) {
+        this.supports.thumbsDown = window.getComputedStyle(thumbsDown).display != 'none';
+    }
     return _super()
 });

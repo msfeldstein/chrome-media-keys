@@ -17,7 +17,7 @@ controller = new BasicController({
 
 controller.override('isPlaying', function() {
   var button = document.querySelector('.ytp-play-button')
-  return button && button.getAttribute('aria-label') == "Pause"
+  return button && button.getAttribute('aria-label').includes("Pause");
 })
 
 controller.override('getTitle', function() {

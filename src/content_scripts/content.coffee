@@ -15,6 +15,10 @@ window.clickById = (id) ->
   div = document.getElementById(id)
   fireEvent(div, 'click')
 
+window.clickBySelector = (selector) ->
+  element = document.querySelector(selector)
+  fireEvent(element, 'click')
+
 window.querySelectorText = (query) ->
   document.querySelector(query)?.textContent or ""
 

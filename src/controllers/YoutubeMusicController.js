@@ -25,10 +25,11 @@ controller.override('init', function (_super) {
         return false;
 });
 
-controller.override('isPlaying', function() {
+controller.override('isPlaying', function () {
     var button = document.querySelector(this.playStateSelector);
     var label = button !== null && button.getAttribute('aria-label');
-    return label && label.match(/Pause/i);
+    console.log("Is playing???", label)
+    return label && !!label.match(/Pause/i);
 });
 
 controller.override('getAlbumArt', function (_super) {

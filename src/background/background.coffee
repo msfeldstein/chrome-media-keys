@@ -1,3 +1,4 @@
+console.log("Background tab")
 # Manage the currently playing tab id by keeping a stack of previous
 # players so we can go back to previous tabs when new ones are closed
 activeTabStack = []
@@ -75,8 +76,6 @@ handleRequestFromContentScript = (request, sender, sendResponse) ->
   else if request.action is 'injectController'
     script = findScriptByHost(request.host)
     if not script then return
-    if script.indexOf('Shim') == -1
-      trackController(request.host)
     chrome.tabs.executeScript sender.tab.id, {file: 'controllers/BasicController.js'}
     chrome.tabs.executeScript(sender.tab.id, {file: script})
     if request.host.indexOf("monstercat") > -1
@@ -91,7 +90,9 @@ handleRequestFromPopup = (request, sender, sendResponse) ->
   else # Pass the message to content script
     sendAction(request.action)
 
+console.log("Adding listener")
 chrome.extension.onRequest.addListener (request, sender, sendResponse) ->
+  console.log(sender, request)
   if sender.tab and sender.tab.id != -1
     handleRequestFromContentScript request, sender, sendResponse
   else

@@ -1,3 +1,4 @@
+console.log("Inecting", window.injected)
 if window.injected then return
 window.injected = true;
 noop = (()->)
@@ -47,6 +48,7 @@ initIfReady = () ->
   # the page isn't ready yet.
 
   if controller? and controller.init()
+    console.log("Senginc controller_loaded")
     chrome.extension.sendRequest(
       {
         action: "controller_loaded",
@@ -80,7 +82,7 @@ didStateChange = (newState) ->
 
 # Send an updated state to the popup. It does a diff between old states and
 # new states and wont send anything to the popup if nothings changed, unless
-# force is true. 
+# force is true.
 window.sendState = (force) ->
   state = controller.getState()
   state.supports = controller.supports
@@ -97,6 +99,7 @@ window.sendState = (force) ->
 if document.querySelector("#plex.application")
   chrome.extension.sendRequest({action:'injectController', host: "plex"}, noop);
 else
+  console.log("Bout to send")
   chrome.extension.sendRequest({action:'injectController', host: window.location.host}, noop);
 
 listener = (request, sender, sendResponse) ->
@@ -124,4 +127,4 @@ listener = (request, sender, sendResponse) ->
 
 chrome.extension.onRequest.addListener listener
 
-  
+

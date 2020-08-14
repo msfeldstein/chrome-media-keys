@@ -1,8 +1,8 @@
 !!!
 %html
   %head
-    %link{:href => "http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700", :rel => "stylesheet", :type => "text/css"}
-    %link{:href => "popup.css", :rel => "stylesheet", :type => "text/css"}
+    %link{href:  "http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700", :rel => "stylesheet", :type => "text/css"}
+    %link{href:  "popup.css", rel: "stylesheet", type: "text/css"}
   %body.loading
     #topbar
     #playing-container
@@ -26,7 +26,7 @@
         %img#album-art
         #sway-cta
           Like Sway.fm?
-          %a{:href => "https://chrome.google.com/webstore/detail/swayfm-unified-music-medi/icckhjgjjompfgoiidainoapgjepncej/reviews?hl=en-US"}
+          %a{href:  "https://chrome.google.com/webstore/detail/swayfm-unified-music-medi/icckhjgjjompfgoiidainoapgjepncej/reviews?hl=en-US"}
             Rate it
           and
           %a#share-link
@@ -34,5 +34,4 @@
     #loading
       %p
         Loading...
-    %script{:src => "popup.js"}
-    -# %script{:src => "track.js", :async => true}
+    %script{src: "popup.js"}

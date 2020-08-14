@@ -72,7 +72,7 @@ load = () ->
   bindClickToAction "#song-details", "focus"
   bindClickToAction "#album-art", "focus"
   document.body.classList.remove("loading")
-  
+
 document.addEventListener "DOMContentLoaded", load, false
 
 convertCTAToShare = () ->

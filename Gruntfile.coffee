@@ -24,7 +24,7 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-contrib-copy'
 	grunt.loadNpmTasks 'grunt-contrib-watch'
 	grunt.loadNpmTasks 'grunt-contrib-coffee'
-	grunt.loadNpmTasks 'grunt-contrib-haml'
+	grunt.loadNpmTasks 'grunt-haml'
 
 	grunt.registerTask 'build:manifest', 'Build chrome manifest file.', () ->
 		mnf = grunt.file.readJSON 'src/manifest.json'
@@ -35,4 +35,4 @@ module.exports = (grunt) ->
 	grunt.registerTask 'build', ['build:manifest', 'build:sources', 'haml:src']
 	grunt.registerTask 'run', ['build:manifest', 'build', 'watch']
 	grunt.registerTask 'default', ['build']
-	
+

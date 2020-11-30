@@ -13,19 +13,24 @@ const config = {
 // New version of spotify
 if (window.location.hostname === 'open.spotify.com') {
   delete config.playStateClass;
-  config.playStateSelector = '.now-playing-bar .control-button[class*="spoticon-play"]';
-  config.playSelector = '.now-playing-bar .control-button[class*="spoticon-play"]';
-  config.pauseSelector = '.now-playing-bar .control-button[class*="spoticon-pause"]';
+
+  const i18nLabels = JSON.parse(
+    document.querySelector('#jsonTranslations').innerHTML
+  );
+
+  config.playStateSelector = `.now-playing-bar .player-controls__buttons [aria-label="${i18nLabels['playback-control.play']}"]`;
+  config.playSelector = `.now-playing-bar .player-controls__buttons [aria-label="${i18nLabels['playback-control.play']}"]`;
+  config.pauseSelector = `.now-playing-bar .player-controls__buttons [aria-label="${i18nLabels['playback-control.pause']}"]`;
   config.artworkImageSelector = '.now-playing-bar .cover-art-image';
   config.artistSelector = '.now-playing-bar [href^="/artist"]';
   config.titleSelector = '.now-playing-bar [href^="/album"]';
-  config.nextSelector = '.now-playing-bar .control-button[class*="spoticon-skip-forward"]';
-  config.previousSelector = '.now-playing-bar .control-button[class*="spoticon-skip-back"]';
+  config.nextSelector = `.now-playing-bar .player-controls__buttons [aria-label="${i18nLabels['playback-control.skip-forward']}"]`;
+  config.previousSelector = `.now-playing-bar .player-controls__buttons [aria-label="${i18nLabels['playback-control.skip-back']}"]`;
 
   controller = new BasicController(config);
 
   controller.override('isPlaying', function () {
-    return this.doc().querySelector('.now-playing-bar .control-button[class*="spoticon-pause"]');
+    return !!this.doc().querySelector(config.pauseSelector);
   })
 
   // The album image also links to `/album/...`. Take last link for the title

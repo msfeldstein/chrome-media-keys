@@ -62,6 +62,7 @@ mapping =
   'poolside': 'PoolsideController.js'
   'pony.fm': 'PonyFmController.js'
   'ponyvillelive': 'PonyvilleLiveController.js'
+  'quickconnect.to': 'SynologyAudioStationController.js'
   'rbmaradio': 'RbmaController.js'
   'rdio': 'RdioController.js'
   'reddit.music.player.il.ly': 'RedditplayerController.js'

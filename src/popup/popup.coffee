@@ -26,14 +26,34 @@ setClass = (el, className, show) ->
 shouldShow = (qs, should) ->
   $(qs).style.display = if should then "block" else "none"
 
+animationSpeed = 60  # px / sec
+animationStartOffset = 70  # px
+
+setScrolling = (el, parentWidth) ->
+  if el.clientWidth > parentWidth
+    el.classList.add 'marquee'
+    duration = (el.clientWidth + parentWidth) / animationSpeed
+    offsetTime = (parentWidth - animationStartOffset) / animationSpeed
+    el.style.setProperty 'animation-duration', "#{duration}s"
+    el.style.setProperty 'animation-delay', "-#{offsetTime}s"
+  else
+    el.classList.remove 'marquee'
+
+getFirstKeyframeStyle = () ->
+  ruleName = 'marquee'
+  for styleSheet in document.styleSheets
+    for cssRule in styleSheet.cssRules
+      if cssRule instanceof CSSKeyframesRule and cssRule.name == ruleName
+        return cssRule.findRule('0%').style
+  return null
+
+marqueeFirstFrameStyle = getFirstKeyframeStyle()
+
 updateUI = (uiState) ->
   # Populate the UI with new player state values
   $("#song-name").textContent = uiState.title
   $("#artist-name").textContent = uiState.artist
   $("#album-art").src = uiState.albumArt || "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-
-  setClass $("#song-name"), "marquee", $("#song-name").clientWidth > $("#song-name").parentNode.clientWidth
-  setClass $("#artist-name"), "marquee", $("#artist-name").clientWidth > $("#artist-name").parentNode.clientWidth
 
   setClass document.body, "playing", uiState.playing
   setClass $("#thumbs-up"), "toggled", uiState.thumbsUp
@@ -47,6 +67,11 @@ updateUI = (uiState) ->
   shouldShow "#favorite", support.favorite
   shouldShow "#thumbs-up", support.thumbsUp
   shouldShow "#thumbs-down", support.thumbsDown
+
+  parentWidth = $("#song-details").clientWidth
+  setScrolling $("#song-name"),   parentWidth
+  setScrolling $("#artist-name"), parentWidth
+  marqueeFirstFrameStyle.setProperty 'transform', "translateX(#{parentWidth}px)"
 
   $("#header").classList.remove "no-music"
   $("#not-playing-container").style.display = "none"
